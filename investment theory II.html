@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+    
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+<div class="section-head">    
+    <h4>Introduction</h4>    
+</div>
+  <div class="eco-text">
+    <p>This page models a firm's capital accumulation policy given that the evolution of demand for its output good is uncertain. The model is mostly derived from those of <a href="https://www.jstor.org/stable/2297794">Abel and Eberly (1996)</a> and Chapter 11 of <a href="https://press.princeton.edu/books/hardcover/9780691034102/investment-under-uncertainty">Dixit and Pindyck (1994)</a>. The firm will seek to maximise its cash flows, defined as operating profit minus investment costs, subject to a standard capital accumulation constraint. Demand for the output good depends negatively on the firm's output and positively on a geometric Brownian motion representing changes in demand over time. The latter introduces uncertainty into the model through its volatility component.</p>
+    <p>The solution to the decision problem involves finding the value of the stochastic process for which the firm should adjust its capital stock. As usual in neoclassical investment theory, this involves an equivalence between the marginal value and marginal cost of capital. An important assumption is that investment is totally irreversible, so once the firm installs a unit of capital, it is not able to sell it at a later date. Some degree of irreversibility is necessary to make uncertainty consequential for the decision problem, if all decisions can be reversed then uncertainty is irrelevant. The assumption of total irreversibility makes the mathematics much simpler. I first outline the assumptions of the model and derive the Bellman equation. Next, I derive and solve a differential equation for the marginal value of capital. This is then equated with marginal cost, forming a set of boundary conditions which solve the remaining unknowns in the model. I write variables as a function of time when they are first defined but drop the arguments afterwards to keep the expressions concise. </p>
+  </div>    
+ 
+
+<div class="section-head">    
+    <h4>Production and Costs</h4>    
+</div>  
+    <div class="eco-text">
+    <p>The firm produces an output good \(Y(t)\) using a Cobb-Douglas production function with inputs of capital, \(K(t)\) and labour, \(L(t)\). Equation (1) gives the production function where the parameters \(\a\) and \(b\) are less than one to reflect the fact that both inputs exhibit diminishing marginal product, \[Y = K^a L^b . \tag{1}\] The inverse demand curve for the output good is \[P(t) = X(t)^{1-\nu} Y(t)^{\nu -1}  \tag{2}\] where \(0 \lt \nu \lt 1\) so demand is decreasing in output and \[dX(t) = \alpha X(t) dt + \sigma X(t) dW(t) \tag{3} \] and \(W(t)\) is a standard <a href="https://en.wikipedia.org/wiki/Wiener_process">Wiener process</a>. \(X\) is a variable capturing external demand conditions, and given the restrictions placed on \(\nu\), demand is increasing in \(X\).</p>
+    <p>Labour is fully adjustable and has a unit cost of \(w\), but capital is fixed in any given point in time. The firm can increase the flow of investment goods into the firm in a given interval of time, which is gross investment, \(I > 0\). Investment goods also have a constant unit cost, \(\phi\). A constant proportion of the capital stock, \(\delta\), also depreciates in every interval of time. The firm's optimal capital accumulation policy in this model will mean there can be discrete changes in the capital stock whenever the stochastic variable \(X\) hits a certain threshold, which means the time derivative of \(K\) cannot be defined. Therefore, the capital accumulation constraint is expressed in differential terms as \[dK = dI - \delta K dt \tag{4}.\]</p>
+    <p>Operating profit, \(\Pi(K, L, X)\), is revenue minus the cost of fully adjustable factor, \[ \Pi = X^{1-\nu} K^{\nu a} L^{\nu b} - wL. \tag{5} \] Given labour is fully adjustable, the firm can find the optimal level simply by setting equation (5) equal to zero and solving for \(L\), which gives \[L = \left( \frac{\nu b}{w} \right)^{\frac{1}{1- \nu b}} X^{\frac{1- \nu}{1- \nu b}} K^{\frac{\nu a}{1- \nu b}}. \] Substituting this back into the operating profit function gives an expression for the latter which is only a function of\(t\), \(X\) and \(K\), \[ \Pi (X, K) = (1-\nu b) \left( \frac{\nu b}{w} \right)^{\frac{\nu b}{1- \nu b}} X^{\frac{1 - \nu}{1- \nu b}} K^{\frac{\nu a}{1- \nu b}}.\tag{6} \]</p>
+    <p>The value of the firm is the present discounted value of cash flows, \[V(X, K) = max_{dI_{t+dt}} E_t \left[ \int^{\infty}_0 e^{-\rho dt} \left( \Pi dt - \phi d I_{t+dt} \right) \right] \tag{7} \] where \(E_t [\cdot]\) is the expectations operator conditional on the information available at \(t\). Again, \(I\) is not differentiable, so the last term in this equation must be interpreted as a <a href="https://en.wikipedia.org/wiki/Riemann%E2%80%93Stieltjes_integral">Stieltjes integral</a>, which unlike the standard Riemann integral does not require a function to be <em>absolutely continuous</em>. The <a href="https://en.wikipedia.org/wiki/Cantor_function">Cantor function</a> is an example of a continuous function which is not absolutely continuous. </p>
+    </div>
+
+<div class="section-head">    
+    <h4>Bellman Equaiton</h4>    
+</div> 
+    <div class="eco-text">
+        <p>Economic intuition (and the conclusions of <a href="investment%20theory.html">deterministic models</a> of capital accumulation) dictates that the firm should invest to maintain the marginal value of capital equal to its marginal cost \(V_K = \phi\). Therefore, the firm needs to find an expression for \(V_K\) to solve its decision problem. </p>
+        <p>The value of the firm can be expressed through a Bellman equation which splits the value of the firm into the immediate profit flow in an infinitesimal interval \(dt\), and the expected discounted value of the change in the value of the firm if the firm behaves optimally \[V = \left(\Pi dt - \phi dI \right) + e^{-\rho dt} E_{K, X} \left[V + dV \right] \tag{8} \] where \(\rho\) is the constant discount rate applied by the firm.</p>
+        <p>Applying Ito's lemma to the expectation and dividing through by \(dt\) gives a second order partial differential equation in \(X\) and \(K\) \[\tfrac{1}{2} \sigma^2 X^2 V_{XX} + \alpha X V_X - \delta K V_K - \rho V + \Pi = 0  \tag{9} .\] To get to this equation, first note that again by applying Ito's lemma, \(dV = V_X dX + \tfrac{1}{2} V_{XX} dX^2  + V_K dK\). Also, all terms including \(dt\) raised to a power greater than one can be ingnored because they go to zero much faster at \(t\) approaches zero. The function \(e^{-\rho dt}\) can also be written as \(1 - \rho dt\) on this basis, after applying a Taylor series expansion around zero. Furthermore, the expected value of \(dW = 0\) given that it is the increment of a Wiener process. Finally, the term \(\left(V_K - \phi \right) dI \) will always be zero because \(dI\) is zero if the firm is not investing and \(V_K = \phi\) if the firm is investing.</p>
+        <p>The derivative of (9) with respect to capital gives a differential equation for the marginal value of capital. Let \[h \equiv a \nu \left( \frac{\nu b}{w} \right)^{\frac{\nu b}{1- \nu b}},\] \(\theta \equiv \frac{1}{1 - \nu b} \), and define a new variable \(y \equiv X^{1-\nu} / K^{1-\nu(a+b)} \). Additionally, call the marginal value of capital \(V_K = q\), as in Tobin's marginal q. This is different from the standard definition of \(q\) which is the ratio of the value of the marginal unit of capital to its marginal cost. The definition of \(q\) adopted here could be called `absolute q'. The derivative of (9) with respect to capital is \[ \tfrac{1}{2} \sigma^2 X^2 q_{XX} + \alpha X q_X - \delta K q_K - (\rho + \delta) q + h X^{(1-\nu) \theta} K^{\left((a+b) \nu -1 \right) \theta} = 0 .\tag{10} \]</p>
+        <p>To write (10) as a function of the stochastic variable \(y\) first apply the chain rule to find the derivatives of \(q (y)\) with respect to \(X\) and \(K\) \[q_X = (1-\nu) \frac{X^{-\nu}}{K^{1 - \nu(a+b)}} q^{\prime}(y) \] \[q_{XX} = - \nu (1-\nu) \frac{X^{-(\nu + 1)}}{K^{1 - \nu(a+b)}} q^{\prime}(y) + (1-\nu)^2 \left( \frac{X^{-\nu}}{K^{1 - \nu(a+b)}} \right)^2 q^{\prime \prime}(y) \] \[q_K = \left(\nu(a+b) -1 \right) \frac{X^{1-\nu}}{K^{2 - \nu(a+b)}} q^{\prime}(y) . \] Plugging these expressions into (10) gives an ordinary differential equation in \(y\) \[ (1-\nu)^2 \tfrac{1}{2} \sigma^2 y^2 q^{\prime \prime}(y) + \left[(1-\nu) (\alpha - \tfrac{1}{2} \sigma^2 \nu ) + (1 - (a+b) \nu ) \delta \right] y q^{\prime}(y)  - (\rho + \delta) q + h y^{\theta}  =  0  \tag{11} \] which can be written more concisely if the terms in square brackets are defined as \(\gamma\) and \( \mu \) respectively \[ \gamma y^2 q^{\prime \prime}(y) + \mu y q^{\prime}(y)  - (\rho + \delta) q + h y^{\theta}  =  0  \tag{12} \]</p>
+    </div>
+    
+
+<div class="section-head">    
+    <h4>Solution</h4>    
+</div> 
+    <div class="eco-text">
+        <p>Because (12) is a linear ordinary differential equation in \(y\), the solution consists of a homogeneous and a non-homogeneous solution. The non-homogeneous solution can be found by guessing that \(q = C y^{\theta}\), plugging this into the equation, and finding an expression for \(C\). For a generic variable \(s\), let \[Z(s) = (\rho + \delta) - \mu s - \gamma s (s-1). \] The non-homogeneous solution to (12) is then \(q = \frac{h}{Z(\theta)} y^{\theta} \). It represents the expected present discounted value of the marginal unit of capital if the firm never adjusts its capital stock. The homogeneous solution is found by setting \(h y^{\theta} = 0\) and guessing that \( q = A y^{\beta} \) which will satisfy the equation if \[\beta = - \frac{\mu - \gamma}{2 \gamma} \pm \frac{\sqrt{(\mu - \gamma)^2 + 4 \mu (\rho + \delta)}}{2 \gamma}.\] Given there are two possible values of \(\beta\), the homogeneous solution becomes \(q = A_1 y^{\beta_1} + A_2 y^{\beta_2} \). Therefore, the general solution to the differential equation is \[q = A_1 y^{\beta_1} + A_2 y^{\beta_2} + \frac{h}{Z(\theta)} y^{\theta} . \tag{13} \]</p>
+        <p>The homogeneous solution represents the option value of adjusting the capital stock. This is the value the firm gains by waiting for more information about the future before making the irreversible decision to marginally increase its capital stock. This option value should logically increase as the demand for the output good increased (hence, as the stochastic variable \(y\) increases), because this will drive up the price of the good and thereby increase the marginal revenue from production. Given that \(\rho\) and \(\delta\) are both positive and assuming \(\rho > \alpha\), which prevents the the marginal unit of capital becoming infinitely valuable over time, one of the \(\beta\) terms will be greater than one and one will be negative. (This is only guaranteed if the production function displays decreasing or constant returns to scale.) However, a negative value of \(\beta\) is incompatible with the logic that the option value of the marginal unit should increase as demand increases, because it implies an inverse relationship between \(q\) and \(y\). Therefore, assuming that \(\beta_2 \) is the negative root, let \(A_2 = 0\) so equation (13) becomes \[q = A_1 y^{\beta_1} + \frac{h}{Z(\theta)} y^{\theta} . \tag{14} \]</p>
+        <p>With this expression for \(q\) we can apply the value matching and smooth pasting conditions, stating that \(q\) must be equal to \(\phi\) at the optimal investment boundary and the derivative of \(q\) with respect to \(y\) must be zero at this point: \[ A_1 y^{\beta_1} + \frac{h}{Z(\theta)} y^{\theta} = \phi  \tag{15} \] \[ \beta_1 A_1 y^{\beta_1 - 1} + \theta \frac{h}{Z(\theta)} y^{\theta - 1} = 0. \tag{16} \] This system of two equations and two unknowns can be used to find the value of \(y\) which triggers investment as well as the remaining constant of integration \(A_1\) \[ y^* = \left[ \frac{\beta_1}{\beta_1 - \theta} \phi \frac{Z(\theta)}{h} \right]^{\frac{1}{\theta}} \tag{17}\] \[ A_1 = - \theta \left(\frac{\phi}{\beta_1 - \theta} \right)^{1 - \frac{\beta_1}{\theta}} \left( \frac{h}{\beta_1 Z(\theta)} \right)^{\frac{\beta_1}{\theta}} \tag{18}.\] Notice that \(A_1 \lt 0\). This is a consequence of the fact that when the capital stock increases at the investment boundary, the marginal product of capital falls which means \(q\) decreases.</p>
+    </div>
+    
+    
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+      
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>

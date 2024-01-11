@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+    
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+  <div class="section-head">    
+    <h4>Introduction</h4>    
+  </div>
+  <div class="eco-text">
+      <p>This page examines a profit maximising firm's capital accumulation problem. Basic models of a firm will assume that all factors of production are fully adjustable in an interval of time, so the firm can always adjust the stock of a factor such that it is equal to the marginal product of that factor. Here, labour is assumed to be fully adjustable but capital will be fixed in a given interval of time. While the stock of capital cannot change during this period, the flow of capital goods into the stock, which is investment, is under the control of the firm. The decision problem now takes place over an interval of time, which means the modeller must solve the firm's decision problem in a continuous time setting. The objective of this decision problem is to maximise the value of the firm subject to an accumulation constraint which states the flow of investment goods into the capital stock in any period is equal to gross investment minus depreciation of the capital stock.</p>
+      <p>Continuous time constrained optimisation problems can be solved by using the familiar Lagrangian setup, except the optimisation takes places over an infinite number of very small time intervals, rather than at one instant as is the case with the familiar static problem. However, the Hamiltonian setup is a much easier way to consider such problems and I will show the connection between the Hamiltonian and Lagrangian methods. This page should, therefore, be useful for economics students encountering Hamiltonian dynamics for the first time. To keep things concrete, I will assume the firm uses a Cobb-Douglas production function and consider both linear and convex adjustment costs. This page is based mostly on the second chapter of <a href="https://global.oup.com/academic/product/models-for-dynamic-macroeconomics-9780199266821?cc=gb&lang=en&#">Bagliano and Bertola (2004)</a>. I will write functions of time with a \(t\) argument when they first appear but not afterwards, to keep the notation more compact.</p>
+  </div>    
+    
+<div class="section-head">    
+    <h4>Assumptions</h4>    
+  </div>
+  <div class="eco-text">
+    <p>A firm produces an output good \(Y(t)\) with inputs of capital \(K(t)\) and labour \(L(t)\) according to the following production function \(Y = K^a L^b\). The elasticities of output with respect to capital and labour are both less than one so the firm faces diminishing marginal product in both inputs. Assume the price of the output good is just a constant equal to unity, so this equation also gives the firm's revenue. Labour is fully adjustable in any interval \(\Delta t\) but capital is fixed. Only the flow of investment goods, \(I(t)\) into the firm can be changed within this interval. Furthermore, some proportion of the capital stock depreciates every period at a constant rate \(\delta\). Therefore, net investment in the infinitesimally small interval \(dt\) is given by \[\frac{dK}{dt} = I - \delta K .\tag{1}\] Profit is revenue minus the cost of adjusting the labour and capital stock \[\Pi(t) = Y - \phi I - w L \tag{2}\] where \(\phi\) is the constant cost of purchasing capital and \(w\) is the constant cost of purchasing labour.</p>
+  </div>  
+    
+  <div class="section-head">    
+    <h4>Lagrangian Setup</h4>    
+  </div>
+  <div class="eco-text">
+    <p>The firm must find the optimal amounts of capital, labour, and investment in every infinitesimally small interval of time \(dt\). In this interval, the discounted profit flow is \(\Pi e^{-\rho t} dt \). Because the firm is immortal, it considers its value over an infinite number of these intervals, so the objective function is \( \int^{\infty}_0  \Pi e^{-\rho t} dt\). Therefore, the firm's objective is to maximise the expected present discounted value of all future profit flows, applying the constant discount rate \(\rho\), subject to the capital accumulation constraint in (1) for all time periods \[max_{L, K, I} \int^{\infty}_0 \left( K^a L^b - \phi I - wL \right) e^{-\rho t} dt \hspace{3mm} s.t. \hspace{3mm}  I - \delta K - \frac{dk}{dt} = 0 \tag{3} .\]</p>
+    <p>The Lagrangian function for this problem is \[\ell = \int^{\infty}_0 \left( K^a L^b - \phi I - wL \right) e^{-\rho t} dt + \int^{\infty}_0  \lambda(t) \left( I - \delta K - \frac{dk}{dt} \right) dt \tag{4}. \] Notice that the Lagrangian parameter is now a function of time. In this case, the parameter represents the change in the value of the firm (discounted profit flows) which occurs due to a marginal increase in the capital stock from investment. This depends on the stock of capital inside the firm, which itself is a function of time, so the Lagrangian parameter in this case is time dependent.</p>
+      <p>The term - \(\int^{\infty}_0 \lambda \tfrac{dK}{dt} dt\) in equation (4) can be rewritten using the integration by parts formula as \[ - \int^{\infty}_0 \lambda \frac{dK}{dt} dt = - \left(\lambda K \right)^{\infty}_0 + \int^{\infty}_0 K \tfrac{d \lambda}{dt} dt \] \[= \lambda(0) K(0) - \lim_{t \to \infty} \lambda K - \int^{\infty}_0 K \tfrac{d \lambda}{dt} dt.  \] The first term in this expression is just the product of the initial capital stock and the initial value of the marginal value of capital. The next term vanishes as a consequence of what is known as the <em>transversality condition</em>, so \[\lim_{t \to \infty} \lambda(t) K(t) = 0  \]. In essence, this prevents the optimal investment strategy from blowing up to infinity over time. If the profit function is linearly homogeneous in its factors and the firm chooses these factors optimally, the value of the firm can be expressed as the product of the marginal value of capital and the capital stock. This fact makes it is easy to appreciate that the transversality condition rules out the possibility that the objective function will blow up to infinity over time.</p>
+    <p>Now, the Lagrangian becomes \[ \ell = \int^{\infty}_0 \left( \left( K^a L^b - \phi I - wL \right) e^{-\rho t} + \lambda \left(I - \delta K \right) - \frac{d \lambda}{d t} K  \right) dt + \lambda(0) K(0) \tag{5}. \] After the applied transformation and application of the transversality condition, the Lagrangian no longer displays a term containing \( \frac{dK}{dt} \). The first order conditions for the decision problem are found by differentiating the Lagrangian function at every instant of time \[\frac{d \ell}{d L} = b K^a L^{b-1} - w = 0  \tag{6} \] \[\frac{d \ell}{dK} = a K^{a-1} L^b e^{-\rho t} - \delta \lambda - \frac{d \lambda}{dt} = 0 \tag{7} \] \[\frac{d \ell}{d I} = - \phi + \lambda = 0 \tag{8} \] \[\frac{d \ell}{d \lambda} = I - \delta K - \frac{dK}{dt} = 0 \tag{9} .\] The term \( \lambda(0) K(0) \) is just a constant, so it will not feature in the first order conditions. Having derived these conditions in the Lagrangian case, the Hamiltonian setup should seem more intuitive.</p>
+  </div>    
+    
+   <div class="section-head">    
+    <h4>Hamiltonian Setup</h4>    
+  </div>
+  <div class="eco-text">
+    <p>The Hamiltonian equation for this model is \[H = \left(K^a L^b - \phi I - w L + \mu(t) \left(I - \delta K \right)   \right) e^{- \rho t} \] where \(\mu(t) = \lambda(t) e^{\rho t} \), so \(\mu\) measures the marginal value of capital at time \(t\) rather than at time zero (because it eliminates the discount factor of future income streams). The first order conditions are \[\frac{d H}{d L} = b K^a L^{b-1} - w = 0  \tag{10} \] \[\frac{d H}{d I} = - \phi + \mu = 0  \tag{11} \] \[\frac{d H}{d K} = - \frac{d}{dt} \mu e^{- \rho t} \hspace{3mm} \rightarrow \hspace{3mm}  \left( a K^{a-1} L^b - \mu \delta \right) e^{-\rho t} = \rho \mu e^{-\rho t} - \frac{d \mu}{dt} e^{\- \rho t} \hspace{3mm} \rightarrow \hspace{3mm} a K^{a-1} L^b = (\rho + \delta) \mu - \frac{d \mu}{dt}  .\tag{12} \] </p> 
+      <p>Labour can be adjusted instantaneously and this is reflected equation (10), which can be used to find the optimal level of labour in terms of capital, \(L = \left( \frac{b}{w} \right)^{\frac{1}{1-b}} K^{\frac{a}{1-b}} \). Substituting this into equation (12) gives \[ a \left( \frac{b}{w} \right)^{\frac{b}{1-b}} K^{\frac{a+b-1}{1-b}} = (\rho + \delta) \mu - \frac{d \mu}{dt} . \] Now from equation (10) define \(q(t) = \frac{\mu}{\phi} = 1 \). This is known as <em>Tobin's marginal q</em>. It is the value of the marginal unit of capital relative to its marginal cost. It is termed `marginal' q to distinguish it from its empirical analogue, Tobin's average q, usually defined as the aggregate value of the firm relative to the capital stock. Marginal q is a useful tool because it provides an intuitive rule for the firm's investment policy; the firm should install the marginal unit of capital whenever \(q > 1 \) because the marginal unit of capital is worth more than its replacement cost, but if \(q < 1\) the firm should uninstall the marginal unit of capital because it costs more to install than it adds in value.</p>
+      <p>In this case, q has not provided the firm with an investment schedule telling the firm how much to invest for a given capital stock, nor has it revealed the path of investment over time. Instead, it simply establishes a rule that the firm should always maintain \(q=1\). The assumption that capital exhibits diminishing marginal product means the marginal value of capital will intuitively be decreasing in the amount of capital. Therefore, whenever \(q>1\) and the firm builds its capital stock, q will fall. This continues until q is restored to unity.</p>
+  </div> 
+    
+<div class="section-head">    
+    <h4>Steady State Capital Stock</h4>    
+  </div>
+  <div class="eco-text">
+    <p>Generally, a differential equation governing the dynamics of q can be derived by taking its derivative with respect to time \[\frac{d}{dt} \frac{\mu}{\phi} = \frac{d \mu}{dt} \frac{1}{\phi} - \frac{d \phi / dt}{\phi} \frac{\mu}{\phi} .\] There is an expression for \( \frac{d \mu}{dt} \) in equation (12) which can be substituted into the last equation along with \( \frac{d \phi / dt}{\phi} = \pi \) to give \[\frac{dq}{dt} = (\rho + \delta - \pi) q - \frac{a}{\phi} \left( \frac{b}{w} \right)^{\frac{b}{1-b}} K^{\frac{a+b-1}{1-b}}. \tag{13} \] In the present case, equation (11) showed that the firm will invest to maintain \(q=1\). Substituting this into (13) and rearranging gives the capital stock consistent with \(q=1\) \[K^{ss} = \left(\frac{a}{(\rho + \delta) \phi} \right)^{\frac{1-b}{1-(a+b)}} \left( \frac{b}{w} \right)^{\frac{b}{1-(a+b)}}, \tag{14}\] which represents a steady state because once the firm reaches this capital stock they have no incentive to change investment to move capital. There are two things to note about this equation. First, I have assumed that the price of capital is not changing over time, \(\pi =0\), which means \(K\) is the only variable in the model which changes over time, given \(\mu = \phi\) which is now assumed to be constant. The second point is that this expression is not valid under constant returns to scale because a zero would appear on the denominator of the exponent. The reason for this is that under constant returns to scale the marginal value of capital is linear in the capital stock once labour has been optimised. This means that if \(q\) is ever pushed greater than one, the firm will install the marginal unit but there will be no change in q because q is not dependent on \(K\). Hence, the firm will carry on installing capital for as long as \(q > 1\) and there will be no steady state capital stock.</p>
+    <p>To maintain this capital stock, the firm must ensure \(I = \delta K^{ss} \). Whenever \(q > 1\), investment will be above this level until q is restored to unity. The dynamics of the model can be shown graphically by first plotting out all the value of capital which cause q to remain constant over time and then equating this with the line determining the firm's optimal investment policy at q=1. From (13) and the restriction that \(\pi =0\), q is constant over time if \[q = \left(\frac{a}{(\rho + \delta) \phi} \right) \left( \frac{b}{w} \right)^{\frac{b}{1-b}} K^{\frac{a+b-1}{1-b}}. \tag{15} \] The blue line in the figure below shows an example of this <em>stationary locus</em> where \(a = b = 0.25\), \(w = \phi = 1\), \(\rho = 0.05\), and \(\delta = 0.04\). Given these parameter values, the steady state capital stock will be 2.315, which is the point on the horizontal axis where the stationary locus for q intersects the line where \(q=1\).</p>
+        <div class="eco-graph">
+        <img src="images/investment%201.png">
+        </div> 
+  </div>   
+
+
+  <div class="section-head">    
+    <h4>Convex Adjustment Costs</h4>    
+  </div>
+  <div class="eco-text">
+      <p>An unrealistic conclusion from the model studied so far is that the firm will always instantaneously adjust its capital stock to maintain \(q = 1\). This implies the firm can acquire and install capital instantaneously. Convex adjustment costs are used to incorporate the idea that investment will become more costly as the quantity of investment increases. This penalises firms who try to install large amounts of capital in a short time frame. One can imagine that large investment projects will disrupt normal work practices or  may involve additional expenses as workers need training to use the new capital. A convex adjustment cost function may take the form \[C(I) = \phi I + \phi I^2 \tag{16} \] which reflects the fact that investment is more expensive for higher values of \(I\). In reality, it makes more sense if the convexity depends on the rate of investment \(I/K\), because what a firm interprets as a large amount of investment will depend on its existing capital stock. However, assuming \(C(I)\) is independent of \(K\) will make the expressions below simpler.</p>
+      <p>With the addition of convex adjustment costs, equation (11) becomes \[\frac{d H}{d I} = - \phi - 2 \phi I + \mu  = 0  \hspace{3mm} \rightarrow \hspace{3mm} q = 1 + 2 I \hspace{3mm} \rightarrow \hspace{3mm} I = \tfrac{1}{2} \left(q - 1\right)\tag{17}\] so the firm has an expression relating \(I\) to \(q\). As expected, higher values of \(q\) imply higher values of investment, and investment will be negative whenever q is below one. This expression can be plugged into the capital accumulation constraint in equation (1) which can then be set equal to zero to derive a stationary locus for the capital stock \[\frac{dK}{dt} = \tfrac{1}{2} \left(q - 1\right) - \delta K \hspace{3mm} \rightarrow \hspace{3mm} q = 1 + 2 \delta K \tag{18}.\] The equation is written with \(q\) on the left hand side so it can be plotted in \(K, q\) space with \(K\) on the horizontal axis. Together with the stationary locus for q, the dynamics of investment can be determined qualitatively in what is known as a <em>phase diagram</em>, such as in the figure below. Note that \(\delta = 0.1\) in this figure for the sake of clarity.</p>
+        <div class="eco-graph">
+        <img src="images/investment%202.png">
+        </div> 
+      <p>The dynamics of investment become clear after considering what will happen to \(q\) and \(K\) when they deviate from their stationary loci. Equation (18) shows that for a given capital stock (any point on the horizontal axis), if the level of \(q\) is above the red line then \(dK / dt\) will be positive. This means accumulating capital and moving rightwards on the phase diagram. Likewise, all levels of \(q\) below the red line for a given capital stock will cause a leftwards movement in the phase space. The red arrows on the diagram represent this process. Similarly, equation (13) reveals that \(dq / dt \) will increase over time if \(K\) is rightward of the blue line for a fixed \(q\), and decrease over time if \(K\) is leftward of the blue line. The blue arrows on the diagram reflect these dynamics. The dynamics of \(K\) above or below its stationary locus are intuitive, if \(q\) is higher than the level required to keep the capital stock constant, the firm should increase the capital stock over time in accordance with its optimal decision rule.
+      However, it is not so easy to think of an intuitive reason for the dynamics of \(q\) away from the stationary locus.</p>
+     <p>Notice that the intersection of the stationary loci creates four regions in the phase space where the dynamics of \(q\) and \(K\) differ over time. It turns out that the region above the blue and red curves, where both \(q\) and \(K\) increase over time, is ruled out as a possible dynamic path by the transversality condition. The same is true as the region below the blue and red curves, where both \(q\) and \(K\) decrease over time. The transversality condition imposed that the product of the marginal value of capital multiplied by the stock of capital must go to zero in the limit. The regions above and below the blue and red lines clearly break this rule, because in the first case this product tends towards positive infinity and in the latter case it tends towards minus infinity.</p>
+    <p>Ignoring these two regions, it is still the case that for any initial capital stock \(K(0)\), there is only one initial value of q \(q(0)\) which will satisfy the transversality condition. When the system starts with such a pair of \(K\) and \(q\), following the direction of the arrows will lead to the intersection of the two stationary loci, which is a steady state where neither \(q\) or \(K\) change over time. These points are represented by the black line in the phase diagram, which is known as a <em>saddle path</em>. All points on the saddle path will converge to the steady state over time.</p>
+    <p>The steady state capital stock can be found numerically by solving the following non-linear equation in \(K\), which itself is derived by setting the two stationary loci equal to each other, \[\left(\frac{a}{(\rho + \delta) \phi} \right) \left( \frac{b}{w} \right)^{\frac{b}{1-b}} K^{\frac{a+b-1}{1-b}} - 2 \delta K - 1 = 0. \tag{19} \] In this case, the capital stock is 0.85, which implies a steady state value of q equal to 1.17. Notice that the introduction of adjustment costs means \(q=1\) is no longer sufficient to make the firm indifferent between and active and passive investment policy.</p>
+  </div>
+
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+    
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+  <div class="section-head">    
+    <h4>Introduction</h4>    
+  </div>
+  <div class="eco-text">
+      <p>Investors form portfolios by allocating a portion of their wealth to certain assets. These portion attached to a given asset is known as its 'weight' in the portfolio. The mean and variance of the asset are exogenous, so the only way the investor can influence the returns and volatility of a portfolio is by changing the weights given to the assets. This page demonstrates how to calculate mean-variance efficient portfolio weights. The algebra is done for the \(N\) asset to keep the results general but we will also see a numerical example for a three asset case to give some intuition behind the formulas. The first section sets up the problem an investor faces when choosing portfolio weights. The second section shows how to find the minimum variance portfolio. The third section then shows how to find the set of efficient portfolios before the last section focuses on the portfolio tangent to the capital market line after adding a risk-free asset to the model. This guide is based on a <a href="https://bookdown.org/compfinezbook/introFinRbook/Portfolio-Theory-with-Matrix-Algebra.html">bookdown article</a> describing how to calculate efficient portfolio weights in R. I will use Python in this demonstration, and the code to replicate the file is at the bottom of the page.</p>  
+  </div>    
+    
+<div class="section-head">    
+    <h4>Portfolio Weights</h4>    
+  </div>
+  <div class="eco-text">
+    <p>Suppose an investor can choose to invest her wealth in \(N\) risky assets. The returns on each asset \(R_i\) for \(i \in N\) are assumed to follow a normal distribution with constant mean \(\left(\mu \right) \), variance \( \left( \sigma^2 \right) \), and correlation \( \left( \rho \right) \) with other assets over time, \[ R_i \sim \mathcal{N} (\mu_i, \sigma_i^2) \tag{1} \] \[cov \left(R_i, R_j \right) = \sigma_{ij} = \rho_{ij} \sigma_{i} \sigma_{j} \tag{2} . \] Portfolios formed from these risky assets gives rise to a feasible set of expected return and volatility combinations. Portfolios are constructed by placing a fraction of the investor's wealth in each of the assets. Mathematically, given the \(N \times 1 \) column vectors of weights \( \mathbf{a} \) and expected returns of the individual assets in the portfolio \( \mathbf{r} \), expected portfolio returns are \[ r_p = \mathbf{a^T r}  \tag{3} \] and its variance is \[ \sigma_p^2 = \mathbf{a^T \Sigma a} \tag{4} \] where \( \mathbf{\Sigma} \) is the covariance matrix of the returns on the individual assets and a \(\bf{T}\) superscript indicates the transpose of a vector. It is worth specifying exactly where the covariance matrix comes from. Suppose \(\bf{X}\) represents a \(S \times N\) data matrix containing the \(N\) assets and the \(S\) time periods of returns data. The covariance matrix is then \[\mathbf{\Sigma} = \mathit{E} \left[ \left( \mathbf{X} - \mathit{E} [\mathbf{X}] \right) \left(\mathbf{X} - \mathit{E} [\mathbf{X}] \right)^T \right] \] \[ = \mathit{E}  \left[ \bf{X X^T} - \bf{X} \left( \mathit{E} [\bf{X}] \right)^{\bf{T}}  -  \mathit{E} [\bf{X}] \bf{X^T} + \mathit{E} [\bf{X}] \left( \mathit{E} [\bf{X}] \right)^{\bf{T}} \right] \] \[ = \mathit{E} [\bf{X X^T}] - 2 \mathit{E} [\bf{X}] \left( \mathit{E} [\bf{X}] \right)^{\bf{T}}  + \mathit{E} [\bf{X}] \left( \mathit{E} [\bf{X}] \right)^{\bf{T}}  \] \[ = \mathit{E} [\bf{X X^T}] -  \mathit{E} [\bf{X}] \left( \mathit{E} [\bf{X}] \right)^{\bf{T}} . \] The steps above use the fact that \( \mathit{E} [ \bf{X} \left( \mathit{E} [\bf{X}] \right)^{\bf{T}} ] =  \mathit{E} [\bf{X}] \left( \mathit{E} [\bf{X}] \right)^{\bf{T}} \) due to the fact that \( \mathit{E} [\bf{X}] \) is just a constant, which means we can apply the known result that \( \mathit{E} [\mathit{c} \bf{X}] = \mathit{c} E[\bf{X}]  \). Furthermore, \(\mathit{E} [\bf{X^T}] = \left( \mathit{E}  \left[\bf{X} \right] \right)^{\bf{T}}\).</p>
+    <p>For exposition, the code below downloads 10 years of stock price data for Apple, Google, and Microsoft. I calculate the daily returns on their equity as the log-difference in prices between each day. The expected return on each stock is the mean over the 10-year period and the expected volatility is the standard deviation of returns over the same period. I annualise expected returns by multiplying by 252 (because returns were calculated using the log approximation, an expected return of \(r\) each day will yield a total return of \(252 \times r\) over the course of the trading year) and annualise expected volatility by multiplying by \(\sqrt{252}\). The scatter plot shows the annualised expected returns and volatility of the Apple (A), Google (G), and Microsoft (M) in \(\left(\sigma, r \right)\) space (with \(\sigma\) on the horizontal axis. The black dot represents a portfolio formed based on equal weights of each stock, so \(\bf{a^T} = \begin{bmatrix} \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \end{bmatrix} \). The remaining dots represent portfolios formed based on 1000 randomly drawn weight vectors. Notice how the cluster of the points follows the typical <a href="https://en.wikipedia.org/wiki/Efficient_frontier">Markowitz bullet</a>.</p>
+<div class="code-box">
+    <pre>
+      <code>
+# Data
+stocks = ["AAPL", "GOOG", "MSFT"]
+start = "2013-01-01"
+end = "2022-12-31"
+data = yf.download(stocks, start, end)
+x = data["Adj Close"]
+lnx = np.log(x)
+lnx_lag = lnx.shift(1)
+logdiff = lnx - lnx_lag
+r = logdiff[1:]
+mean = np.mean(r, axis=0)
+annual_mean = 252*mean
+std = np.std(r, axis=0)
+annual_std = np.sqrt(252)*std
+r_T = np.transpose(r)
+sigma = np.cov(r_T)
+
+# Random Portfolios
+weights_size = 3
+count_portfolios = 1000
+vec_rand_r = []
+vec_rand_sigma = []
+for _ in range(count_portfolios):
+    random_n = np.random.rand(weights_size)
+    random_weights = random_n / random_n.sum()
+    random_weights_T = np.transpose(random_weights)
+    r_step = np.dot(random_weights, mean)
+    alpha_sigma_step = np.dot(random_weights, sigma)
+    sigma_2_step = np.dot(alpha_sigma_step, random_weights_T)
+    sigma_step = np.sqrt(sigma_2_step)
+    vec_rand_r.append(r_step)
+    vec_rand_sigma.append(sigma_step)
+vec_rand_r = np.array(vec_rand_r)
+vec_rand_sigma = np.array(vec_rand_sigma)
+annual_vec_rand_r = 252*vec_rand_r
+annual_rand_sigma = np.sqrt(252)*vec_rand_sigma
+
+# Equally Weighted Portfolio
+equal_weights = np.array([1/3, 1/3, 1/3])
+equal_weights_T = np.transpose(equal_weights)
+r_p = np.dot(equal_weights, mean)
+alpha_sigma = np.dot(equal_weights, sigma)
+sigma_p_2 = np.dot(alpha_sigma, equal_weights_T)
+sigma_p = np.sqrt(sigma_p_2)
+annual_r_p = 252*r_p
+annual_sigma_p = np.sqrt(252)*sigma_p
+
+# Plot
+colors = np.array(["red", "blue", "green"])
+names = np.array(["A", "G", "M"])
+mp.scatter(annual_std, annual_mean, color=colors)
+for names, x_point, y_point in zip(names, annual_std, annual_mean):
+    mp.annotate(names, (x_point, y_point), textcoords="offset points", xytext=(0, 5), ha='center')
+mp.scatter(annual_sigma_p, annual_r_p, color=["black"])
+mp.scatter(annual_rand_sigma, annual_vec_rand_r)
+mp.text(annual_sigma_p, annual_r_p, "P", ha='center', va='bottom')
+mp.ylabel("r")
+mp.xlabel("σ")
+mp.show()
+
+      </code>
+    </pre>
+  </div>
+      
+  <div class="eco-graph">
+  <img src="images/MPT_2.png">
+  </div>
+      
+  </div>  
+    
+  <div class="section-head">    
+    <h4>Minimum Variance Portfolio</h4>    
+  </div>
+  <div class="eco-text">
+    <p>The minimum variance portfolio can be found by minimising \(\sigma^2_p\) subject to the constraint that the weights used must sum to one. Let \(\mathbf{m}\) be the weights associated with the minimum variance portfolio, then the Lagrangian equation for this problem is \[\ell (\lambda, \mathbf{m}) = \mathbf{m^T \Sigma m} + \lambda \left(\mathbf{m^T 1} - 1 \right) \tag{5} \] where \(\mathbf{1}\) is an \(N \times 1\) column vector of ones. The first order conditions are \[ \frac{\partial \ell}{\partial \mathbf{m}} = 2 \bf{\Sigma} \bf{m} + \lambda 1  = 0 \tag{6} \]  \[ \frac{\partial \ell}{\partial \lambda} = \mathbf{m^T 1} - 1  = 0 \tag{7} .\] (This page discusses the intuition behind matrix and vector derivatives). Equations (6) and (7) form a system of linear equations which we can write as \[ 2 \bf{\Sigma} \bf{m} + \lambda \bf{1}  = 0 \] \[ \mathbf{m^T 1} = 1 \] \[ \begin{bmatrix} 2 \bf{\Sigma} & \bf{1} \\ \bf{1^T} & 0  \end{bmatrix} \begin{bmatrix} \bf{m} \\ \lambda \end{bmatrix} = \begin{bmatrix} \bf{0} \\ 1 \end{bmatrix} \] \[ \bf{A} \bf{z} = \bf{b} \tag{8} \] with \( \bf{A} = \begin{bmatrix} 2 \bf{\Sigma} & \bf{1} \\ \bf{1^T} & 0  \end{bmatrix}  \), \( \bf{z} = \begin{bmatrix} \bf{m} \\ \lambda \end{bmatrix}  \), and \(  \bf{b} = \begin{bmatrix} \bf{0} \\ 1 \end{bmatrix} \). The minimum variance weights are therefore the first \(N\) elements of the vector \[ \bf{z} = \bf{A^{-1}} \bf{b} \tag{9} \]</p>
+    <p>There is a second way to get this result. From (6) \[\bf{m} = - \frac{1}{2} \lambda \bf{\Sigma}^{-1} \bf{1} .\] Next multiplying both sides by \( \bf{1^T} \) and noticing that \( \bf{1^T m} = 1 \) we have \[ \lambda = - 2 \frac{1}{\bf{1^T} \bf{\Sigma}^{-1} \bf{1}}  \] which can be substituted back into the expression for \( \bf{m} \) to yield \[ \bf{m} = \frac{\bf{\Sigma}^{-1} \bf{1}}{\bf{1^T} \bf{\Sigma}^{-1} \bf{1}}. \tag{10} \] The following code demonstrates how to locate and plot the minimum variance portfolio in Python.</p>
+  </div>    
+   
+   <div class="code-box">
+    <pre>
+      <code>
+# Minimum Variance Portfolio
+sigmat2 = 2*sigma
+A = np.array([[sigmat2[0, 0], sigmat2[0,1], sigmat2[0, 2], 1],
+              [sigmat2[1, 0], sigmat2[1,1], sigmat2[1, 2], 1],
+              [sigmat2[2, 0], sigmat2[2,1], sigmat2[2, 2], 1],
+              [1, 1, 1, 0]])
+b = np.array([[0],
+              [0],
+              [0],
+              [1]])
+A_inv = np.linalg.inv(A)
+z = np.dot(A_inv, b)
+m = z[:3, 0]
+m_T = np.transpose(m)
+mv_r = np.dot(m_T, mean)
+mv_sigma_step = np.dot(m_T, sigma)
+mv_sigma_step_2 = np.dot(mv_sigma_step, m)
+mv_sigma = np.sqrt(mv_sigma_step_2)
+annual_mv_r = 252*mv_r
+annual_mv_sigma = np.sqrt(252)*mv_sigma
+
+# Plot
+colors = np.array(["gold"])
+mp.scatter(annual_mv_sigma, annual_mv_r, color=colors)
+mp.text(annual_mv_sigma, annual_mv_r, "MVP", ha='center', va='bottom')
+mp.ylabel("r")
+mp.xlabel("σ")
+mp.show()
+      </code>
+    </pre>
+  </div>
+    
+  <div class="eco-graph">
+  <img src="images/MPT_3.png">
+  </div>
+    
+   <div class="section-head">    
+    <h4>Efficient Portfolios</h4>    
+  </div>
+  <div class="eco-text">
+    <p>Efficient portfolios are those which minimise risk for a target level of returns (or equivalently, maximise return for a target level of risk). Intuitively, such portfolios will lie along the boundary of the feasible set for all values of \(r_p\) greater than that associated with the minimum variance portfolio. By offering a lower return at the same level of volatility, any portfolio lying below this boundary will be dominated by those along the boundary. Consequently, all portfolios with returns above that associated with the minimum variance portfolio and along the boundary of the feasible set are efficient portfolios which are said to lie along the <em>efficiency frontier</em>. As we will see, any portfolio along the efficiency frontier can be expressed as a linear combination of two other portfolios along the frontier. Hence, knowing the locations of two portfolios is sufficient to identify the whole frontier.</p>
+    <p>To find two such portfolios, we will solve two constrained minimisation problems by choosing the weight vector \(\bf{e} \) to solve \[min_{\bf{e}} \hspace{3mm} \sigma^2_{p, e} \hspace{3mm} \text{s.t.} \hspace{3mm} \bf{e^T r} = \mathit{r^*_e}, \hspace{3mm} \bf{e^T 1} = \mathit{1}  \] where \( r^*_e \) represents the target returns on the portfolio. The Lagranian equations for this problem is \[\ell(\lambda, \bf{e}) = \bf{e^T} \bf{\Sigma} \bf{e} + \mathit{\lambda_1} \left( \bf{e^T} \bf{r} - \mathit{r^*_e} \right) + \mathit{\lambda_2} \left( \bf{e^T} \bf{1} - \mathit{1} \right) \] so the associated first order conditions are \[ \frac{\partial \ell}{\partial \bf{e}} = 2 \bf{\Sigma e} + \mathit{\lambda_1} \bf{r} + \mathit{\lambda_2} \bf{1} = 0 \tag{11} \] \[ \frac{\partial \ell}{\partial \mathit{\lambda_1}} = \bf{e^T} \bf{r} - \mathit{r^*_e} = \mathit{0} \tag{12} \] \[ \frac{\partial \ell}{\partial \mathit{\lambda_2}} = \bf{e^T} \bf{1} - \mathit{1} = \mathit{0}. \tag{13} \] Again, this system of equations can be written in matrix form \[ \begin{bmatrix}  2 \bf{\Sigma} & \bf{r} & \bf{1} \\ \bf{r^T} & \mathit{0} & \mathit{0} \\ \bf{1^T} & \mathit{0} & \mathit{0} \end{bmatrix} \begin{bmatrix} \mathbf{e} \\ \mathit{\lambda_1} \\ \mathit{\lambda_2}  \end{bmatrix} = \begin{bmatrix} \mathbf{0} \\ \mathit{r^*_e} \\ \mathit{1}  \end{bmatrix} \tag{14} \] which means that if \( \mathbf{A^*} = \begin{bmatrix}  2 \bf{\Sigma} & \bf{r} & \bf{1} \\ \bf{r^T} & \mathit{0} & \mathit{0} \\ \bf{1^T} & \mathit{0} & \mathit{0} \end{bmatrix} \), \(\bf{z^*} =  \begin{bmatrix} \mathbf{e} \\ \mathit{\lambda_1} \\ \mathit{\lambda_2}  \end{bmatrix} \), and \(\bf{b^*}  = \begin{bmatrix} \mathbf{0} \\ \mathit{r^*_e} \\ \mathit{1}  \end{bmatrix}  \) then \[\bf{z^*} =  \left( \bf{A^*} \right)^{-1} \bf{b^*} . \tag{15} \]</p>
+    <p>Two different values of \(r^*_e\) will give the two efficient portfolios from which the efficiency frontier can be constructed. Say the returns of the two constructed portfolios are \(r_{p, 1} \) and \(r_{p, 2} \) and let the weights in these portfolios be \( \bf{e_1} \) and \( \bf{e_2} \) respectively. Then suppose there is a new target level of portfolio return \( r^*_{\theta}\). Hence, \( r^*_{\theta} = \theta r_{p, 1} + \left( 1 - \theta \right) r_{p, 2} \) which implies \[\theta = \frac{r^*_{\theta} - r_{p, 2}}{r_{p, 1} - r_{p, 2}} \tag{16} . \]  The weights for the new portfolio on the efficient frontier will be \[ \bf{z_{\theta}} = \theta \bf{e_1} + \left( \mathit{1} - \theta \right) \bf{e_2} . \tag{17}  \]</p>
+    <p>The example below shows two efficient portfolios (labelled E1 and E2) found through the method described in equations (11) to (15) and one (labelled Eθ) identified as a linear combination of the other two. The investor aims for an annualised return of 21% at E1 and 22% at E2. Short selling E1 to put more wealth in E2 allows the investor to achieve a higher return at Eθ.</p>
+  </div> 
+     <div class="code-box">
+    <pre>
+      <code>
+# Efficient Portfolio
+A_star = np.zeros((5, 5))
+A_star[0:3, 0:3] = sigmat2
+A_star[3:4, 0:3] = mean.reshape(1, 3)
+A_star[4:5, 0:3] = np.ones([1, 3])
+A_star[0:3, 3:4] = mean.reshape(3, 1)
+A_star[0:3, 4:5] = np.ones([3, 1])
+A_star_inv = np.linalg.inv(A_star)
+target_r_1 = 0.21/252
+target_r_2 = 0.22/252
+b_star_1 = np.array([[0], [0], [0], [target_r_1], [1]])
+b_star_2 = np.array([[0], [0], [0], [target_r_2], [1]])
+z_star_1 = np.dot(A_star_inv, b_star_1)
+z_star_2 = np.dot(A_star_inv, b_star_2)
+
+e_1 = z_star_1[:3, 0]
+e_1_T = np.transpose(e_1)
+ep_r_1 = np.dot(e_1_T, mean)
+ep_sigma2_1_step = np.dot(e_1_T, sigma)
+ep_sigma2_1 = np.dot(ep_sigma2_1_step, e_1)
+ep_sigma_1 = np.sqrt(ep_sigma2_1)
+annual_ep_r_1 = 252*ep_r_1
+annual_ep_sigma_1 = np.sqrt(252)*ep_sigma_1
+
+e_2 = z_star_2[:3, 0]
+e_2_T = np.transpose(e_2)
+ep_r_2 = np.dot(e_2_T, mean)
+ep_sigma2_2_step = np.dot(e_2_T, sigma)
+ep_sigma2_2 = np.dot(ep_sigma2_2_step, e_2)
+ep_sigma_2 = np.sqrt(ep_sigma2_2)
+annual_ep_r_2 = 252*ep_r_2
+annual_ep_sigma_2 = np.sqrt(252)*ep_sigma_2
+
+new_target_r = 0.23/252
+theta = (new_target_r - target_r_2) / (target_r_1 - target_r_2)
+e_theta = theta*e_1 + (1-theta)*e_2
+e_theta_T = np.transpose(e_theta)
+r_theta = np.dot(e_theta_T, mean)
+sigma2_theta_step = np.dot(e_theta_T, sigma)
+sigma2_theta = np.dot(sigma2_theta_step, e_theta)
+sigma_theta = np.sqrt(sigma2_theta)
+annual_r_theta = 252*r_theta
+annual_sigma_theta = np.sqrt(252)*sigma_theta
+
+# Plot
+colors = np.array(["gold"])
+mp.scatter(annual_ep_sigma_1, annual_ep_r_1, color=colors)
+mp.text(annual_ep_sigma_1, annual_ep_r_1, "E1", ha='center', va='bottom')
+mp.scatter(annual_ep_sigma_2, annual_ep_r_2, color=colors)
+mp.text(annual_ep_sigma_2, annual_ep_r_2, "E2", ha='center', va='bottom')
+mp.scatter(annual_sigma_theta, annual_r_theta, color=colors)
+mp.text(annual_sigma_theta, annual_r_theta, "Eθ", ha='center', va='bottom')
+mp.ylabel("r")
+mp.xlabel("σ")
+      </code>
+    </pre>
+  </div>
+    
+  <div class="eco-graph">
+  <img src="images/MPT_4.png">
+  </div>
+    
+  <div class="section-head">    
+    <h4>Tangent Portfolio</h4>    
+  </div>
+  <div class="eco-text">
+    <p>Now we add a risk-free asset to the model, \(r_f\). The investor can allocate her wealth between this asset and the portfolio formed by investment in the risky assets (the three stocks in our example). To find the tangency portfolio we will reframe the problem as one of minimising the variance of a portfolio with a target level of <em>excess returns</em>, which are just returns minus the risk-free rate. We derive the weights of such a portfolio then find the tangency portfolio by imagining the investor chooses to put all her wealth in the volatile assets.</p> 
+    <p>The expected return on a portfolio combining risk-free and volatile assets is \[r_p = \bf{a^T r} + \left(\mathit{1} - \bf{a^T} \bf{1} \right) \mathit{r_f} \hspace{3mm} = \hspace{3mm} r_p = r_f + \bf{a^T} \left(\bf{r} - \mathit{r_f} \bf{1}  \right)  \hspace{3mm} = \hspace{3mm} \mathit{r_f} + \bf{a^T} \bf{u}  \tag{18}  \] where \( \bf{u} =  \bf{r} - \mathit{r_f} \bf{1} \) represents risk-free returns on the risky assets so the expected excess return on the portfolio, \( u_p = r_p - r_f \), is \(\bf{a^T u} \). The investor now wants to minimise the variance of the portfolio given a target level of risk-free returns, \(u^*_p\) \[ min_{\bf{a}} \hspace{3mm} \bf{a^T \Sigma a} \hspace{3mm} \text{s.t.} \hspace{3mm} \mathit{u_p} = \mathit{u^*_p} . \] There is no constraint on the weights this time because in the presence of the risk free asset they do not have to sum to one and short selling is permitted which means they can be negative. The Lagrangian equation is \[ \ell(\lambda, \bf{a}) = \bf{a^T \Sigma a} + \mathit{\lambda} \left( \bf{a^T u} - \mathit{u_p^*} \right) \tag{19} \]with first order conditions \[ \frac{\partial \ell}{\partial \bf{a}} = 2 \bf{\Sigma a} + \mathit{\lambda} \bf{u} = 0 \tag{20} \]   \[ \frac{\partial \ell}{\partial \lambda}  =  \bf{a^T u} - \mathit{u_p^*} = \mathit{0}  \tag{21} . \]</p>
+    <p>Using (20) to solve for \( \bf{a} \) \[ \bf{a} = - \mathit{\frac{1}{2}} \lambda \left( \bf{\Sigma} \right)^{-1} \bf{u} \tag{22} .\] From (21), we know that \( \bf{a^T u} = \mathit{u_p^*} \) and we also know that \( \bf{a^T u} = \bf{u^T a} \) because the result is just a scalar. Hence, multiplying (22) by \( \bf{u^T} \) and setting equal to \( u^*_p \) \[ \bf{u^T a} \hspace{3mm} = \hspace{3mm} - \mathit{\frac{1}{2}} \lambda \bf{u^T} \left( \bf{\Sigma} \right)^{-1} \bf{u} \hspace{3mm} = \hspace{3mm} \mathit{u^*_p} \] \[ \lambda = \frac{\mathit{2} u^*_p}{\bf{u^T} \left( \bf{\Sigma} \right)^{-1} \bf{u}}  \tag{23} \] which substituted back into (22) gives \[\bf{a} = \mathit{u^*_p} \frac{\left( \bf{\Sigma} \right)^{-1} \bf{u}}{\bf{u^T} \left( \bf{\Sigma} \right)^{-1} \bf{u}} \tag{24} \] so the weight given to the risk-free asset is just \( \mathit{1} - \left( \mathit{u^*_p} \frac{\left( \bf{\Sigma} \right)^{-1} \bf{u}}{\bf{u^T} \left( \bf{\Sigma} \right)^{-1} \bf{u}} \right)^{\bf{T}} \bf{1} \). Again, these are the weights obtained if the investor put some of their wealth in the risky portfolio and some of it in the risk-free asset. We can find the tangency portfolio, whose weights we will label \( \bf{t} \), by supposing all of the investor's wealth is placed in the risky assets, so \( \bf{1^T a} = \mathit{1} \) \[ \bf{1^T t} =   \mathit{u^*_p} \frac{\bf{1^T} \left( \bf{\Sigma} \right)^{-1} \bf{u}}{\bf{u^T} \left( \bf{\Sigma} \right)^{-1} \bf{u}}  = \mathit{1} \tag{25} \] which after rearranging gives an expression for \( u^*_p \) \[ u^*_p = \frac{\bf{u^T} \left( \bf{\Sigma} \right)^{-1} \bf{u}}{\bf{1^T} \left( \bf{\Sigma} \right)^{-1} \bf{u}} \] and finally substituting this expression back into (25) gives \[ \bf{t} = \frac{\left( \bf{\Sigma} \right)^{-1} \bf{u}}{\bf{1^T} \left( \bf{\Sigma} \right)^{-1} \bf{u}}  \tag{26} .\]</p>
+    <p>The figure below shows the tangent portfolio, labelled T, in our example assuming a daily risk-free interest rate of 0.01%. The line drawn from the vertical intercept reflecting the annualised risk-free return that is tangent to the Markowitz bullet at portfolio T represents a new efficiency frontier. Also shown is the portfolio chosen by the investor along the new efficiency frontier given a target daily excess return of 0.07%.</p>
+  </div>
+       <div class="code-box">
+    <pre>
+      <code>
+# Tangency Portfolio
+r_f = 0.0001
+annual_r_f = 252*r_f
+u = mean - r_f
+u_T = np.transpose(u)
+one_vec = np.ones((1, 3))
+sigma_inv = np.linalg.inv(sigma)
+denominator_step = np.dot(one_vec, sigma_inv)
+denominator_step_2 = np.dot(denominator_step, u)
+denominator = 1 / denominator_step_2
+t_step = np.dot(sigma_inv, u)
+t = denominator*t_step
+t_T = np.transpose(t)
+
+r_tangent = np.dot(t_T, mean)
+sigma2_tangent_step = np.dot(t_T, sigma)
+sigma2_tangent = np.dot(sigma2_tangent_step, t)
+sigma_tangent = np.sqrt(sigma2_tangent)
+annual_r_tangent = 252*r_tangent
+annual_sigma_tangent = np.sqrt(252)*sigma_tangent
+
+beta = (annual_r_tangent - annual_r_f) / annual_sigma_tangent
+line_x = np.linspace(0, 0.5, 100)
+line_y = annual_r_f + (beta*line_x)
+
+# Choice along the tangency line
+target_xsr = 0.0007
+denominator_step = np.dot(u_T, sigma_inv)
+denominator_step_2 = np.dot(denominator_step, u)
+denominator = 1 / denominator_step_2
+numerator = np.dot(sigma_inv, u)
+op_weight = (target_xsr*denominator)*numerator
+op_weight_T = np.transpose(op_weight)
+r_f_weight = 1 - np.dot(one_vec, op_weight)
+op_r = np.dot(op_weight_T, mean) + (r_f_weight*r_f)
+sigma2_op_step = np.dot(op_weight_T, sigma)
+sigma2_op = np.dot(sigma2_op_step, op_weight)
+sigma_op = np.sqrt(sigma2_op)
+annual_r_op = 252*op_r
+annual_sigma_op = np.sqrt(252)*sigma_op
+
+
+# Plot
+colors = np.array(["gold"])
+mp.scatter(annual_sigma_tangent, annual_r_tangent, color=colors)
+mp.text(annual_sigma_tangent, annual_r_tangent, "T", ha='center', va='bottom')
+mp.scatter(0, annual_r_f, color=colors)
+mp.text(0, annual_r_f, "r_f", ha='center', va='bottom')
+mp.plot(line_x, line_y, color='black', label='Line')
+mp.scatter(annual_sigma_op, annual_r_op, color=colors)
+mp.text(annual_sigma_op, annual_r_op, "OP", ha='center', va='bottom')
+mp.ylabel("r")
+mp.xlabel("σ")
+mp.xlim(0.2, 0.30)
+mp.ylim(0.15, 0.25)
+mp.show()
+      </code>
+    </pre>
+  </div>
+    
+  <div class="eco-graph">
+  <img src="images/MPT_5.png">
+  </div>
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>

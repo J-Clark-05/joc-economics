@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+    
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+<div class="section-head">    
+    <h4>Introduction</h4>    
+</div>
+  <div class="eco-text">
+    <p>In the context of portfolio management, financial leverage involves the use of borrowed capital to invest in risky assets. If the repayments on the debt are smaller than the capital gains and dividend flow from the portfolio, investors can earn higher returns on their invested capital (their equity) than would be possible without the use of leverage. The term 'leverage' is borrowed from physics; levers are tools which make it possible to exert a greater force on an object than the force applied on the lever itself. In a similar way, leverage in finance is used to describe a method by which an investor can increase their returns. This article focuses on demonstrating how borrowed funds can be placed in a portfolio to potentially increase its returns. I say 'potentially' because using leverage also comes with greater risk, the potential losses are magnified as well as the gains because the initial loan needs to be repaid regardless of the performance of the portfolio over the holding period. The applied example in this page will demonstrate these features of leveraged investment.</p>
+    <p>Using borrowed funds is the focus of this article, but there are some other applications of leverage in finance worth mentioning. Derivatives such as options provide a way of utilising financial leverage. An investor who expects a stock's price to rise in the future can buy an call option, giving her the right but not the obligation to purchase the option at some specified date (and before this date if it is an American-style call option) and at a specified price, known as the strike price. If the investor is correct and the stock's price rises above the strike price, she can exercise the option, acquire the stock at the strike price and then sell it at the higher spot price to make a return. This offers the chance for very high returns relative to the initial cost of the investment (the option price) because there is no theoretical limit to how high the stock price can rise over the period of the option contact.</p>
+    <p>Another example of leverage comes from corporate finance, where the leverage ratio describes the ratio of a firm's liabilities to its assets, often measured by the debt to equity ratio. Firms use borrowed capital to fund their expenditures such as production costs and fixed capital investment, the more debt a firm takes on relative to its equity, the more levered it becomes. Because it does not require issuing new shares financing through debt can give current shareholders greater returns compared to equity financing. However, it comes with the risk that a firm will not be able to pay off its debts if its earnings take a turn for the worse. If the firm cannot pay off its debt obligations, it will have to declare bankruptcy and its assets will be transfered over to the agents who loaned money to the firm.</p>
+    <p>Leveraged buyouts are an important concept in private equity and investment banking. This occurs when an investment firm purchases another firm using an (often large) ratio of borrowed capital to cover the payment. The acquired firm's assets are often used as collateral for the loan. Again, the use of borrowed capital can drastically increase the returns of the investment for the investment firm but carries the risk that the acquired firm will not be as profitable as was expected, in which case the investment firm could make substantial losses or even default on their loan.</p>
+  </div>    
+ 
+
+<div class="section-head">    
+    <h4>Portfolio Returns and Volatility</h4>    
+</div>  
+    <div class="eco-text">
+    <p>We will consider investment in an equally weighted portfolio of the SPDR S&P 500 Trust ETF, the Vanguard Total Bond Market Index ETF, and the SPDR Gold Trust. The representative portfolio thus comprises of ETFs representing movements in stock, bond, and commodity markets. The Python code below installs the relevant packages for this page, downloads the data, and calculates its expected return and volatility. Let \(\mathbf{R}\) be a \(T \times N\) matrix of log returns where \(T\) is the number of time periods and \(N\) is the number of assets. Also, let \(\mathbf{v}\) be a \(T \times 1\) vector with all elements equal to \(1 / T\), and let \(\mathbf{w}\) be a \(N \times 1\) matrix of portfolio weights, so in the equally-weighted case all elements are just \(1/N\). Finally, let \(\bf{X^{\prime}}\) indicate the transpose of a matrix or vector. Given these definitions, the expected return on the portfolio is \[ \mu_p = \bf{v^{\prime} R w} \tag{1}\] and the variance is \[ \sigma_p^2 = \bf{w^{\prime}} \left[ \mathit{\frac{1}{T}} \bf{R^{\prime} R}  -  \bf{R^{\prime} v v^{\prime} R}  \right] w.   \tag{2} \]</p>
+    </div>
+    <div class="code-box">
+    <pre>
+      <code>
+# Packages
+import numpy as np
+import matplotlib.pyplot as mp
+from mpl_toolkits.mplot3d import Axes3D
+import pandas as pd
+import datetime as dt
+import yfinance as yf
+import random
+from scipy.stats import norm
+
+# Data
+tickers = ["SPY", "BND", "GLD"]
+start = "2007-01-01"
+end = "2022-12-31"
+data = yf.download(tickers, start, end)
+x = data["Adj Close"]
+lnx = np.log(x)
+lnx_lag = lnx.shift(1)
+logdiff = lnx - lnx_lag
+r = logdiff.dropna()
+r = np.array(r)
+time_dim = np.size(r, axis=0)
+asset_dim = np.size(r, axis=1)
+weights = np.full([asset_dim, 1], (1 / asset_dim))
+vec = np.full([time_dim, 1], (1 / time_dim))
+mean = vec.T@r@weights
+variance = weights.T@((1/(time_dim-1))*(r.T@r) - (r.T@vec@vec.T@r))@weights
+std = np.sqrt(variance)
+
+      </code>
+    </pre>
+  </div>
+
+
+<div class="section-head">    
+    <h4>Monet Carlo Simulation</h4>    
+</div> 
+    <div class="eco-text">
+        <p>Now assume that returns follow a normal distribution so that \(\forall \bf{r_i} \in R\) \[\mathbf{r_i} \sim \mathcal{N} \left(\mu_i, \sigma^2_i  \right) \tag{3} \] where \(\mathbf{r_i}\) is a \(T \times 1\) column of the matrix \(\mathbf{R}\) representing the returns of asset \(i\) in the portfolio over the sample period. This means that we can write an expression for daily returns of asset \(i\) as the sum of its expect value and its volatility multiplied by a draw from the standard normal distribution \(z_t\) \[ r_{it} = \mu_i + \sigma_i z_t. \tag{4} \] We can use this information to perform Monte Carlo simulations of portfolio returns and examine how leverage can affect the returns and volatility of the investment. Note that there are two assumptions built into this methodology which are unrealistic. The first is that past returns can be used to determine information about future returns and the second is that returns follow a normal distribution. In reality, what happened to an asset in the past is not a good reflection of what returns will happen in the future, and returns exhibit higher kurtosis than is displayed by the normal distribution (which is equal to 3). </p>
+        <p>Let's assume that the investor puts $100,000 of their own capital and $100,000 of borrowed capital into the portfolio, so that the initial portfolio value is $200,000. Leverage in this case is given by the ratio of total assets to the value of their debt, so the initial leverage is \($200,000 / $100,000 = 2\). Note that this is equivalent to the ratio of debt plus equity to equity (again, equity is the value of the investor's own capital in the portfolio). The debt must be repaid with an interest rate of 5% per year, so after a year the investor must pay back $105,000. This repayment is assumed to occur in daily increments. The portfolio will be held for one year, or 252 trading days, which means the daily repayment in debt is \(0.05/252 = 0.02%\). The Python code below performs 1000 Monte Carlo simulations to generate series for the return on the portfolio and the return on equity (ROE) over the holding period. It also calculates the evolution of the portfolio value, the value of the investor's equity, and the evolution of the leverage ratio over the holding period.</p>
+    </div>
+   <div class="code-box">
+    <pre>
+      <code>
+# Simulations
+simulations = 1000
+days = 252
+periods = days + 1
+V0 = 200000
+D0 = 100000
+interest = 0.05/days
+r_series = np.full([simulations, periods], np.nan)
+V_series = np.full([simulations, periods], np.nan)
+D_series = np.full([simulations, periods], np.nan)
+V_series[:, 0] = V0
+D_series[:, 0] = D0
+
+for h in np.arange(0, simulations, 1):
+    for i in np.arange(1, periods, 1):
+        z = np.random.normal(0, 1)
+        r_step = mean + std*z
+        V_step = np.exp(r_step + np.log(V_series[h, i-1]))
+        r_series[h, i] = r_step[0, 0]
+        V_series[h, i] = V_step[0, 0]
+        D_step = np.exp(interest + np.log(D_series[h, i-1]))
+        D_series[h, i] = D_step
+
+# ROE
+E_series = V_series - D_series
+E_series_lag = np.zeros([simulations, periods])
+for i in np.arange(0, simulations, 1):
+    E_series_lag[i, :] = np.roll(E_series[i, :], 1)
+E_series_lag[:, 0] = np.nan
+ROE = np.log(E_series) - np.log(E_series_lag)
+
+# Leverage
+lev = V_series / E_series
+      </code>
+    </pre>
+  </div>
+
+    
+
+<div class="section-head">    
+    <h4>Simulation Results</h4>    
+</div> 
+    <div class="eco-text">
+        <p>The figure below displays the results of the simulations. The top three panels show the portfolio value, equity value, and leverage ratio for the first 5 simulations in the sample. In 4 of the 5 cases, the portfolio gains value over the holding period, which means the investor's equity also increases in value and that the leverage ratio falls. The strategy has been successful in these 4 cases, because the value of the portfolio has grown more than the debt repayments the investor has been able to use the borrowed funds to increase their holding in the portfolio and increase the return on their equity. As an example, the return on the portfolio in the simulation indicated by the red line is approximately \(\frac{$245,000}{$200,000} - 1 = 22.5 \% \) while the return on equity is approximately \(\frac{$140,000}{$100,000} - 1 = 40 \%\). The simulation indicated by the gold line shows the exact opposite fortune for the investor. The portfolio in this case has declined in value by about \(7.5\%\) over the year, but this means the value of the investors equity has declined by around \(20\%\). These examples demonstrate both the large potential benefits and potential costs of using leverage to finance investments.</p>
+        <p>The bottom three panels summarise results from all 1000 simulations. The first shows the distribution of total portfolio returns over the holding period, where the vertical gold line indicates the mean and the vertical red lines indicate one standard deviation from the mean. When comparing this to the adjacent panel, which shows the same thing for equity returns over the 1000 simulations, we see that equity returns have a much higher variance, ranging between -50% and 50% compared to -25% and 40% for portfolio returns. The mean across all the simulations was very similar, 6.0% for portfolio returns and 6.2% for equity returns. The final panel shows the distribution of the end-of-holding-period leverage ratio. While on average the leverage ratio tended to remain at about 2, the distribution shows a clear positive skew, which demonstrates that in some simulations the leverage became very high over the holding period.</p>
+    </div>
+    
+    <div class="eco-graph">
+    <img src="images/leverage_1.png">
+    </div>
+
+<div class="section-head">    
+    <h4>Higher Initial Leverage</h4>    
+</div> 
+    <div class="eco-text">
+        <p>The next figure shows what happens when the investor takes on an even more levered position to invest $200,000 in the portfolio, this time only putting in $75,000 of her own equity and borrowing $120,000 to give an initial leverage of 2.67. The most notable point from this example is that a few of the simulations resulted in a 100% decline in the investor's equity, so the investor lost everything from their leveraging strategy. Intuitively given this fact, there is also a higher variance in the distribution of equity returns and the leverage ratio in some simulations was as high as 7. This example demonstrates just how dangerous levered positions can be for investors. A good example is Lehman Brothers before the financial crisis of 2008. By 2007, this major American investment bank had a leverage ratio of 31:1, which meant a 3%-4% decline in the value of its assets was enough to wipe out all of its equity <a href="https://www.amazon.co.uk/Options-Futures-Other-Derivatives-John/dp/0133456315">(Hull, 2012, p.3)</a>.</p>
+    </div>
+    
+    <div class="eco-graph">
+    <img src="images/leverage_2.png">
+    </div>
+    
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+      
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>

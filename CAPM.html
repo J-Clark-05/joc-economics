@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+    
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+<div class="section-head">    
+    <h4>Introduction</h4>    
+</div>
+  <div class="eco-text">
+      <p>This page derives the capital asset pricing model (CAPM) of <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1540-6261.1964.tb02865.x">Sharpe (1964)</a>, which is foundational to the theory of how the expected returns of assets are determined in financial markets. Equations (1) and (2) below follow directly from the mean-variance portfolio theory of <a href="https://www.jstor.org/stable/2975974">Markowitz (1952)</a> and relates the expected excess return on asset \(i\), \(r_i\), to the expected excess return on the market portfolio \(r_m\), where \(r_f\) is the risk-free rate, \(\sigma_i\) is the standard deviation of asset \(i\) and \(\rho_{i, m}\) is the correlation between the returns on asset \(i\) and returns on the market portfolio. \[ r_i - r_f = \beta \left(r_m - r_f \right) \tag{1} \] \[ \beta = \frac{cov(r_i, r_m)}{var(r_m)} = \frac{\rho_{i, m} \sigma_i \sigma_m}{\sigma_m^2} = \frac{\rho_{i, m} \sigma_i }{\sigma_m} \tag{2} .\] Despite its fame, it is not obvious how equation (1) follows from the Markowitz model. This page shows the steps involved in deriving the equation with reference to a numerical example constructed in Python. First, however, it is worth stating what the equation means in more detail.</p>
+      <p>The market portfolio is an efficient combination of assets which can be used with borrowing and lending of a risk-free asset to dominate the return and risk combinations of all other available portfolios. The level of risk displayed by the market portfolio, as measured by its standard deviation \(\sigma_m\), is known as systematic risk because it cannot be eliminated by further portfolio diversification. Investors must accept this level of risk if they desire the rate of return offered by the market portfolio. If the covariance \(r_i\) and \(r_m\) is greater than the level of systematic risk, which implies \(\sigma_i > \sigma_m\) (and \(\rho_{i, m} > 0\)), then by equation (2) \(\beta\) will be greater than one and by equation (1) the excess returns offered on asset \(i\) will be higher than those of the market portfolio. In fact, given that \(r_m > r_f \), we can say that \(r_i > r_m\) when \(\beta \gt 1\) and \(r_i \lt r_m\) when \(\beta \lt 1\). Suppose that \(r_m = r_f + \epsilon\) where \(\epsilon\) is a positive number. Then from (1) \[ r_i = r_f + \beta \epsilon \]  \[ r_i > r_m \hspace{3mm} \rightarrow \hspace{3mm}  r_f + \beta \epsilon > r_m\] \[ r_f + \beta \epsilon > r_f + \epsilon \] \[ \beta > 1 .\] Note that if \(\rho_{i, m} = 0 \) then \(r_i = r_f\). This makes sense because it states that assets which do not correlate with systematic risk should offer a risk-free return, reflecting the fact that their unsystematic risk can be mitigated through diversification.</p>
+      <p>The result that assets which have a risk greater than the market portfolio will offer a higher expected return is intuitive given the assumption that investors like higher returns but do not like risk. The CAPM model provides researchers with a way of testing how well the mean-variance model predicts the expected return on financial assets, and also gives gives practitioners a model for estimating the expected return of their investments. It is important to note, however, that the model makes two key assumptions beyond those made by the Markowitz model. First, it is assumed that there are no transaction costs, including fees for short sales, and all investors have access to risk-free borrowing and lending which is independent of how much is borrowed or lent. Furthermore, all investors are assumed to agree on the expected return and volatility of the assets available to them, and the assumed joint distribution of returns is the correct one, i.e. returns follow the distribution which investors believe they do. Neither of these assumptions are realistic.</p>
+  </div>    
+ 
+
+<div class="section-head">    
+    <h4>Market Portfolio</h4>    
+</div>  
+    <div class="eco-text">
+    <p>To derive equation (1), we first need to construct a market portfolio from a universe of risky assets available to investors. In theory, we would need to include all classes of assets, such as stocks, bonds, real estate, and commodities. For simplicity, the example market portfolio in this page only includes stocks listed in the S&P 500. The code below shows how to extract this data using the pandas library. It then calculates the daily returns for those stocks which have at least 10 years worth of data.</p>
+<div class="code-box">
+    <pre>
+      <code>
+# Packages
+import numpy as np
+import matplotlib.pyplot as mp
+from mpl_toolkits.mplot3d import Axes3D
+import pandas as pd
+import datetime as dt
+import yfinance as yf
+import random
+from scipy.stats import t as t_dist
+
+# Tickers
+url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
+table = pd.read_html(url)
+stocks = table[0]['Symbol'].tolist()
+
+
+# Data
+start = "2013-01-01"
+end = "2022-12-31"
+data = yf.download(stocks, start, end)["Adj Close"]
+log_diff = np.log(data / data.shift(1))
+require = len(log_diff) - 1
+r = log_diff.dropna(axis=1, thresh=require)
+r = r.dropna()
+Er = np.mean(r, axis=0)
+Er = np.array(Er)
+sigma = np.cov(r.T)
+sigma = np.array(sigma)
+r_f = 0.0001
+      </code>
+    </pre>
+  </div>
+  <p>I will assume throughout this example that the risk-free rate is a constant equal to 0.0001, which implies an annualised return of 2.52%. I have shown in <a href="MPT.html">this</a> page how to calculate the efficiency frontier and tangency portfolio given a selection of assets and a risk-free rate of borrowing and lending. To derive equation (1), we start by making a new portfolio which places a fraction \(\alpha\) of the investor's wealth in asset \(i\) and \(1- \alpha\) in the market portfolio such that \[ r_p = \alpha r_i + (1-\alpha) r_m  \tag{3} \] and \[ \sigma_p = \sqrt{\alpha^2 \sigma_i^2 + (1-\alpha)^2 \sigma_m^2 + 2 \alpha (1-\alpha) \sigma_i \sigma_m \rho_{i, m}}. \tag{4} \] Note that because \(i\) is part of the market portfolio even though \(\alpha = 1 \) implies all the investor's wealth goes in asset \(i\), \(\alpha = 0\) implies some investment in \(i\). Therefore, some negative value of \(\alpha\) will give a portfolio which places no weight on asset \(i\) (if it is optimal for the investor to short sell \(i\) then the value of \(\alpha\) associated with no investment in \(i\) will be positive). If the expected return on the market portfolio is given by \( \mathbf{g^T} \mathbf{r}  \) where \( \mathbf{g^T} \) is the transpose of a \(N \times 1\) column vector giving the weights of each stock in the portfolio (\(\gamma_1 \cdots \gamma_N\)) and \(\mathbf{r}\) is another \(N \times 1\) column vector giving the expected returns of the individual assets, then let \[\mathbf{h} =  \begin{bmatrix} (1-\alpha) \gamma_1 & \cdots & \left( \alpha + (1-\alpha) \gamma_i \right) & \cdots & (1-\alpha) \gamma_N  \end{bmatrix}^{T}  . \tag{5}\] The expected return and variance of the new portfolio is \[ r_p = \mathbf{h^T r} \tag{6}\]  \[ \sigma_p = \mathbf{h^T \Sigma h} \tag{7}\] where \(\mathbf{\Sigma}\) is the covariance matrix of daily returns. Note that if \( \alpha = \frac{\gamma_i}{\gamma_i - 1} \), which implies \(1 - \alpha = \frac{1}{1 - \gamma_i}\), then \[\mathbf{h} = \begin{bmatrix} \frac{\gamma_1}{1 - \gamma_i} & \cdots & 0 & \cdots & \frac{\gamma_N}{1-\gamma_i}  \end{bmatrix}^{T}  \] so none of the investor's wealth is placed in asset \(i\). </p>
+  <p>The diagram below gives an example of this set up, the orange points are the annualised risk-return combinations of the individual assets on the S&P 500 and the red point is the risk-return combination of the market portfolio, which is tangent to the line representing the efficiency frontier with borrowing and lending. The black point is a randomly chosen stock and the blue dots are the risk-return combinations for portfolios constructed from this randomly chosen stock and the market portfolio. In this example, asset \(i\) had a weight of 0.316 in the market portfolio and the value of \(\alpha\) implying zero investment in asset \(i\) is given by -0.46.</p>
+    </div>
+    <div class="eco-graph">
+    <img src="images/market_combos.png">
+    </div>
+
+<div class="section-head">    
+    <h4>Deriving the CAPM Equation</h4>    
+</div> 
+    <div class="eco-text">
+        <p>It is clear from equation (5) that whenever \(\alpha = 0\) all the investors wealth is placed in the market portfolio and \(r_p = r_m\). Evaluating the change in expected returns and volatility of \(r_p\) at this point given a marginal change in \(\alpha\) will allow us to derive the CAPM equation. The derivatives of (3) and (4) with respect to \(\alpha\) are \[ \frac{\partial r_p}{\partial \alpha} = r_i - r_m  \tag{8}\] and \[\frac{\partial \sigma_p}{\partial \alpha} = \frac{2 \alpha \sigma_i^2 - 2 (1-\alpha) \sigma_m^2 + (1 - 2\alpha) 2 \sigma_i \sigma_m \rho_{i, m}}{2 \sqrt{\alpha^2 \sigma_i^2 + (1-\alpha)^2 \sigma_m^2 + 2 \alpha (1-\alpha) \sigma_i \sigma_m \rho_{i, m}}} \tag{9} \] which evaluated \(\alpha = 0\) gives \[ \left. \frac{\partial r_p}{\partial \alpha} \right|_{\alpha=0} = r_i - r_m  \tag{10}\] and \[\left. \frac{\partial \sigma_p}{\partial \alpha} \right|_{\alpha=0} = -\left(\sigma_m - \sigma_i \rho_{i, m}  \right) \tag{11}. \] Equations (10) and (11) can now be used to find the change in volatility given a marginal change in returns \[ \left. \frac{\partial \sigma_p}{\partial r_p} \right|_{\alpha = 0} = \frac{\sigma_m - \sigma_i \rho_{i,m}}{r_m - r_i}.  \tag{12}\]</p>
+        <p>As is evident from the figure above, if \(\alpha=0\) and the investor has all their wealth in the market portfolio (the red point), the marginal change in volatility given a marginal change in expected returns must be equal to the slope of the capital makret line, the efficiency frontier with borrowing and lending. The capital market line is usually written in terms of \(r\), which means it has the form \(r = r_f + c \sigma\) where \(c\) is the slope of the line in (\(\sigma, r\)) space. This reflects the fact that the expected returns on assets are linear functions of volatility, with \(r_f\) representing the returns on an asset with zero volatility. Given we know the points \(r_f\), \(\sigma_m\), and \(r_m\), we can write the equation for the capital market line as \[ r = r_f + \frac{r_m - r_f}{\sigma_m} \sigma \] \[ \sigma = -\frac{r_f \sigma_m}{r_m - r_f} + \frac{\sigma_m}{r_m - r_f} r  \] which imples \[\frac{\partial \sigma}{\partial r} = \frac{\sigma_m}{r_m - r_f} . \tag{13} \] Now set (12) equal to (13) and rearrange to find \[ \frac{\sigma_m - \sigma_i \rho_{i,m}}{r_m - r_i} = \frac{\sigma_m}{r_m - r_f} \] \[ \frac{\sigma_i \rho_{i, m}}{\sigma_m} = - \frac{r_f}{r_m - r_f} + \frac{r_i}{r_m - r_f} = \beta \tag{14} \] from which we can find equation (1) \[r_i = r_f + \beta (r_m - r_f)  \]</p>
+        <p></p>
+    </div>
+
+
+<div class="section-head">    
+    <h4>Estimating \(\beta\) by OLS Regression</h4>    
+</div> 
+    <div class="eco-text">
+        <p>\(\beta\) measures how sensitive an asset's expected return is to changes in the excess return on the market portfolio. A unit change in \(r_m - r_f\) causes a \(\beta\) unit change in the expected return of asset \(i\). This is exactly the same interpretation as the estimated slope coefficient in a linear regression model. If returns satisfy the <a href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem">Gauss-Markov assumptions</a>, then \(\beta\) can be recovered by running and ordinary least squares regression of the excess returns on asset \(i\) on the excess returns on the market portfolio. If the CAPM theory is valid, a t-test for statistical significance should reveal that the value of \(\beta\) is statistically different from zero and the slope coefficient should not be statistically different from zero at the chosen significance level. Below are the results of performing these regressions for each asset in the sample. The code to reproduce these figures is also given below. Remember that I have simplified things by assuming the daily risk-free rate is just a constant equal to 0.0001, a better measure would be the daily return on a very low risk short term debt instrument like a T-bill.</p>
+<div class="code-box">
+    <pre>
+      <code>      
+# Beta
+dim = np.size(r, axis=1)
+time_dim = np.size(r, axis= 0)
+data_array = np.array(r)
+data_rf = data_array - r_f
+u = Er - r_f
+u_T = np.transpose(u)
+one_vec = np.ones((1, dim))
+sigma_inv = np.linalg.inv(sigma)
+denominator_step = np.dot(one_vec, sigma_inv)
+denominator_step_2 = np.dot(denominator_step, u)
+denominator = 1 / denominator_step_2
+w_step = np.dot(sigma_inv, u)
+w = denominator*w_step
+g_mat = w*data_array # TxN  
+g_mat_sum = np.sum(g_mat, axis=1) # Tx1
+g_mat_sum = g_mat_sum.reshape(time_dim, 1)
+cons_vec = np.full([time_dim, 1], 1)
+g_mat_rf = g_mat_sum - r_f
+X = np.hstack([cons_vec, g_mat_rf]) # Tx2
+Xt = X.T # 2xT
+XtX = (Xt@X)
+XtXinv = np.linalg.inv(XtX)
+beta = []
+beta_0 = []
+t_stat_slope = []
+t_stat_cons = []
+p_value_slope = []
+p_value_cons = []
+R2 = []
+for i in np.arange(0, dim, 1):
+    coefficients_step = XtXinv@Xt@data_rf[:, i] # 2x1
+    coefficients_step = coefficients_step.reshape(2, 1)
+    beta_step = coefficients_step[1, 0]
+    beta.append(beta_step)
+    con_step = coefficients_step[0, 0]
+    beta_0.append(con_step)
+    err_step = data_rf[:, i].reshape(time_dim, 1) - (X@coefficients_step)
+    var_err_step = (err_step.T@err_step) / (time_dim - 1 - 1)
+    err_mat_step = np.sqrt(var_err_step*XtXinv)
+    t_step_slope = beta_step / err_mat_step[1, 1]
+    t_stat_slope.append(t_step_slope)
+    p_value_step_slope = 2*(1 - t_dist.cdf(abs(t_step_slope), time_dim - 1 - 1))
+    p_value_slope.append(p_value_step_slope)
+    t_step_cons = con_step / err_mat_step[0, 0]
+    t_stat_cons.append(t_step_cons)
+    p_value_step_cons = 2*(1 - t_dist.cdf(abs(t_step_cons), time_dim - 1 - 1))
+    p_value_cons.append(p_value_step_cons)
+    RSS = err_step.T@err_step
+    TSS = data_rf[:, i].reshape(1, time_dim)@data_rf[:, i].reshape(time_dim, 1)
+    R2_step = 1 - (RSS/TSS)
+    R2.append(R2_step)
+beta = np.array(beta)
+beta_0 = np.array(beta_0)
+t_stat_slope = np.array(t_stat_slope)
+t_stat_cons = np.array(t_stat_cons)
+p_value_slope = np.array(p_value_slope)
+p_value_cons = np.array(p_value_cons)
+beta = beta.reshape(dim, 1)
+R2 = np.array(R2)
+R2 = R2.reshape(dim, 1)
+
+# Histogram of results
+fig, axs = mp.subplots(2, 3, figsize=(10, 8))
+axs[0, 0].hist(beta, bins=10, color="blue")
+axs[0, 0].set_title("Beta")
+axs[0, 1].hist(t_stat_slope, bins=10, color="blue")
+axs[0, 1].set_title("Beta t-stat")
+axs[0, 2].hist(p_value_slope, bins=10, color="blue")
+axs[0, 2].set_title("Beta p-value")
+axs[1, 0].hist(beta_0, bins=10, color="red")
+axs[1, 0].set_title("Constant")
+axs[1, 1].hist(t_stat_cons, bins=10, color="red")
+axs[1, 1].set_title("Constant t-stat")
+axs[1, 2].hist(p_value_cons, bins=10, color="red")
+axs[1, 2].set_title("Constant p-value")
+mp.tight_layout()
+
+# histogram of R-squared
+mp.figure()
+mp.hist(R2[:, 0], bins=10, color="blue")
+mp.title("R Squared")
+mp.show()
+      </code>
+    </pre>
+  </div>
+        <p>The histograms show that most \(\beta\) fall between -0.05 and 0.10 in this sample. The relatively low values were predictable because the market portfolio offers a much higher return than any individual asset in the sample. Despite the low values, over 350 of the 460 \(\beta\) coefficients have a p-value of less than 0.1, which is a conventional minimum threshold for accepting the hypothesis that the value of a regression statistic is different from zero. On the other hand, it is clear from the scale at the bottom of the histogram of constant estimates from the regression that they are all very close to zero. This is reflected in p-values that are all very close to one. Note, however, that the total variation in returns that is accounted for by variation in the market portfolio, known as R-squared, it quite low, with around 3.5% being the largest R-squared observed in the sample.</p>
+    </div>
+    <div class="eco-graph">
+    <img src="images/CAPM%20regressions.png">
+    </div>
+    <div class="eco-graph">
+    <img src="images/CAPM%20%20R2.png">
+    </div>
+
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+      
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>

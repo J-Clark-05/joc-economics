@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+<div class="section-head">    
+    <h4>Introduction</h4>    
+</div>
+  <div class="eco-text">
+    <p>This page will find the value of a profit maximising firm assuming this firm competes in a perfectly competitive market where the price of its output good grows at a constant rate \(\pi\). The firm produces output using a Cobb-Douglas production function with inputs of capital and labour, and faces a linear cost constraint. I first find the cost minimising levels of capital and labour and the firm's cost function. I then make some comments about returns to scale before using the well-known condition for perfectly competitive markets that price will be driven towards its marginal cost to derive the firm's profit function. These steps will make it clear why only firm's with decreasing returns to scale production functions will be able to make positive profits under these conditions. Finally, I calculate the value of the firm and give a numerical example to show how it changes over time. This page should provide students who are already familiar with the types of constrained optimisation problems encountered in producer theory with more intuition about what the results imply as well as introducing them to some simple extensions that can be made to textbook models.</p>
+  </div>    
+ 
+
+<div class="section-head">    
+    <h4>Production, Costs, and Market Structure</h4>    
+</div>  
+    <div class="eco-text">
+    <p>A firm produces an output good \(Y\) according to the production function \(Y=K^a L^b \). For now, the only restriction on \(a\) and \(b\) is that they are both positive, so output is increasing in capital and labour. The firm also faces a linear cost constraint in the two inputs \(C = wL + rK\) where \(w\) is the wage paid to labour and \(r\) is the price of capital goods. Both of the factor prices are assumed to be constant. The market for the output good is perfectly competitive, so the firm is a price taker and has no influence over the output price \(P\). All competing firms have access to the same technology and there are no barriers to entry, a mechanism which ensures price will always be bidded down to marginal cost. However, due to demand-side factors, the price of the output good grows at a constant exogenous rate \(\pi\), so let \(P = P_0 e^{\pi t}\). </p>
+    </div>
+    
+    
+<div class="section-head">    
+    <h4>Cost Minimising Inputs</h4>    
+</div> 
+    <div class="eco-text">
+        <p>In order to maximise profits, the firm should produce output with the cost minimising levels of capital and labour. These levels can be found by setting up a Lagrangian function \(\ell (K, L, \lambda)\) and finding the first order conditions with respect to capital, labour, and the Lagragian parameter \(\lambda\), which in this case will represent the marginal cost of production. As long as you write the constraint in the way seen below, the Lagrangian parameter can always be interpreted as the change in the objective function (the function you are maximising or minimising subject to the constraint) given a marginal change in the constraint. The Lagrangian is given by \[\ell(K, L, \lambda) = wL + rK + \lambda \left(Y - K^a L^b \right) \tag{1} \] and its first order conditions are \[\frac{d \ell}{d K} = aK^{a-1} L^b - \lambda r = 0 \tag{2} \] \[\frac{d \ell}{d L} = bK^{a} L^{b-1} - \lambda w = 0 \tag{3} \] \[\frac{d \ell}{d \lambda} = Y - K^a L^b = 0 \tag{4}. \] </p>
+        <p>Dividing (2) by (3) and rearranging gives \(K = \frac{a}{b} \frac{w}{r} L \) and \(L = \frac{b}{a} \frac{r}{w} K\) which you can substitute back into the constraint (4) to yield the cost minimising levels of labour and capital \[L^* = \left( \frac{r}{w} \frac{b}{a} \right)^{\frac{a}{a+b}} Y^{\frac{1}{a+b}},\hspace{7mm} K^* = \left( \frac{w}{r} \frac{a}{b} \right)^{\frac{b}{a+b}}  Y^{\frac{1}{a+b}}. \] It is always a good idea to check whether the expressions make sense at this point. The cost-minimising levels of output should depend negativly on their own factor price and the share of the other input in production (the elasticity of output with respect to the other factor), positively on the other factor price and their own share in production, and both should be positively related to \(Y\). The expressions above satisfy all of these points.</p>
+        <p>Substituting these expressions into the objective function will give total cost as a function of output given the firm produces with the cost-minimising level of labour and capital \[C(Y) = (a+b) \left(\left(\frac{r}{a}\right)^a \left(\frac{w}{b}\right)^b \right)^{\frac{1}{a+b}} Y^{\frac{1}{a+b}}. \tag{5} \] The trick to deriving this expression is to realise that \(w \left(\frac{r}{w} \right)^{\frac{a}{a+b}} = r^{\frac{a}{a+b}} w^{\frac{b}{a+b}} \) and that \(b^{\frac{a}{a+b}} = b \left( b^{\frac{-b}{a+b}} \right) \), then you can factor out the common terms and be left with \(a+b\) inside the parentheses, as in (5). The marginal cost function is the derivative of (5) with respect to \(Y\) which you can verify is the equal to \(\lambda\) by substituting the cost minimised inputs into either (2) or (3) \[ C^{\prime} (Y) = \left(\left(\frac{r}{a}\right)^a \left(\frac{w}{b}\right)^b \right)^{\frac{1}{a+b}} Y^{\frac{1 - (a+b)}{a+b}}. \tag{6} \]</p>
+    </div>
+
+<div class="section-head">    
+    <h4>Returns to Scale</h4>    
+</div> 
+    <div class="eco-text">
+    <p>It is now useful to make some observations about what the returns to scale means for the model. Note from the outset that the conclusions made in this section apply to the returns to scale for a Cobb-Douglas production function. When I say `constant returns to scale', I really mean `a Cobb-Douglas production function with constant returns to scale'. The first diagram below shows how total cost changes with output under constant returns to scale (CRS), decreasing returns to scale (DRS), and increasing returns to scale (IRS). The second shows the marginal cost function. Clearly, marginal costs are constant under constant returns to scale leading to a linear cost function, increasing under decreasing returns to scale leading to a convex cost function, and decreasing under increasing returns to scale leading to a concave cost function.</p>
+    <div class="eco-graph">
+        <img src="images/RTS%201.png">
+        <img src="images/RTS%202.png">
+    </div>     
+    <p>In perfect competition, the lack of entry barriers means price will always be bidded down to marginal cost, \(P = C^{\prime}(Y) \). Furthermore, firms have no influence on the prevailing market price, so price expressed as a function of their output would just be a constant; a horizontal line on their marginal cost curve. In the CRS case, this horizontal line must be equivalent to the blue line representing marginal costs because all firms have access to the same production technology and face the same factor prices, so every firm has the same marginal cost as the representative firm. The quantity of output produced by the firm in this case is dependent on the quantity demanded by consumers at that price and the number of other firms in equilibrium. Price is equal to marginal cost <em>for every marginal unit of output</em> under CRS. This means the firm is unable to make profit on any unit sold.</p>
+    <p>Now imagine that the blue line represents the prevailing market price in the DRS case. This means price is above the marginal cost curve until \(Y=0.5\), so the firm is able to make positive profit for each marginal unit up to this level of output, which will be the level it produces in equilibrium. Hence, firms with decreasing return to scale production function are able to earn positive profits in perfect competition. The linear marginal cost function was produced because \(a+b=0.5\), for \(a+b<0.5\) the cost function would be steeper and for \(0.5<a+b<1\) it would be shallower.</p>
+    <p>If the firm has an IRS production function and faces an exogenous price level such as the one represented by the blue line, price would be below marginal cost for all units up to the point where \(P = C^{\prime}(Y) \). This implies firms with IRS production functions will not produce output in market structures where they are a price taker. The marginal revenue function must be downward sloping for such a firm to produce any output, which is the case when the firm has some degree of market power, so increases in the quantity it produces lead to decreases in price.</p>
+    </div>
+    
+
+<div class="section-head">    
+    <h4>Profit Function</h4>    
+</div> 
+    <div class="eco-text">
+        <p>The profit maximising level of output can be found by setting \(P = C^{\prime}(Y) \) and solving for \(Y\) \[Y^* =  \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \right)^{\frac{1}{1 - (a+b)}} P^{\frac{1}{1 - (a+b)}}. \] Substituting this expression into the profit function, \(\Pi = PY^* - C(Y^*) \), will give profit as a function of price \[ \Pi = \left(1 - (a+b)  \right) \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \right)^{\frac{1}{1 - (a+b)}} P^{\frac{1}{1 - (a+b)}}. \tag{7} \]</p>
+        <p>This function verifies the conclusions reached when graphically analysing the returns to scale. If \(a+b =1\) there would be a zero in the denominator of the exponent, which means the function is not valid in the case of CRS. This is because it is not possible to make profit with a CRS Cobb-Douglas production function in a perfectly competitive market. Similarly, profits will be negative when \(a+b>1\) and will tend towards zero as price tends to infinity. This reflects the incompatibility with the IRS production function with perfect competition. However, the function is positive and convex in \(P\) when the production function exhibits DRS.</p>
+        <p>Remember that \(P\) is assumed to grow exponentially over time due to demand side factors. Substituting in the expression for the time dynamics of \(P\) into the profit function gives \[ \Pi = \left(1 - (a+b)  \right) \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b P_0 \right)^{\frac{1}{1 - (a+b)}} \exp \left({\frac{\pi t}{1 - (a+b)}} \right) \tag{8} \] implying that profit will grow over time at a constant rate of \( \frac{\pi}{1 - (a+b)} \).</p>
+    </div>
+    
+    
+<div class="section-head">    
+    <h4>Value of the Firm</h4>    
+</div> 
+    <div class="eco-text">
+    <p>The value of the firm, \(V\), is the present discounted value of all future profit flows. Assume an investor discounts the future at a constant rate \(\rho\). We need \(\rho > \tfrac{\pi}{1 - (a+b)}\) to ensure that \(V\) converges to a finite value. The future stream of profits coming from ownership of the firm would be infinitely valuable to an investor today if this were not the case. Let \[h = \left(1 - (a+b)  \right) \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b P_0 \right)^{\frac{1}{1 - (a+b)}} \] and \(\theta = \tfrac{1}{1 - (a+b)} \) then profit can be written more succinctly as \(\Pi = h e^{\theta \pi t} \). Under the assumption that \(\rho > \theta \pi \), the value of the firm is \[ V = \int_0^{\infty} h e^{\theta \pi t} e^{-\rho t} dt = \int_0^{\infty} h e^{- \left(\rho - \theta \pi \right) t} dt = \frac{h}{\rho - \theta \pi}. \] The last expression is the area under the curve formed when plotting \(V\) as a function of \(t\). The discounted value of profit flows are plotted over time in the following diagram where \(a+b = 0.5\) and both factor prices and the initial price level are equal to unity. The growth rate of price is \(0.02\) and the discount rate is \(0.1\). This diagram is reflecting the fact that the profit flows generated very far in the future are worth very little today, a consequence of income today being worth more than future income because it can be loaned out and earn interest. I have also plotted \(\Pi\) on this diagram for comparison.</p>
+    </div>
+<div class="eco-graph">
+        <img src="images/value%20pc.png">
+</div> 
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+      
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>

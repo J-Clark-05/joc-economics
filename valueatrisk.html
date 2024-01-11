@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+    
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+<div class="section-head">    
+    <h4>Introduction</h4>    
+</div>
+  <div class="eco-text">
+    <p>Standard deviation is perhaps the most widely used measure of risk but it comes with the cost that upside variance is treated the same as downside variance and it gives an incomplete picture of the behaviour of variables which do not follow normal distributions. Value at risk (VaR) is an alternative measure of risk which quantifies how much an investor can expect to lose with a specified probability over a given time period. For example, if an investor has a portfolio worth $100000 at time \(t\) and there is a 5% chance that the portfolio will suffer a loss of 10% between \(t\) and \(t+ \Delta t\), then the 95% VaR over the period \(\Delta t\) is $1000. Analysts often word this as there is a 95% probability that the portfolio's losses will be no greater than $1000. This page shows how to perform a VaR assessment on a portfolio using Monte Carlo simulations to estimate the distribution of future portfolio returns. The expected return and variance of the portfolio are calculated from historical data and returns are assumed to follow a normal distribution. These assumptions are known to be unrealistic, because past returns are not an accurate predictor of future returns and the distribution of returns exhibits greater kurtosis than normality. However, the model serves as a good foundation for analysing the potential downside losses of an investment. All the analysis in this page is done using Python. I recommend looking at chapter 12 of <a href="https://www.amazon.co.uk/Introduction-Mathematical-Portfolio-International-Actuarial/dp/1107042313">Joshi & Paterson (2013)</a> for the mathematical foundation of VaR and <a href="https://www.youtube.com/watch?v=X8aNFXJEENs">this</a> video on YouTube for a more thorough walkthrough of the Python code.</p>
+  </div>    
+ 
+
+<div class="section-head">    
+    <h4>Portfolio Returns and Volatility</h4>    
+</div>  
+    <div class="eco-text">
+    <p>Assume an investor allocates \(V_0\) to an equally weighted portfolio of risky assets. The distribution of daily returns on this portfolio, \(r_t \), are assumed to follow a normal distribution, with an expected return \(\mu\) and a variance of \(\sigma^2\) \[ r_t \sim \mathcal{N} \left(\mu, \sigma^2 \right). \tag{1} \] A convenient property of normally distributed variables is that they can be written as a linear function of a variable which has a standard normal distribution. For example, given \(X_t \sim \mathcal{N} \left( 0, 1 \right) \) we can write \[ r_t = \mu + \sigma X_t \tag{2}. \] To see this note that \(E[r_t] = \mu + \sigma E[X_t] = \mu  \) and \[ E[r_t^2] - \left( E[r_t] \right)^2 = \left( E[\mu^2] + \mu \sigma E[X_t] + \sigma^2 E[X_t^2] \right) - \left( E[\mu] \right)^2 = \sigma^2. \] This property makes the estimation of VaR through Monte Carlo simulation relatively straightforward.</p>
+    <p>The Python code below calculates the logarithmic return and volatility on a portfolio containing three exchange traded funds (EFTs); the Standard & Poor's Depository Receipts (SPDR) S&P 500 ETF (SPY), which is the world's largest stock market ETF, the Vanguard Total Bond Market Index Fund (BND), the world's largest bond market ETF, and the SPDR gold trust, the largest commodity ETF. The expected return of the portfolio is the mean of historical returns and the standard deviation is the square root of the variance of returns.</p>
+    </div>
+<div class="code-box">
+    <pre>
+      <code>
+# Packages
+import numpy as np
+import matplotlib.pyplot as mp
+import pandas as pd
+import yfinance as yf
+import datetime as dt
+from scipy.stats import norm
+
+# Data
+tickers = ["SPY", "BND", "GLD"]
+start = "2007-01-01"
+end = "2022-12-31"
+data = yf.download(tickers, start, end)
+x = data["Adj Close"]
+lnx = np.log(x)
+lnx_lag = lnx.shift(1)
+logdiff = lnx - lnx_lag
+r = logdiff.dropna()
+
+# Portfolio return and volatility
+V_0 = 100000
+weights = np.array([1/len(tickers)]*len(tickers))
+mean_r = np.mean(r, axis=0)
+mu = weights.T@mean_r
+cov_mat = r.cov()
+sigma_2 = weights.T@cov_mat@weights
+sigma = np.sqrt(sigma_2)
+
+      </code>
+    </pre>
+  </div>
+
+<div class="section-head">    
+    <h4>Monet Carlo Simulation</h4>    
+</div> 
+    <div class="eco-text">
+        <p>Equation (2) gives us a way to simulate how the value of the portfolio will change over time by drawing random values of \(X_t\) from the standard normal distribution and using them to simulate values of \(r_t\). In the Python code below, this is done 10000 times to produce a large number of possible outcomes for the portfolio returns. The figure at the end of the page shows that the simulations produce a normal distribution, as expected. For controlling trading books, managers and regulators are often interested in VaR over a 10-day horizon. Given we have used logarithmic returns, multiplying \(\mu\) by 10 and \(\sigma\) by \(\sqrt{10}\) (variance increases is also scaled linearly over time like the mean, which implies standard deviation should be scaled according to the square root of time) gives estimates for the expected returns and volatility of the portfolio over a 10-day period. Equation (2) can then be written as \[r_t = 10 \mu + \sqrt{10} \sigma X_t \tag{3} \] and drawing \(X_t\) can be interpreted as simulating the returns on a portfolio over a 10-day period.</p>
+    </div>
+    <div class="code-box">
+    <pre>
+      <code>
+# Standard normal draws
+days = 10
+simulations = 10000
+results = []
+for i in range(simulations):
+    z = np.random.normal(0, 1)
+    V_1 = V_0*((mu*days) + (sigma*np.sqrt(days)*z))
+    results.append(V_1)
+
+      </code>
+    </pre>
+  </div>
+
+    
+
+<div class="section-head">    
+    <h4>VaR</h4>    
+</div> 
+    <div class="eco-text">
+        <p>The \(100 \times \alpha\) VaR is the \( 100 \times (1 - \alpha) \) percentile of the distribution of returns generated by the simulation. In the figure below, the red line represents the 99% VaR, or the 1st percentile of the distribution, which is equal to -$4178.71. Again, this estimate is most often presented as there being a 99% probability that the portfolio will lose no more than $4178.71 over a 10 day period. Equivalently, there is a 1% probability that the portfolio will lose $4178.71 or more over the next 10 days. Notice that framing is important here, investors might more confident if they are told there is 99% change that will lose $4178.71 rather than being told there is a 1% change they could lose $4178.71 or more.</p>
+    </div>
+    
+        <div class="code-box">
+    <pre>
+      <code>
+# VaR
+CI = 0.99
+VaR = np.percentile(results, 100*(1 - CI))
+print(VaR)
+
+# Plot
+mp.hist(results, bins=50, density=True)
+mp.xlabel("Simulated Portfolio Value")
+mp.ylabel("Frequency")
+mp.axvline(VaR, color="red", linestyle='dashed', linewidth=2, label=f'{CI:.0%} VaR')
+mp.show()
+      </code>
+    </pre>
+  </div>
+    
+  <div class="eco-graph">
+  <img src="images/VaR_1.png">
+  </div>
+
+    
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+      
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>

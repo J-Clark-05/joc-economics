@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+    
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+  <div class="section-head">    
+    <h4>Introduction</h4>    
+  </div>
+  <div class="eco-text">
+      <p>This page outlines a model of a rational investor's decision to choose a risky portfolio from a universe of assets. The investor has a has a utility function that is increasing in returns and decreasing in volatility and chooses the portfolio which maximises their expected utility given the constraint imposed by the available portfolios. For simplicity, the universe of return-volatility combinations available to the investor by forming portfolios based on combinations of risky assets is described as a circle in return-volatility space centered around zero returns and some positive level of volatility. The tangency point between the south-eastern region of this circle and the consumer's upward sloping, concave indifference curve in return-volatility space gives the optimal portfolio. We will also examine how the optimal choice changes with the addition of a risk free asset which allows the investor to borrow and lend. The model is inspired by <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1540-6261.1964.tb02865.x">Sharpe (1964)</a> and <a href="https://www.jstor.org/stable/2975974">Markowitz (1952)</a>.</p>
+  </div>    
+    
+<div class="section-head">    
+    <h4>Utility and Asset Universe</h4>    
+  </div>
+  <div class="eco-text">
+    <p>An investor has some amount of wealth \(W\) which she has decided to invest in a risk bearing portfolio of assets. The expected rate of return on this portfolio is the change in the investment over the investment period as a proportion of the total amount invested \(r = \frac{W_{t} - W_0}{W_0}\). The risk of this investment is measured by the standard deviation of its returns \(\sigma = \sqrt{E \left[r^2 \right] - \left( E[r] \right)^2} \). The investor has the following utility function which depends (quadratically) on returns and volatility \[ U = a + b r - c  r^2 - c \sigma^2 . \tag{1} \] The parameters in this equation are all positive by assumption. This means that utility is increasing in \(r\) with diminishing marginal utility and decreasing in \(\sigma\). When plotted in \( \left( r, \sigma \right) \) space (with \(r\) on the horizontal axis, utility will be increasing when moving in a south-easterly direction. Thus, in the diagram below, the red indifference curve represents a higher utility compared to the blue indifference curve. The quadratic form of returns is appropriate because it allows returns to be negative, however, it also means that for \(r > \frac{b}{c} \) utility will be decreasing in \(r\) for any given \(\sigma\) which is counterintuitive. As will be seen, the nature of the set of available assets constraining the investor's decision means this feature of the utility function will not affect the intuition of the model's conclusions. </p>
+  <div class="eco-graph">
+  <img src="images/sharpe%20utility.png">
+  </div>
+  <p>The available set of assets is given by \[M = (\sigma_0 \pm \sigma)^2 + r^2 \tag{2}, \] which is a circle centered around \((0, \sigma_0)\) with a radius of \(M\) in \(r, \sigma\) space, as shown in the figure below. Any point in the circle is achievable for the investor by placing her wealth in some combination of the risky assets. However, portfolios on the lower right quadrant of the circle will dominate all others because they provide the highest level of return for a given risk. This quadrant, outlined in black in the figure, forms the <em>investment opportunity frontier</em>. All choices along this curve are efficient, it is up to the investor to decide what return-volatility combination she wants along this frontier. We can write equation (2) with \(\sigma\) on the left-hand side as a function of \(r\) and the other exogenous parameters given we know that we are only interested in the lower quadrant of the circle by converting the \(\pm\) sign to a \(-\) and rearranging \[\sigma(r; \sigma_0, M) = \sigma_0 - \sqrt{M - r^2} . \]</p>
+  <div class="eco-graph">
+  <img src="images/sharpe%20circle.png">
+  </div>
+    <p>Formally, the investor wants to maximise their utility subject to the available assets defined by (2). \(\sigma_0\) gives the coordinate where the center of the circle sits along the vertical axis. This can be achieved by setting up a Lagrangian function \[ \ell = \left( a + b r - c  r^2 - c \sigma^2  \right) + \lambda \left( M - (\sigma_0 - \sigma)^2 - r^2  \right) \tag{3} \] As usual in constrained optimisation problems, the optimal choices will be found at the tangency point between the indifference curve and the constraint.</p>
+  </div>  
+    
+  <div class="section-head">    
+    <h4>Optimal Portfolio</h4>    
+  </div>
+  <div class="eco-text">
+    <p>The first order conditions for optimisation of equation (3) are \[ \frac{\partial \ell}{\partial r} = b - 2 c r - 2 \lambda r = 0 \tag{4} \] \[ \frac{\partial \ell}{\partial \sigma} = - 2 c \sigma - 2 \lambda (\sigma - \sigma_0) = 0 \tag{5} \] \[ \frac{\partial \ell}{\partial \lambda} = M - (\sigma_0 - \sigma)^2 - r^2 \tag{6}. \] Using (4) and (5) to eliminate \(\lambda\), we can derive an expression for \(\sigma\) in terms of \(r\) \[ \sigma = \sigma_0 - \frac{2 c \sigma_0}{b} r \tag{7} \] and then substitute this into (3) to find \(r\) as a function of parameters \[ r^* = \sqrt{\frac{b^2 M}{b^2 + (2 c \sigma_0)^2}} \tag{8} \] which of course means we also have \(\sigma\) as a function of parameters \[ \sigma^* = \sigma_0 - \sqrt{\frac{ (2 c \sigma_0)^2 M}{b^2 + (2 c \sigma_0)^2}} \tag{9} .\]</p>
+    <p>From (8), the optimal return is increasing in the radius of the universe of stocks \( \left( M \right) \) and the coefficient given to the linear returns term in the utility function \( \left( b \right) \) but is decreasing in the coefficient on variance in the utility function \( \left( c \right)  \) and the center of the universe of stocks on the vertical axis \( \left( \sigma_0 \right) \). On the other hand, the optimal volatility is negatively related to \(\left( M \right) \) and \(  \left( c \right) \) but, like returns, is positively related to \(b\). Volatility's relationship with \(\sigma_0\) is ambiguous but if we write \(\sigma^*\) in the form \[\sigma^* =  \sigma_0 - \sqrt{\frac{M}{1 + \frac{b^2}{(2 c \sigma_0)^2} }} \] you can see that the optimal volatility will be increasing in \(\sigma_0\) when \(M\) or \(c\) are very small or when \(b\) is very large because this will make the second term on the right hand side relatively unimportant. The last section of this page provides a numerical example which demonstrates the tangency between the investment opportunity frontier and the maximum possible indifference curve.</p>
+  </div>    
+    
+   <div class="section-head">    
+    <h4>Risk Free Asset</h4>    
+  </div>
+  <div class="eco-text">
+    <p>Suppose now that some risk free asset \( F \) is available to the investor and denote its return \( r_f \). By definition, this asset has zero volatility, so its expected return is equal to its actual return. Now imagine the investor puts some fraction \(\alpha\)of her wealth in the a risk bearing portfolio available from the investment universe and the rest in the risk free asset. For clarity, let's now label the returns on the risky portfolio of assets \(X\) and label the returns on this portfolio \( r_x \). The portfolio distributing the total amount invested across the risk free \( \left( F \right) \) and risk bearing \( \left( X \right) \) assets we will call \(P\). The expected return of this portfolio \(\left( r_p \right) \) is \[ r_p = \alpha r_x + (1-\alpha) r_f \tag{10} \] and the volatility is \[\sigma_p =  \sqrt{\alpha^2 \left( \sigma_{x} \right)^2 + (1-\alpha)^2 \left( \sigma_{f} \right)^2 + 2 \alpha (1-\alpha) \rho_{r_f, r_x} \sigma_{x} \sigma_{f}} \hspace{2mm} = \hspace{2mm} \alpha \sigma_{x} \tag{11} \] where \( \rho_{r_f, r_x} \) is the correlation between the returns of the risk-free and risk-bearing asset.</p>
+    <p>Equation (11) reduces to \( \alpha \sigma_{x} \) because the risk-free asset has zero volatility by definition. Togther, equations (10) and (11) imply that any portfolio combining the risk free asset and the risky portfolio will have a return and volatility lying on a line connecting the coordinates \( \left( 0, r_f  \right) \) with the coordinates \( \left( \sigma_x, r_x  \right) \) in \( \left( \sigma, r \right) \) space (placing \(\sigma\) on the horizontal axis). Given the return on the risky portfolio will be higher than the return on the risk free asset (otherwise no one would invest in it), the line will have the form \[r = r_f + \beta \sigma \tag{12}\] for a given \(r\) and \(\sigma\). The slope is just a constant equal to \( \beta = \frac{r_x - r_f}{\sigma_x} \). You can see that when \(r = r_p\) \[ r_p = r_f + \beta \sigma_p  \] \[ \alpha r_x + (1-\alpha) r_f = r_f + \left( \frac{r_x - r_f}{\sigma_x} \right) \sigma_p \] \[ \sigma_x \alpha (r_x - r_f) = (r_x - r_f) \sigma_p  \] \[ \sigma_p = \alpha \sigma_x \]</p>
+    <p>Equation (12) is the most common form of the capital market line, which gives a relationship between returns, the risk free asset, and volatility. There are in fact as many of these lines as there are risky portfolios available to the investor in the universe of assets. However, the line we are interested is the one that is tangent to the investment opportunity frontier, since this will dominate all other possibilities by offering the highest possible return for a given volatility. In \( \left( r, \sigma \right) \) space (placing \(r\) on the horizontal axis), equation (12) has the form \[ \sigma = - \frac{r_f}{\beta} + \frac{1}{\beta} r \tag{13} \] so the slope of the line is \( \frac{1}{\beta} \). Hence, the capital market line is tangent to the investment opportunity curve when \[\frac{1}{\beta} = \frac{d \sigma (r; \sigma_0, M)}{d r} \] \[\frac{1}{\beta} = \frac{r}{\sqrt{M - r^2}} \] \[ r = \sqrt{\frac{M}{1 + \beta^2}} \tag{14}.\] This is the value of \(r\) at which the capital market line is tangent to the investment opportunity frontier. Substituting this value into the equation for \(\sigma\) on the investment opportunity frontier and the capital market line gives two values of \( \sigma \) at this value of \(r\). These values must be equal if the two lines are tangent, so \[ \sigma_0 - \sqrt{\frac{M \beta^2}{1 + \beta^2}} = - \frac{r_f}{\beta} + \frac{1}{\beta} \sqrt{\frac{M}{1+\beta^2}} \] \[ \beta^2 + \left( 2 \frac{\sigma_0 r_f}{\left(\sigma_0\right)^2 - M} \right) \beta + \frac{\left(r_f\right)^2 - M}{\left(\sigma_0\right)^2 - M} \tag{15}.\] Applying the quadratic formula, the positive root of (15) gives \(\beta\) \[ \beta = - \frac{\sigma_0 r_f}{ \left(\left(\sigma_0\right)^2 - M \right)} + \sqrt{ \frac{ \left(\sigma_0\right)^2 \left(r_f\right)^2 -  \left(\left(r_f \right)^2 - M \right)\left(\left(\sigma_0\right)^2 - M \right)}{\left(\left(\sigma_0\right)^2 - M)\right)^2}} \tag{16}\]</p>
+    <p>The investor now maximises their utility by choosing the return and volatility combination subject to the constraint imposed by the capital market line. The Lagrangian equation is \[\ell_2 =  \left( a + b r - c  r^2 - c \sigma^2  \right) + \lambda_2 \left( r_f - r + \beta \sigma  \right) \tag{17}\] with first order conditions \[ \frac{\partial \ell_2}{\partial r} = b - 2 c r - \lambda_2 = 0 \tag{18} \] \[ \frac{\partial \ell_2}{\partial \sigma} = - 2 c \sigma + \beta \lambda_2 = 0 \tag{19} \] \[ \frac{\partial \ell_2}{\partial \lambda_2} = r_f - r - \beta \sigma = 0\tag{20} . \] Following the usual steps; eliminating \( \lambda_2 \) through equations (18) and (19), then substituting back into the constraint to find the optimal choices, gives \[ r^* = r_f \left( \frac{1 + \frac{b}{2 c r_f} \beta^2}{1+\beta_2} \right) \tag{21} \] \[ \sigma^* = - \frac{r_f}{\beta} + \frac{r_f}{\beta} \left( \frac{1 + \frac{b}{2 c r_f} \beta^2}{1+\beta^2} \right) .\tag{22} \] A numerical example is the best way to examine the implications of the addition of the risk-free asset.</p>
+  </div> 
+    
+<div class="section-head">    
+    <h4>Numerical Example</h4>    
+</div>
+  <div class="eco-text">
+    <p>In the following example, \(a = 0\), \(b=0.2\), \(c = 0.4\), \(M = 0.0025\), \(\sigma_0 = 0.1\), and \(r_f = 0.03\). These parameters imply a \(\beta\) of 0.211. The tangency point between the blue indifference curve, IC1, and the investment possibility frontier gives the portfolio return (4.64%) and volatility (8.1%) the investor will choose in the absence of the risk-free asset. For the given parameter values, the introduction of the risk free asset has resulted in the investor choosing a lower portfolio return (3.94%) and lower volatility (4.44%). To recapitulate, investor achieves this by placing some of her wealth in the risk free asset yielding a return of 3%, and some of her wealth in the market portfolio where the capital market line (the black dashed line) is tangent to the investment opportunity frontier, which in this case yields a return of 4.98%. You can see that the investor achieves higher utility when the capital market line is tangent to the red indifference curve (IC2). Quantitatively, the blue indifference curve gives a utilty of 0.0058 while the red curve gives a utility of 0.0065.</p>
+  </div>   
+   <div class="eco-graph">
+  <img src="images/sharpe%201.png">
+  </div> 
+  <p>The investor is also able to borrow as much as she desires at the risk-free rate (note that this means assuming borrowing and lending rates are equivalent). If the investor sets \(\alpha \gt 1 \) she can borrow at the risk free rate and invest the funds in the portfolio tangent to the capital market line. Any combination of returns and volatility on the capital market line is now obtainable. In the example below, \(c\) falls to 0.1 with everything else unchanged. This means there is no change in the investment opportunity frontier or the capital market line. However, the investor is now less averse to risk. We can see that she now chooses to borrow at the risk-free rate to obtain a portfolio with a return of 7.14% and accepts a volatility of 19.6%, which yields a utility of 0.0099. Her utility on the blue indifference curve is now 0.0088, where she would choose a return of 4.98% and volatility of 9.5% if she could not borrow at the risk-free asset. 
+</p>
+  <div class="eco-graph">
+  <img src="images/sharpe%202.png">
+  </div>
+  <p>Finally, it is interesting to see how the results change after a change in the risk free rate. Assume it increases to 0.04 and that once again \(c = 0.4\). Note that the increase in the risk-free rate causes an increase in \(\beta\) to 0.26. The investor again chooses to reduce the return and volatility of her portfolio by putting more of her wealth into the risk-free asset. Her return is now 4.22% and the portfolio's volatility is 2.13%, a combination which gives her a utility of 0.0075.</p>
+  <div class="eco-graph">
+  <img src="images/sharpe%203.png">
+  </div>
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+<div class="section-head">    
+    <h4>Introduction</h4>    
+</div>
+  <div class="eco-text">
+    <p>The constant elasticity of substitution (CES) utility function is often mentioned in economics courses but students are rarely shown a worked example applying it to a utility maximisation problem. This page provides such an example. A consumer chooses a bundle of two goods which maximises her utility given she faces a linear budget constraint. We will solve the consumer's problem and cement the intuition behind the equations with a numerical example. You may be aware that the marginal rate of substitution (MRS) measures the slope of the indifference curve. The elasticity of substitution measures the curvature of the indifference curve, which economically means the change in the ratio of goods consumed given a marginal change in the MRS. When a small change in MRS results in a large change in the ratio of inputs consumed, the indifference curve is relatively flat and the elasticity of substitution is relatively large. A standard Cobb-Douglas utility function will have an elasticity of substitution equal to one, but the CES allows greater flexibility in modelling the curvature of the indifference curve. This will become clearer in the following sections as we derive the equations.</p>
+  </div>    
+ 
+
+<div class="section-head">    
+    <h4>Assumptions</h4>    
+</div>  
+    <div class="eco-text">
+    <p>A consumer has the following utility function for the two goods \(x\) and \(y\) \[U = \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1}{\rho}}  \tag{1}\] and faces the linear budget constraint \[M = p_x X + p_y Y  \tag{2} \] where \(M\) is income, \(p_x > 0\) is the price of good \(X\) and \(p_y > 0\) is the price of good \(Y\). Both prices, the consumer's income, and the parameters \(a > 0\) and \(b > 0\) are constants by assumption.</p>
+    <p>The parameters \(a\) and \(b\) say something about the `importance' of the two goods for the consumer's utility. Higher \(a\) will increase the utility gained from good \(X\) and likewise for \(b\) and good \(Y\). If \(b = 1-a\), the consumer attaches a weight reflecting the importance of the two goods in their utility. Unlike the standard Cobb-Douglas case, the consumer can derive positive utility even when consumption of one of the goods is zero. As will be shown below, \(\rho\) will control the elasticity of substitution, the change in the input ratio given a change in the marginal rate of substitution.</p>
+    <p>The consumer's problem is to maximise the utility function in (1) subject to the budget constraint in (2). This will allow us to derive an expression for the indirect utility function, \(U(p_x, p_y, M) \). If instead we framed the problem as one of cost minimisation, the lowest possible expenditure for a given utility \(U_0\), we would instead derive the expenditure function, \(E(p_x, p_y, U_0)\). However, the expenditure function can easily be found from the indirect utility function in this case, so we will focus on maximising utility subject to the budget constraint. The Lagrangian equation for this problem is \[\ell = \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1}{\rho}} + \lambda \left( M - p_x X - p_y Y \right)  \tag{3} \]</p>
+    </div>  
+
+
+<div class="section-head">    
+    <h4>Solution</h4>    
+</div> 
+    <div class="eco-text">
+        <p>Applying the chain rule to the first term in equation (3), first order conditions for optimisation are \[\frac{\partial \ell}{\partial X} = a X^{\rho - 1} \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1 - \rho }{\rho}} - \lambda p_x = 0  \tag{4} \] \[\frac{\partial \ell}{\partial Y} = b Y^{\rho - 1} \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1 - \rho }{\rho}} - \lambda p_y = 0  \tag{5} \] \[ \frac{\partial \ell}{\partial \lambda} = M - p_x X - p_y Y = 0  \tag{6}. \] Dividing (4) by (6) gives the familiar result that the marginal rate of substitution must be equal to the slope of the budget constraint in order to maximise utility \[\frac{a}{b} \left( \frac{X}{Y} \right)^{\rho -1} = \frac{p_x}{p_y}. \tag{7} \] Note that the exponent is written in the form \( \tfrac{1}{1-\rho} \), which will make the expressions we derive easier to interpret. An expression for \(X\) can easily be derived from this equation, \(X = \left( \frac{a}{b} \frac{p_y}{p_x} \right)^{\frac{1}{1-\rho}} Y \) which can be plugged into (6) to give \[p_x \left[ \left( \frac{a}{b} \frac{p_y}{p_x} \right)^{\frac{1}{1-\rho}} Y \right]  + p_y Y = M  \] \[ p_y \left[ \left( \frac{a}{b} \left( \frac{p_y}{p_x} \right)^{\rho} \right)^{\frac{1}{1-\rho}} Y \right]  + p_y Y = M  \] \[p_y Y \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}   \right] = M \] \[Y^* (p_x, p_y, M) = \frac{M}{p_y} \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \tag{8}\]</p>
+        <p>We can apply exactly the same steps to find the optimal level of \(X\) \[X^* (p_x, p_y, M) = \frac{M}{p_x} \left[ \frac{\left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \tag{9}. \] These expressions are the Marshallian demand functions for goods \(X\) and \(Y\). We could also write them in the form \[Y^* = \frac{M}{p_y} \left(\frac{1}{b p_x^{\rho}} \right)^{\frac{1}{\rho -1}} \left[ \left(\frac{1}{b p_x^{\rho}} \right)^{\frac{1}{\rho -1}} + \left(\frac{1}{a p_y^{\rho}} \right)^{\frac{1}{\rho -1}}   \right]^{-1}  \] \[ = \frac{M}{p_y} \left(\frac{1}{b p_x^{\rho}} \right)^{\frac{1}{\rho -1}}  \left[ \frac{ \left(a p_y^{\rho}  \right)^{\frac{1}{\rho-1 }} \left(b p_x^{\rho}  \right)^{\frac{1}{\rho-1 }} }{\left(a p_y^{\rho}  \right)^{\frac{1}{\rho-1 }} + \left(b p_x^{\rho}  \right)^{\frac{1}{\rho-1 }}} \right] \] \[= M \left[ \frac{\left( a p_y \right)^{\frac{1}{\rho-1}}}{\left( b p_x^{\rho} \right)^{\frac{1}{\rho-1}} + \left( a p_y^{\rho} \right)^{\frac{1}{\rho-1}}}, \right] \] however, the form in which they appear in (8) and (9) is easier to work with in the following steps.  For example, applying the quotient rule reveals that \[\frac{\partial Y^*}{\partial p_y} = - \frac{M \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}{\left(p_y\right)^2} \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \frac{1}{1-\rho} \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{ \left( \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right)^2} \right] \tag{10} \] which is definitely negative as long as \(\rho \lt 1\).</p>
+        <p>To find the indirect utility function, substitute (8) and (9) back into the utility function \[ U = \left(a \left( \frac{M}{p_x} \left[ \frac{\left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \right)^{\rho} + b \left( \frac{M}{p_y} \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \right)^{\rho} \right)^{\frac{1}{\rho}}. \] Multiplying and dividing the first term by \( p_y \) and the second term by \(p_x\) allows us to factor out a common term \(M / p_x p_y \) and simply the resulting expression to derive \[ U(p_x, p_y, M) = \frac{M}{p_x p_y} \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{1 - \rho}{\rho}} = M \left[ \left( b p_y^{\rho} \right)^{\frac{1}{\rho-1}} +   \left( a p_x^{\rho} \right)^{\frac{1}{\rho-1}} \right]^{\frac{1 - \rho}{\rho}}.  \tag{11}\]   As mentioned earlier, it is now easy to derive the expenditure function \[ M(p_x, p_y, U) = U p_x p_y \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{\rho-1}{\rho}} = U  \left[ \left( b p_y^{\rho} \right)^{\frac{1}{\rho-1}} +   \left( a p_x^{\rho} \right)^{\frac{1}{\rho-1}} \right]^{\frac{\rho-1}{\rho}} . \tag{12}\]</p>
+        <p>Once we have the expenditure function, we can also find the Hicksian demand function (denoted by an \(h\) subscript) for the two goods by applying Shephard's lemma. To find the Hicksian demand for good \(Y\), this just involves taking the derivative of (12) with respect to \(p_y\) \[\frac{\partial M(p_x, p_y, U)}{\partial p_y} =  - U p_x \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{-\frac{1}{\rho}} + U p_x \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{\rho-1}{\rho}}  \] \[ \frac{\partial M(p_x, p_y, U)}{\partial p_y} = U \left( \frac{\left( b p_x\right)^{\frac{1}{1-\rho}}}{\left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{1}{\rho}}} \right) =  Y_h (p_x, p_y, U) \tag{13}. \] You can also use Roy's identity to show the equivalence between the Marshallian demand for \(Y\) in equation (8) and \(- \frac{\partial U(p_x, p_y, M)}{\partial p_y} / \frac{\partial U(p_x, p_y, M) }{\partial M} \).</p>
+    </div>
+    
+    
+<div class="section-head">    
+    <h4>Properties</h4>    
+</div>  
+    <div class="eco-text">
+    <p>Formally, the elasticity of substitution is the percentage change in the ratio of inputs divided by the percentage change in the MRS \[ \sigma = \frac{\Delta (Y / X)}{(Y/X)} \bigg/ \frac{\Delta MRS}{MRS} \tag{14}  \] We saw in (7) that \[MRS = \frac{a}{b} \left( \frac{X}{Y} \right)^{\rho - 1}  \] which implies \[ \frac{Y}{X} = \left( \frac{b}{a} MRS \right)^{\frac{1}{1-\rho}}. \tag{15} \] This gives a relationship between the ratio of goods and the MRS. Taking the natrual log of both sides an differentiating with respect to \( Y/X \) \[ \ln \left( \frac{Y}{X} \right) = \frac{1}{1 - \rho} \left[ \ln \left( \frac{b}{a} \right) + \ln \left( MRS \right) \right] \] \[ \frac{1}{(Y/X)} = \frac{1}{1 - \rho} \frac{d MRS / d (Y/X) }{MRS} \] \[\frac{d \left( Y/X \right)}{(Y/X)} \bigg/ \frac{d \left( MRS \right) }{MRS} = \frac{1}{1 - \rho} \tag{16}. \]</p>
+    <p>The CES utility function is flexible because other common utility functions are really just special cases of the general CES function for given values of \(\rho\). It is easy to see that \(\rho = 1\) produces a linear utility function. When \(\rho \rightarrow 0\), equation (15) shows that \(MRS \rightarrow \frac{a}{b} \frac{Y}{X}  \), which is just the Cobb-Douglas case. Finally, as \(\rho \rightarrow -\infty\), \(MRS \rightarrow (Y /X)^{\infty} \), which is the Leontief case of perfect complements.</p>
+    </div>  
+    
+    
+
+<div class="section-head">    
+    <h4>Numerical Example</h4>    
+</div> 
+    <div class="eco-text">
+        <p>The diagrams below show how changing \(\rho\) affects the solution. In all examples, \(a = b = 0.5\), \(p_x = 2\), \(p_y = 1\), and \(M = 100\). When \(\rho = 0.5\), the elasticity of substitution is equal to 2 and the consumer chooses a bundle containing 16.67 units of good \(X\) and 66.67 units of good \(Y\), giving a utility of 37.5.</p>
+        <div class="eco-graph">
+        <img src="images/utility%201.png">
+        </div> 
+        <p>For \(\rho = 0.3\), the elasticity of substitution is 1.43 which results in greater curvature of the indifference curve. The consumer now chooses 21.31 units of good \(X\) and 57.37 units of good \(Y\) and has a total utility 36.27. </p>
+        <div class="eco-graph">
+        <img src="images/utility%202.png">
+        </div> 
+        <p>Finally, if \(\rho =0.7\), the elasticity of substitution is 3.33 resulting in a much flatter indifference curve. The consumer chooses 8.28 units of good \(X\) and 83.44 units of good \(Y\) and has a total utility of 40.15.</p>
+        <div class="eco-graph">
+        <img src="images/utility%203.png">
+        </div> 
+    </div>
+    
+    
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+      
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>

@@ -1,0 +1,242 @@
+*{
+   margin: 0; 
+   padding: 0; 
+}
+
+body {
+ font-family: 'Roboto', sans-serif;
+}
+
+.header{
+  min-height: 100vh; 
+  width: 100%; 
+  background-image: url("images/white");
+  background-position: center; 
+  background-size: cover; 
+  position: relative; 
+}
+.objective{
+min-height: 60vh; 
+position: relative; 
+width: 100%;
+}
+nav{
+    display: flex; 
+    padding: 2% 6%;
+    justify-content: space-between; 
+    align-items: center; 
+}
+nav img{
+    width: 150px; 
+    height: 150px; 
+}
+.nav-links{
+    flex: 1;  
+    text-align: right;  
+}
+.nav-links ul li {
+ list-style: none; 
+ display: inline-block; 
+ padding: 8px 12px; 
+ position: relative; 
+} 
+.nav-links ul li a{
+  color: black; 
+  text-decoration: none; 
+  font-size: 18px; 
+}
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #581845; 
+    display: block;
+    margin: auto; 
+    transition: 0.5s; 
+}
+.nav-links ul li:hover::after{
+    width: 100%; 
+}
+.text-box{
+    width: 90%; 
+    color: black;
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: center;
+}
+.text-box h1{
+    font-size: 31px; 
+    font-weight: 600;
+}
+.text-box p{
+    margin: 10px 0 40px; 
+    font-size: 20px; 
+    font-weight: 300;
+    color: black; 
+}
+nav .fa{
+display: none;
+}
+
+@media(max-width: 700px){
+    .text-box h1{
+        font-size: 15px; 
+    }
+    .nav-links ul li {
+       display: block;  
+    }
+    .nav-links{
+        position: absolute; 
+        background-image: url("images/white"); 
+        height: 100vh; 
+        width: 200px; 
+        top: 0; 
+        right: -200px; 
+        text-align: left; 
+        z-index: 2; 
+        transition: 1s;
+    }
+    nav .fa{
+        display: block;
+        colour: black; 
+        margin: 10px; 
+        font-size: 22px; 
+        cursor: pointer; 
+    }
+    .nav-links ul{
+        padding: 30px; 
+    }
+}
+
+/*----- macroeconomics page -----*/
+
+.sub-header {
+    height: 30vh;
+    width: 100%; 
+    background-image: url("images/white"); 
+}
+
+.macroeconomics{
+    width: 90%;
+    margin: auto; 
+    text-align: center; 
+    padding-top: 10px; 
+    padding-left: 0px; 
+    padding-right: 0px;
+    min-height: 60vh; 
+}
+h1{
+    font-size: 31px; 
+    font-weight: 600; 
+}
+p{
+    color: black;
+    font-size: 16px; 
+    font-weight:400;
+    line-height: 22px; 
+    padding: 10px;
+}
+.row{
+    margin-top: 0%; 
+    display: flex; 
+    justify-content: space-between; 
+}
+.macro-col{
+    flex-basis: 31%;
+    background-image: url("images/white");
+    border-radius: 10px;
+    margin-bottom: 5%; 
+    padding: 20px 12px; 
+    box-sizing: border-box;
+    transition: 0.5s; 
+}
+h3{
+    text-align: center; 
+    font-weight: 600; 
+    margin: 10px 0; 
+}
+.macro-col a{
+    color: black; 
+    text-decoration: none; 
+}
+.macro-col:hover{
+    box-shadow: 0 0 20px 0px rgba(0,0,0,0.2); 
+}
+@media(max-width: 700px){
+    .row{
+        flex-direction: column; 
+    }
+}
+
+
+/*----------Content---------------*/
+
+.content{
+    width: 90%; 
+    min-height: 30vh; 
+    margin-left: 50px; 
+    margin-right: 50px; 
+    position: relative; 
+    padding-top: 20px; 
+}
+
+.section-head{
+    text-decoration: underline; 
+    padding: 10px; 
+    display: flex; 
+}
+
+.h4{
+    font-weight: 300; 
+    text-align: left;
+}
+
+.eco-text{
+    position: relative;
+    padding: 10px; 
+}
+
+.eco-text p{
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+
+.eco-graph img{
+    display: block; 
+    width: 50%; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+
+.code-box {
+  background-color: black;
+  color: white; 
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: auto !important; /* Add a scrollbar if code exceeds the box size */
+  font-family: 'Courier New', monospace !important; /* Use a monospaced font for better code presentation */
+  max-width: 600px; /* Set a maximum width */
+  max-height: 400px; /* Set a maximum height */
+  display: block;  
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+
+/*------------footer--------------*/
+.footer{
+    margin: auto; 
+    width: 100%;
+    text-align: left;
+    background-image: url("images/white"); 
+    background-size: cover; 
+    background-position: center; 
+    position: relative; 
+    min-height: 10vh;  
+}
+

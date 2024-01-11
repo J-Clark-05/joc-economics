@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+    
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+    
+    <div class="section-head">    
+    <h4>Introduction</h4>    
+</div> 
+    <div class="eco-text">
+     <p>This article gives an overview of using futures contracts to hedge risky positions. The first section covers some basic principles and the second gives an applied example using real world data showing how to hedge an equity portfolio with stock index futures. I recommend reading the chapter on 'Hedging Strategies using Futures Contracts' in John Hull's <a href="https://www.amazon.co.uk/Options-Futures-Other-Derivatives-John/dp/0133456315">Options, Futures, and Other Derivatives</a>, which is the primary source of information used to construct this page.</p>
+    </div>
+    
+<div class="section-head">    
+    <h4>Hedging with Futures Contracts</h4>    
+</div>
+  <div class="eco-text">
+     <p>Hedging is a strategy which seeks to reduce the risk of an investment. One way to do this is by using futures contracts. These are agreements between parties concerning the purchase of an asset at for a specified price which will be delivered at some date in the future. Normally, the delivery period is actually an interval of one month and futures contracts are named after the month of their delivery. They differ from forwards contracts in so far as they are traded on exchanges, which means they are subject to standardised regulation and payments are settled daily using a marginal account with a brokerage agency (I will ignore daily settlement in these examples for convenience). The agent who agrees to sell the good is said to take a short position on the futures contract while the agent who agrees to buy the good takes the long position. A classic example is a farmer who knows he will own some amount of grain after a harvest in the foreseeable future. The future price of grain is very uncertain, depending on several factors out of the farmer's control, such as the weather, changes in consumer preferences, and domestic and foreign government policy. The farmer can enter the short position of a futures contract and agree to sell her wheat to another economic agent at some point in the future for a given price. If the price of wheat falls during the period of the contract the farmer will be glad they hedged their position. If the price of wheat rises, the farmer will lose money because she is forced to sell her wheat at the lower price specified in the futures contract.</p>
+      <p>This is an intuitive example, however, most agents who take a position on a futures contract have no intention of holding the contract until the delivery date. Futures contracts can be purchased and sold on exchanges like stocks or bonds, and because their payoff moves in the opposite direction to the value of the underlying asset (e.g. the wheat in the previous example) they can be used to hedge a position even if the investor does not intend to honour the contract. Examples for both the short and long side of the futures contract will help make this clear. Before those examples, note that the spot price of the underlying asset and the price of a futures contract for that same asset should converge to each other as the date of delivery gets closer. A futures contract written at the start of January for an asset sold at the end of December might differ quite widely. However, if the futures price close to the end of December was higher than the sport price, there would be very little demand for futures contracts, which would drive their price down and the spot price of the asset up by the laws of supply and demand. The difference between the spot price and the futures price is known as the basis and by this reasoning it should tend towards zero as the delivery date of the futures contract approaches.</p>
+      <p>As an example of hedging on the short side of a futures contract, consider again a farmer in January who knows she will be selling one ton of wheat at its spot price on the 3rd of September (assume there is no risk of her crop failing). The current futures price of wheat is $250 per ton. She can hedge her position by short selling one wheat futures contract. If there are no transaction fees associated with short selling, this gives her a payoff of $250 but she must close the position later by returning the September futures contract to the broker. Now assume that on the 3rd of September the spot price of wheat is $200 per ton. Since September futures contracts are now written within the month of delivery, their price should be very close to $200 per ton, assume it is indeed exactly $200. The farmer sells her wheat for $200 on the market and purchases a futures contract at the same price to close her position. Overall, this strategy leaves her with the revenue from the sale of the wheat plus the spread between the purchase and sale of the futures contract $200 + ($250 - $200) = $250. If the spot price on the 3rd of September is $300 per ton, she sells the wheat for this price but will also have to close her short position by buying back September futures prices, which are also priced at $300 per ton. The total gain from the hedging strategy is $300 + (£250 - $300) = $250. Thus, she has managed to lock in a value of $250 for the wheat. If the price falls before the 3rd of September this strategy will be beneficial, but if it rises she would have been better off if she never hedged her position. This is a key point about hedging, although it can mitigate the risk of an investment, it does not eliminate the possibility of downside losses.</p>
+      <p>Now consider a major food and beverage producer who know they need to buy one ton of wheat on the 3rd of December and it is currently June. The spot price in June is $300 per ton and the December futures price is $250. The farmer should take a long position on a futures contract to hedge their position, at a cost of $250. If the spot price on the 3rd of December turns out to be $325, the futures price should be very close to this value. They pay £325 for the wheat on the market and sell their December futures for the same amount. The total cost of the  wheat is $325 + ($250 - $325) = $250. However, if the spot price on the 3rd of December is $275, the December futures price should also be very close to $275. They now buy the wheat for $275 and sell their December futures contracts for the same amount. The total cost of this purchasing strategy is the spot price paid in December plus the difference in the futures contracts, or $275 + ($250 - $275) = $250. Like in the other example, the producer has managed to lock in a value of $250 for the transaction. In the case where the price rose they benefit from this strategy, but in the case where the price fell it leads to a more expensive outcome.</p>
+      <p>In the examples considered so far, the asset underlying the futures contract is the same as the asset the agents wants to trade. This is often not possible because futures contracts are not available on every asset. However, an agent may still use futures contracts on other assets to hedge their position, this is known as cross hedging. It now becomes important to consider the hedge ratio, defined as the number of futures contracts which should be purchased or sold given the size of the exposed position in the asset. Let \(N\) be the number of futures contracts used to cover the position, \(Q_A\) be the number of assets in the position being hedged (for example, the tons of wheat being sold), and \(Q_F\) be the size of one futures contract (the number of units of the asset specified by the contract). The hedge ratio, \(h\), is then defined as \[h = \frac{N Q_F}{Q_A} \tag{1} .\]  To minimise risk, an agent should find a value of \(h\) which will minimise the variance of the value of the hedged position. We assume that the quantity of futures contracts and the quantity of assets remain fixed over the period of the hedge. Therefore, only the price of the asset and the price of the futures contract are moving over time. Given historical data on the change in the asset price and the change in the futures price during the period of the hedge, \[h^* = \rho_{A, F} \frac{ \sigma_A}{\sigma_F} \tag{2} \] minimises the variance of the change in the asset price, where \(\rho_{A, F}\) is the correlation between changes in the asset and futures price and \(\sigma_i\) with \(i \in {A, F}\) representing the standard deviation of a change in the variable. This is just the slope coefficient from an <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">ordinary least squares regression</a>. With all other terms in (1) determined, it is clear that \(N\) must be \[ N^* = h^* \frac{Q_A}{Q_F} \tag{3} \]</p>
+    
+  </div>    
+
+
+<div class="section-head">    
+    <h4>Applied Example: Hedging an Equity Portfolio</h4>    
+</div> 
+    <div class="eco-text">
+        <p>Futures contracts are available on stock indices such as the S&P 500 and the Dow Jones Industrial Average. These contracts are settled in cash rather than in the physical delivery of some good. Futures contracts on the S&P 500 are available at $50 times the index and are closed out at the opening price of the index on the third Friday of the month. The contracts are written with delivery months in March, June, September, and December. If an investor's portfolio does not exactly track the S&P 500, the optimal number of futures contracts to hedge a position in equation (3) is modified to \[N^* = \beta \frac{V_P}{V_F} \tag{4} \] where \(V_P\) is the value of the portfolio, \(V_F\) is the value of one futures contract and \(\beta\) is the response of excess returns on the portfolio to excess returns on the index.</p>
+        <p>As a practical example, consider a portfolio placing $1,000,000 in an equally weighted portfolio of Apple, Google, and Microsoft stocks. Assume our hypothetical investor wanted to hedge her returns on this portfolio between January 3rd and March 11th 2022. First, she will need to acquire an estimate for \(\beta\). Suppose she has \(T \times 1\) column vectors of data for all \(t \in T\) on the daily returns of the portfolio, \(\mathbf{r_p}\), the daily returns of the S&P 500, \(\mathbf{r_m}\), and the daily yield of a 13 week T-bill as a measure of the risk-free, \(\mathbf{r_f}\), between January 2007 and December 2021. Let \(\mathbf{x_p}\) and \(\mathbf{x_m}\) be the excess returns above the risk-free rate on the portfolio and the market respectively. Then, the value of \(\beta\) is \[ \beta = \frac{\tfrac{1}{T} \mathbf{x_p}^{\prime} \mathbf{x_m} - \mathbf{x_p}^{\prime} \mathbf{v} \mathbf{v}^{\prime} \mathbf{x_m}}{\tfrac{1}{T} \mathbf{x_m}^{\prime} \mathbf{x_m} - \mathbf{x_m}^{\prime} \mathbf{v} \mathbf{v}^{\prime} \mathbf{x_m}} \tag{1} \] where \(\mathbf{v}\) is a \(T \times 1\) vector with all elements equal to \( 1 / T \). The value of \(\beta\) for this portfolio between January 2007 and December 2021 is 1.008.</p>
+        <p>On January 3rd 2022, the investor can hedge against losses this portfolio by shorting futures on the S&P 500. The series E-Mini S&P 500 (available from Yahoo finance with ticker symbol 'ES=F') gives historical price quotes for futures contracts on the S&P 500. The given price is always for the contract which will be delivered next, so the prices in January 2007 are for futures contracts expiring in March. When the March contracts are delivered on the third Friday of the month, the price is then for contracts up for delivery in June. The futures price on January 3rd was $4786, which means the contract is worth this dollar value multiplied by $50, or $239,300. Hence, the optimal number of contracts is \[N^* = 1.008 \times \frac{1,000,000}{239,300} \approx 4.  \] The figure below shows the evolution of the S&P 500 index and the E-Mini futures price (left panel), as well as the change in the value of the portfolio over time compared to placing $1,000,000 in the S&P 500 (right panel). The futures price stays very close to the S&P 500 index over time and by the middle of March when the delivery date is very close they are essentially indistinguishable. The investor will be glad she hedged her position because both the value of the portfolio declined over the period of the hedge, as did the value of the S&P 500.</p>
+    </div>
+    <div>
+        <img src="images/hedging_1.png" style="display: block; width: 75%; margin-left: auto; margin-right: auto;">
+    </div>
+    <div class="eco-text">
+        <p>The investor short sells four contracts on January the 3rd for $957,200. At the end of the hedging period on March the 11th, she buys these four futures contracts back to close her position. The futures price on this date is 4201.5, so the total cost of closing her position is $840,300, and the total gain from the short position is $116,900. The value of the portfolio on March 11th was $869,154.4, representing a total return of around -14%. Overall the investor's position is $116,900 + $869,154 = $986,054, so she has managed to hedge her losses against the large fall in the value of the portfolio over this period.</p> 
+    </div>
+
+    
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+      
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>
