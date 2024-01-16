@@ -42,8 +42,53 @@
     <h4>Differentiating Linear Systems</h4>    
 </div>
   <div class="eco-text">
-    <p>This is a quick guide to taking the derivative of a linear system written in matrix form, such as the one in equation (1), with respect to a vector of variables, \[\mathbf{A} \mathbf{x} \tag{1}\] where \(\mathbf{A}\) is a \(n \times n\) matrix of constants and \(\mathbf{x}\) is a \(n \times 1\) matrix of variables \(x_1, \cdots , x_n\). The best way to illustrate what it means to perform the operation \[\frac{\partial}{\partial \mathbf{x}} \mathbf{A} \mathbf{x} \tag{2} \] is with a practical example. Hence, let \[ \mathbf{A} = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix} \] and \[\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} .\]  With these definitions, the linear system in (1) becomes \[ E_1 = a_{11} x_1 + a_{12} x_2  \tag{3} \] \[E_2 = a_{21} x_1 + a_{22} x_2  \tag{4} .\] Taking the derivative of this system with respect to the vector \(\mathbf{x}\) means constructing a new matrix consisting of the partial derivatives of equations (3) and (4) with respect to both of the variables in the vector, formally, \[\frac{\partial}{\partial \mathbf{x}} \mathbf{A} \mathbf{x} = \begin{bmatrix} \frac{\partial E_1}{\partial x_1} &  \frac{\partial E_1}{\partial x_2} \\ \frac{\partial E_2}{\partial x_1} & \frac{\partial E_2}{\partial x_2} \end{bmatrix}.  \] This gives \[ \frac{\partial}{\partial \mathbf{x}} \mathbf{A} \mathbf{x} =  \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix} = \mathbf{A} \tag{5} \] which is an exact analogue to the rule that \(dy / dx = a\) for \(y = ax\).</p>
-    <p>In economics and finance, we are often interested in \[ \frac{\partial}{\partial \mathbf{x}} \mathbf{x}^{\prime} \mathbf{A} \mathbf{x} \tag{6} \] which appears whenever we are interested in minimising the total variance of a system. Applying the same logic as before, we can write (6) as \[ \frac{\partial}{\partial \mathbf{x}} \left( a_{11} x_1^2 + \left( a_{12} + a_{21} \right) x_1 x_2 + a_{22} x_2^2 \right). \tag{7} \] This time the system does not have two rows when it has been expanded by matrix multiplication. Intuitively, this means the matrix of derivatives will also only have one row, however, it will still have two columns because we must take the partial derivative with respect to \(x_1\) and \(x_2\). Doing this gives \[ \begin{bmatrix}  2 a_{11} x_1^2 +  \left( a_{12} + a_{21} \right) x_2 & 2 a_{22} x_2 + \left( a_{12} + a_{21} \right) x_1 \end{bmatrix} = \mathbf{x}^{\prime} \begin{bmatrix}  2 a_{11} & \left( a_{12} + a_{21} \right) \\ \left( a_{12} + a_{21} \right) & 2 a_{22}   \end{bmatrix} \tag{8} \] which under the condition that \(a_{12} = a_{21} \) gives the familiar result that \[  \frac{\partial}{\partial \mathbf{x}} \mathbf{x}^{\prime} \mathbf{A} \mathbf{x} = 2 \mathbf{x}^{\prime} \mathbf{A} \tag{9} \] which is a direct analogue of the result from differentiation with scalars that \(dy / dx = 2 a x \) for \(y = ax^2\).</p>
+    <p>This is a quick guide to taking the derivative of a linear system written in matrix form, such as the one in equation (1), with respect to a vector of variables, </p>
+        <div class="equation">
+    \[\mathbf{A} \mathbf{x} \tag{1}\] 
+      </div>
+    <p>where \(\mathbf{A}\) is a \(n \times n\) matrix of constants and \(\mathbf{x}\) is a \(n \times 1\) matrix of variables \(x_1, \cdots , x_n\). The best way to illustrate what it means to perform the operation </p>
+        <div class="equation">
+    \[\frac{\partial}{\partial \mathbf{x}} \mathbf{A} \mathbf{x} \tag{2} \] 
+      </div>
+      <p>is with a practical example. Hence, let </p>
+        <div class="equation">
+    \[ \mathbf{A} = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix} \] 
+      </div>
+      <p>and</p> 
+      <div class="equation">
+      \[\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} .\]  
+      </div>
+      <p>With these definitions, the linear system in (1) becomes </p>
+        <div class="equation">
+    \[ E_1 = a_{11} x_1 + a_{12} x_2  \tag{3} \] 
+    \[E_2 = a_{21} x_1 + a_{22} x_2  \tag{4} .\] 
+      </div>
+    <p>Taking the derivative of this system with respect to the vector \(\mathbf{x}\) means constructing a new matrix consisting of the partial derivatives of equations (3) and (4) with respect to both of the variables in the vector, formally, </p>
+        <div class="equation">
+    \[\frac{\partial}{\partial \mathbf{x}} \mathbf{A} \mathbf{x} = \begin{bmatrix} \frac{\partial E_1}{\partial x_1} &  \frac{\partial E_1}{\partial x_2} \\ \frac{\partial E_2}{\partial x_1} & \frac{\partial E_2}{\partial x_2} \end{bmatrix}.  \] 
+      </div>
+      <p>This gives </p>
+        <div class="equation">
+    \[ \frac{\partial}{\partial \mathbf{x}} \mathbf{A} \mathbf{x} =  \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix} = \mathbf{A} \tag{5} \] 
+      </div>
+    <p>which is an exact analogue to the rule that \(dy / dx = a\) for \(y = ax\).</p>
+      <p>In economics and finance, we are often interested in </p>
+        <div class="equation">
+    \[ \frac{\partial}{\partial \mathbf{x}} \mathbf{x}^{\prime} \mathbf{A} \mathbf{x} \tag{6} \] 
+      </div>
+    <p>which appears whenever we are interested in minimising the total variance of a system. Applying the same logic as before, we can write (6) as</p>
+        <div class="equation">
+    \[ \frac{\partial}{\partial \mathbf{x}} \left( a_{11} x_1^2 + \left( a_{12} + a_{21} \right) x_1 x_2 + a_{22} x_2^2 \right). \tag{7} \] 
+      </div>
+    <p>This time the system does not have two rows when it has been expanded by matrix multiplication. Intuitively, this means the matrix of derivatives will also only have one row, however, it will still have two columns because we must take the partial derivative with respect to \(x_1\) and \(x_2\). Doing this gives </p>
+        <div class="equation">
+    \[ \begin{bmatrix}  2 a_{11} x_1^2 +  \left( a_{12} + a_{21} \right) x_2 & 2 a_{22} x_2 + \left( a_{12} + a_{21} \right) x_1 \end{bmatrix} = \mathbf{x}^{\prime} \begin{bmatrix}  2 a_{11} & \left( a_{12} + a_{21} \right) \\ \left( a_{12} + a_{21} \right) & 2 a_{22}   \end{bmatrix} \tag{8} \] 
+      </div>
+      <p>which under the condition that \(a_{12} = a_{21} \) gives the familiar result that </p>
+        <div class="equation">
+    \[  \frac{\partial}{\partial \mathbf{x}} \mathbf{x}^{\prime} \mathbf{A} \mathbf{x} = 2 \mathbf{x}^{\prime} \mathbf{A} \tag{9} \] 
+      </div>
+    <p>which is a direct analogue of the result from differentiation with scalars that \(dy / dx = 2 a x \) for \(y = ax^2\).</p>
   </div>    
 
     

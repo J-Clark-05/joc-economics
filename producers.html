@@ -57,7 +57,16 @@
     <h4>Cost Minimising Inputs</h4>    
 </div> 
     <div class="eco-text">
-        <p>In order to maximise profits, the firm should produce output with the cost minimising levels of capital and labour. These levels can be found by setting up a Lagrangian function \(\ell (K, L, \lambda)\) and finding the first order conditions with respect to capital, labour, and the Lagragian parameter \(\lambda\), which in this case will represent the marginal cost of production. As long as you write the constraint in the way seen below, the Lagrangian parameter can always be interpreted as the change in the objective function (the function you are maximising or minimising subject to the constraint) given a marginal change in the constraint. The Lagrangian is given by \[\ell(K, L, \lambda) = wL + rK + \lambda \left(Y - K^a L^b \right) \tag{1} \] and its first order conditions are \[\frac{d \ell}{d K} = aK^{a-1} L^b - \lambda r = 0 \tag{2} \] \[\frac{d \ell}{d L} = bK^{a} L^{b-1} - \lambda w = 0 \tag{3} \] \[\frac{d \ell}{d \lambda} = Y - K^a L^b = 0 \tag{4}. \] </p>
+        <p>In order to maximise profits, the firm should produce output with the cost minimising levels of capital and labour. These levels can be found by setting up a Lagrangian function \(\ell (K, L, \lambda)\) and finding the first order conditions with respect to capital, labour, and the Lagragian parameter \(\lambda\), which in this case will represent the marginal cost of production. As long as you write the constraint in the way seen below, the Lagrangian parameter can always be interpreted as the change in the objective function (the function you are maximising or minimising subject to the constraint) given a marginal change in the constraint. The Lagrangian is given by </p>
+        <div class="equation">
+        \[\ell(K, L, \lambda) = wL + rK + \lambda \left(Y - K^a L^b \right) \tag{1} \]
+        </div>
+        <p>and its first order conditions are</p>
+        <div class="equation">
+        \[\frac{d \ell}{d K} = aK^{a-1} L^b - \lambda r = 0 \tag{2} \] 
+        \[\frac{d \ell}{d L} = bK^{a} L^{b-1} - \lambda w = 0 \tag{3} \] 
+        \[\frac{d \ell}{d \lambda} = Y - K^a L^b = 0 \tag{4}. \] 
+        </div>
         <p>Dividing (2) by (3) and rearranging gives \(K = \frac{a}{b} \frac{w}{r} L \) and \(L = \frac{b}{a} \frac{r}{w} K\) which you can substitute back into the constraint (4) to yield the cost minimising levels of labour and capital \[L^* = \left( \frac{r}{w} \frac{b}{a} \right)^{\frac{a}{a+b}} Y^{\frac{1}{a+b}},\hspace{7mm} K^* = \left( \frac{w}{r} \frac{a}{b} \right)^{\frac{b}{a+b}}  Y^{\frac{1}{a+b}}. \] It is always a good idea to check whether the expressions make sense at this point. The cost-minimising levels of output should depend negativly on their own factor price and the share of the other input in production (the elasticity of output with respect to the other factor), positively on the other factor price and their own share in production, and both should be positively related to \(Y\). The expressions above satisfy all of these points.</p>
         <p>Substituting these expressions into the objective function will give total cost as a function of output given the firm produces with the cost-minimising level of labour and capital \[C(Y) = (a+b) \left(\left(\frac{r}{a}\right)^a \left(\frac{w}{b}\right)^b \right)^{\frac{1}{a+b}} Y^{\frac{1}{a+b}}. \tag{5} \] The trick to deriving this expression is to realise that \(w \left(\frac{r}{w} \right)^{\frac{a}{a+b}} = r^{\frac{a}{a+b}} w^{\frac{b}{a+b}} \) and that \(b^{\frac{a}{a+b}} = b \left( b^{\frac{-b}{a+b}} \right) \), then you can factor out the common terms and be left with \(a+b\) inside the parentheses, as in (5). The marginal cost function is the derivative of (5) with respect to \(Y\) which you can verify is the equal to \(\lambda\) by substituting the cost minimised inputs into either (2) or (3) \[ C^{\prime} (Y) = \left(\left(\frac{r}{a}\right)^a \left(\frac{w}{b}\right)^b \right)^{\frac{1}{a+b}} Y^{\frac{1 - (a+b)}{a+b}}. \tag{6} \]</p>
     </div>
@@ -81,9 +90,20 @@
     <h4>Profit Function</h4>    
 </div> 
     <div class="eco-text">
-        <p>The profit maximising level of output can be found by setting \(P = C^{\prime}(Y) \) and solving for \(Y\) \[Y^* =  \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \right)^{\frac{1}{1 - (a+b)}} P^{\frac{1}{1 - (a+b)}}. \] Substituting this expression into the profit function, \(\Pi = PY^* - C(Y^*) \), will give profit as a function of price \[ \Pi = \left(1 - (a+b)  \right) \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \right)^{\frac{1}{1 - (a+b)}} P^{\frac{1}{1 - (a+b)}}. \tag{7} \]</p>
+        <p>The profit maximising level of output can be found by setting \(P = C^{\prime}(Y) \) and solving for \(Y\) </p>
+        <div class="equation">    
+        \[Y^* =  \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \right)^{\frac{1}{1 - (a+b)}} P^{\frac{1}{1 - (a+b)}}. \]
+        </div>   
+        <p>Substituting this expression into the profit function, \(\Pi = PY^* - C(Y^*) \), will give profit as a function of price </p>
+        <div class="equation">    
+        \[ \Pi = \left(1 - (a+b)  \right) \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \right)^{\frac{1}{1 - (a+b)}} P^{\frac{1}{1 - (a+b)}}. \tag{7} \]
+        </div>
         <p>This function verifies the conclusions reached when graphically analysing the returns to scale. If \(a+b =1\) there would be a zero in the denominator of the exponent, which means the function is not valid in the case of CRS. This is because it is not possible to make profit with a CRS Cobb-Douglas production function in a perfectly competitive market. Similarly, profits will be negative when \(a+b>1\) and will tend towards zero as price tends to infinity. This reflects the incompatibility with the IRS production function with perfect competition. However, the function is positive and convex in \(P\) when the production function exhibits DRS.</p>
-        <p>Remember that \(P\) is assumed to grow exponentially over time due to demand side factors. Substituting in the expression for the time dynamics of \(P\) into the profit function gives \[ \Pi = \left(1 - (a+b)  \right) \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b P_0 \right)^{\frac{1}{1 - (a+b)}} \exp \left({\frac{\pi t}{1 - (a+b)}} \right) \tag{8} \] implying that profit will grow over time at a constant rate of \( \frac{\pi}{1 - (a+b)} \).</p>
+        <p>Remember that \(P\) is assumed to grow exponentially over time due to demand side factors. Substituting in the expression for the time dynamics of \(P\) into the profit function gives</p> 
+        <div class="equation"> 
+            \[ \Pi = \left(1 - (a+b)  \right) \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b P_0 \right)^{\frac{1}{1 - (a+b)}} \exp \left({\frac{\pi t}{1 - (a+b)}} \right) \tag{8} \] 
+        </div>   
+        <p>implying that profit will grow over time at a constant rate of \( \frac{\pi}{1 - (a+b)} \).</p>
     </div>
     
     
@@ -91,7 +111,15 @@
     <h4>Value of the Firm</h4>    
 </div> 
     <div class="eco-text">
-    <p>The value of the firm, \(V\), is the present discounted value of all future profit flows. Assume an investor discounts the future at a constant rate \(\rho\). We need \(\rho > \tfrac{\pi}{1 - (a+b)}\) to ensure that \(V\) converges to a finite value. The future stream of profits coming from ownership of the firm would be infinitely valuable to an investor today if this were not the case. Let \[h = \left(1 - (a+b)  \right) \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b P_0 \right)^{\frac{1}{1 - (a+b)}} \] and \(\theta = \tfrac{1}{1 - (a+b)} \) then profit can be written more succinctly as \(\Pi = h e^{\theta \pi t} \). Under the assumption that \(\rho > \theta \pi \), the value of the firm is \[ V = \int_0^{\infty} h e^{\theta \pi t} e^{-\rho t} dt = \int_0^{\infty} h e^{- \left(\rho - \theta \pi \right) t} dt = \frac{h}{\rho - \theta \pi}. \] The last expression is the area under the curve formed when plotting \(V\) as a function of \(t\). The discounted value of profit flows are plotted over time in the following diagram where \(a+b = 0.5\) and both factor prices and the initial price level are equal to unity. The growth rate of price is \(0.02\) and the discount rate is \(0.1\). This diagram is reflecting the fact that the profit flows generated very far in the future are worth very little today, a consequence of income today being worth more than future income because it can be loaned out and earn interest. I have also plotted \(\Pi\) on this diagram for comparison.</p>
+    <p>The value of the firm, \(V\), is the present discounted value of all future profit flows. Assume an investor discounts the future at a constant rate \(\rho\). We need \(\rho > \tfrac{\pi}{1 - (a+b)}\) to ensure that \(V\) converges to a finite value. The future stream of profits coming from ownership of the firm would be infinitely valuable to an investor today if this were not the case. Let </p>
+    <div class="equation">
+    \[h = \left(1 - (a+b)  \right) \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b P_0 \right)^{\frac{1}{1 - (a+b)}} \] 
+    </div>   
+    <p>and \(\theta = \tfrac{1}{1 - (a+b)} \) then profit can be written more succinctly as \(\Pi = h e^{\theta \pi t} \). Under the assumption that \(\rho > \theta \pi \), the value of the firm is 
+    <div class="equation">  
+    \[ V = \int_0^{\infty} h e^{\theta \pi t} e^{-\rho t} dt = \int_0^{\infty} h e^{- \left(\rho - \theta \pi \right) t} dt = \frac{h}{\rho - \theta \pi}. \tag{9} \] 
+    </div>
+    <p>The last expression is the area under the curve formed when plotting \(V\) as a function of \(t\). The discounted value of profit flows are plotted over time in the following diagram where \(a+b = 0.5\) and both factor prices and the initial price level are equal to unity. The growth rate of price is \(0.02\) and the discount rate is \(0.1\). This diagram is reflecting the fact that the profit flows generated very far in the future are worth very little today, a consequence of income today being worth more than future income because it can be loaned out and earn interest. I have also plotted \(\Pi\) on this diagram for comparison.</p>
     </div>
 <div class="eco-graph">
         <img src="images/value%20pc.png">

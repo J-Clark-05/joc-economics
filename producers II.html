@@ -51,8 +51,16 @@
     <h4>Production, Costs, and Market Structure</h4>    
 </div>  
     <div class="eco-text">
-    <p>The firm produces output \(Y\) with inputs capital, \(K\), and labour, \(L\), according to the Cobb-Douglas production function \(Y = K^a L^b\), and faces the cost constraint \(C = wL + rK\), where \(w\) is the constant wage paid to labour and \(r\) is the constant price of capital goods. The firm faces an inverse demand function \[P = X^{1 - \nu} Y^{\nu - 1} \tag{1}\] where \(0 < \nu < 1\) implies the function is increasing in \(X\) and decreasing in \(Y\), which is the price of the output good. Notive that this demand curve implies a revenue function with is homogenous of degree one in \(X\) and \(Y\), \(PY = X^{1 - \nu} Y^{\nu}\), so if the two inputs in the function increased by a constant proportion output would increase by that same proportion.</p>
-    <p>\(X\) captures exogenous demand conditions and is assumed to evolve stochastically over time according to the following GBM process \[dX = \alpha X dt + \sigma X dW  \tag{2}\] where \(\alpha\) is the drift of the process reflecting into long-run trend and \(\sigma\) determines the volatility of the process at every instant. \(W\) is a standard <a href="https://en.wikipedia.org/wiki/Wiener_process">Wiener process</a>. When \(X\) is large the price of the output good is large to reflect the fact that demand for the output good is very high. Conversely, a very small \(X\) reflects the fact that demand is low.</p>
+    <p>The firm produces output \(Y\) with inputs capital, \(K\), and labour, \(L\), according to the Cobb-Douglas production function \(Y = K^a L^b\), and faces the cost constraint \(C = wL + rK\), where \(w\) is the constant wage paid to labour and \(r\) is the constant price of capital goods. The firm faces an inverse demand function </p>
+    <div class="equation"> 
+    \[P = X^{1 - \nu} Y^{\nu - 1} \tag{1}\] 
+    </div>
+    <p>where \(0 \lt \nu \lt 1\) implies the function is increasing in \(X\) and decreasing in \(Y\), which is the price of the output good. Notice that this demand curve implies a revenue function with is homogeneous of degree one in \(X\) and \(Y\), \(PY = X^{1 - \nu} Y^{\nu}\), so if the two inputs in the function increased by a constant proportion output would increase by that same proportion.</p>
+    <p>\(X\) captures exogenous demand conditions and is assumed to evolve stochastically over time according to the following GBM process </p>
+    <div class="equation">
+    \[dX = \alpha X dt + \sigma X dW  \tag{2}\] 
+    </div>
+    <p>where \(\alpha\) is the drift of the process reflecting into long-run trend and \(\sigma\) determines the volatility of the process at every instant. \(W\) is a standard <a href="https://en.wikipedia.org/wiki/Wiener_process">Wiener process</a>. When \(X\) is large the price of the output good is large to reflect the fact that demand for the output good is very high. Conversely, a very small \(X\) reflects the fact that demand is low.</p>
     </div>
     
 
@@ -60,8 +68,33 @@
     <h4>Profit Maximisation</h4>    
 </div> 
     <div class="eco-text">
-        <p>The firm will maximise revenue subject to its costs. After substituting the demand function into the revenue function, the Lagrangian function for this problem is \[\ell = X^{1- \nu} K^{a \nu} L^{b \nu} + \lambda \left(C - rK - wL \right) \tag{3}\] which has first order conditions \[\frac{d \ell}{d K} = a \nu K^{a \nu -1} L^{b \nu} - \lambda r = 0 \tag{4} \] \[\frac{d \ell}{d L} = b \nu K^{a \nu} L^{b \nu-1} - \lambda w = 0 \tag{5} \] \[\frac{d \ell}{d \lambda} = C - rK - wL  = 0 \tag{6}. \] From the first order conditions, it turns out that the profit maximising level of inputs are exactly the same as the cost minimising level of inputs found in the page linked above which studied perfect competition \[L^* = \left( \frac{r}{w} \frac{b}{a} \right)^{\frac{a}{a+b}} Y^{\frac{1}{a+b}},\hspace{7mm} K^* = \left( \frac{w}{r} \frac{a}{b} \right)^{\frac{b}{a+b}}  Y^{\frac{1}{a+b}}.  \] This means the cost function expressed in terms of \(Y\) also has the same form \[ C(Y) = (a+b) \left(\left(\frac{r}{a}\right)^a \left(\frac{w}{b}\right)^b \right)^{\frac{1}{a+b}} Y^{\frac{1}{a+b}}. \tag{7} \]</p>
-        <p>The firm will produce up until the point where marginal revenue is equal to marginal cost. Setting these two expressions equivalent to each other gives the optimal level of output as a function of the stochastic variable \(X\) \[\nu X^{1-\nu} Y^{\nu -1} = \left(\left(\frac{r}{a}\right)^a \left(\frac{w}{b}\right)^b \right)^{\frac{1}{a+b}} Y^{\frac{1 - (a+b)}{a+b}} \] \[Y^* = \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \nu \right)^{\frac{a+b}{1 - \nu (a+b)}} X^{\frac{(a+b)(1-\nu)}{1 - \nu (a+b)}}. \] Substituting this expression into the profit function gives \(PY^* - C(Y^*)\) which after some algebra gives profits as a function of \(X\) \[\Pi = \left(1 - \nu (a+b)  \right) \left( \left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \nu \right)^{\frac{\nu (a+b)}{1 - \nu (a+b)}} X^{\frac{1 - \nu}{1 - \nu (a+b)}}. \tag{8} \]</p>
+        <p>The firm will maximise revenue subject to its costs. After substituting the demand function into the revenue function, the Lagrangian function for this problem is</p>
+        <div class="equation">
+        \[\ell = X^{1- \nu} K^{a \nu} L^{b \nu} + \lambda \left(C - rK - wL \right) \tag{3}\] 
+        </div>  
+        <p>which has first order conditions </p>
+        <div class="equation"> 
+        \[\frac{d \ell}{d K} = a \nu K^{a \nu -1} L^{b \nu} - \lambda r = 0 \tag{4} \]
+        \[\frac{d \ell}{d L} = b \nu K^{a \nu} L^{b \nu-1} - \lambda w = 0 \tag{5} \] 
+        \[\frac{d \ell}{d \lambda} = C - rK - wL  = 0 \tag{6}. \] 
+        </div>
+        <p>From the first order conditions, it turns out that the profit maximising level of inputs are exactly the same as the cost minimising level of inputs found in the page linked above which studied perfect competition</p> 
+        <div class="equation">
+        \[L^* = \left( \frac{r}{w} \frac{b}{a} \right)^{\frac{a}{a+b}} Y^{\frac{1}{a+b}},\hspace{7mm} K^* = \left( \frac{w}{r} \frac{a}{b} \right)^{\frac{b}{a+b}}  Y^{\frac{1}{a+b}}.  \] 
+        </div> 
+        <p>This means the cost function expressed in terms of \(Y\) also has the same form</p>
+         <div class="equation">   
+        \[ C(Y) = (a+b) \left(\left(\frac{r}{a}\right)^a \left(\frac{w}{b}\right)^b \right)^{\frac{1}{a+b}} Y^{\frac{1}{a+b}}. \tag{7} \]
+        </div>
+        <p>The firm will produce up until the point where marginal revenue is equal to marginal cost. Setting these two expressions equivalent to each other gives the optimal level of output as a function of the stochastic variable \(X\) </p>
+          <div class="equation">  
+        \[\nu X^{1-\nu} Y^{\nu -1} = \left(\left(\frac{r}{a}\right)^a \left(\frac{w}{b}\right)^b \right)^{\frac{1}{a+b}} Y^{\frac{1 - (a+b)}{a+b}} \] 
+        \[Y^* = \left(\left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \nu \right)^{\frac{a+b}{1 - \nu (a+b)}} X^{\frac{(a+b)(1-\nu)}{1 - \nu (a+b)}}. \] 
+        </div>
+        <p>Substituting this expression into the profit function gives \(PY^* - C(Y^*)\) which after some algebra gives profits as a function of \(X\) </p>
+         <div class="equation">   
+        \[\Pi = \left(1 - \nu (a+b)  \right) \left( \left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \nu \right)^{\frac{\nu (a+b)}{1 - \nu (a+b)}} X^{\frac{1 - \nu}{1 - \nu (a+b)}}. \tag{8} \]
+        </div>
         <p>This profit function is compatible with CRS, DRS, and IRS as long as  \(\frac{1}{a+b} > \(\nu\). It is helpful to see how the profit function will change when the returns to scale and (\nu\) vary. The diagrams below give such a demonstration. The first shows profits as a function of \(X\) when \(a = b = 0.5\) (CRS), the second shows the case of \(a = b = 0.25\) (DRS), and the third shows the case \(a = b = 0.75 \) (IRS). For these parameter values, the highest profit flows for a given \(X\) are generated under decreasing returns to scale.</p>
     <div class="eco-graph">
         <img src="images/monopoly%20crs.png">
@@ -69,14 +102,28 @@
         <img src="images/monopoly%20irs.png"
     </div>
     </div>
-    <p>Profit is a linear in \(X\) under CRS, concave in \(X\) under DRS, and a convex in \(X\) under IRS. Higher \(\nu\) will lower profits for a given value of \(X\). This makes sense because a higher \(\nu\) implies the elasticity of revenue with respect to the stochastic demand is lower. In the IRS case shown above, a value of \(\nu = 0.6\) produces a very low profit flow. The expression for \(\Pi \) becomes much simpler if \[h \equiv  \left(1 - \nu (a+b)  \right) \left( \left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \nu \right)^{\frac{\nu (a+b)}{1 - \nu (a+b)}} \]</p>
-    
+    <p>Profit is a linear in \(X\) under CRS, concave in \(X\) under DRS, and a convex in \(X\) under IRS. Higher \(\nu\) will lower profits for a given value of \(X\). This makes sense because a higher \(\nu\) implies the elasticity of revenue with respect to the stochastic demand is lower. In the IRS case shown above, a value of \(\nu = 0.6\) produces a very low profit flow. The expression for \(\Pi \) becomes much simpler if</p> 
+    <div class="equation">
+    \[h \equiv  \left(1 - \nu (a+b)  \right) \left( \left(\frac{a}{r}\right)^a \left(\frac{b}{w}\right)^b \nu \right)^{\frac{\nu (a+b)}{1 - \nu (a+b)}} \]
+    </div>
+        
 <div class="section-head">    
     <h4>Profit Flows</h4>    
 </div> 
     <div class="eco-text">
         <p>The section above expressed profits as a function of the stochastic demand variable alone, which was assumed at the start to follow a GBM. Such stochastic processes are not smooth over time, so the normal methods of calculus will not allow investors to find the change in the profit flow over an infinitesimally small interval. In such instances, Ito's lemma must be used to find the derivative of \(\Pi\) with respect to time. In practice, Ito's lemma works a lot like a Taylor series expansion of the variable in question. Importantly, because \(dt\) represents an infinitesimally small interval, any powers of \(dt\) can be ignored during the following derivations. This is relevant when considering the value of \(dX^2\) from equation (2). A rule of the standard Brownian motion is that \(dW^2 = dt\), which means the only term that survives in \(dX^2\) will be \(\sigma^2 X^2 dt\) because all other terms have \(dt\) raised to a power. </p> 
-        <p>Applying Ito's lemma to the profit function \[d \Pi = \Pi_{X} dX + \frac{1}{2} \Pi_{XX} dX^2. \] Taking the relevant derivatives of \(\Pi\) with respect to \(X\) and substituting in \(dX\) and \(dX^2\) gives \[d \Pi = \pi \Pi dt + \gamma \Pi dW \tag{9} \] where \[ \pi = \alpha \frac{1 - \nu}{1 - \nu (a+b)} - \frac{\sigma^2}{2} \frac{\nu (1-\nu) (1 - (a+b))}{\left(1 - \nu (a+b) \right)^2}, \hspace{5mm} \gamma = \frac{(1 - \nu) \sigma}{ 1 - \nu (a+b) } \].</p>
+        <p>Applying Ito's lemma to the profit function </p>
+        <div class="equation">  
+        \[d \Pi = \Pi_{X} dX + \frac{1}{2} \Pi_{XX} dX^2. \] 
+        </div> 
+        <p>Taking the relevant derivatives of \(\Pi\) with respect to \(X\) and substituting in \(dX\) and \(dX^2\) gives </p>
+        <div class="equation">
+        \[d \Pi = \pi \Pi dt + \gamma \Pi dW \tag{9} \] 
+        </div>
+        <p>where</p> 
+        <div class="equation">
+        \[ \pi = \alpha \frac{1 - \nu}{1 - \nu (a+b)} - \frac{\sigma^2}{2} \frac{\nu (1-\nu) (1 - (a+b))}{\left(1 - \nu (a+b) \right)^2}, \hspace{5mm} \gamma = \frac{(1 - \nu) \sigma}{ 1 - \nu (a+b) } \].
+        </div>
     </div>
     
     
@@ -84,7 +131,26 @@
     <h4>Value of the Firm</h4>    
 </div> 
     <div class="eco-text">
-    <p>The value of the firm in this case is defined by the Bellman equation, which separates the firm's profit flows in the interval \(dt\) into the flow the firm receives within the interval and the discounted value of all expected future flows, as in the equation below: \[V = \Pi dt + e^{-\rho dt} E \left(V + dV \right). \tag{10} \] Because \(V\) is a function of \(\Pi\) and \(\Pi\) follows a GBM, \(dV\) is another stochastic integral which means applying Ito's lemma again \[dV = V_{\Pi} d \Pi + \tfrac{1}{2} V_{\Pi \Pi} d \Pi^{2} .\] A Taylor series expansion around zero of \(e^{-\rho dt} \) gives \(1 - \rho dt\) if all powers of \(dt\) greater than one are ignored. The Bellman equation becomes \[V = \Pi dt + \left(1 - \rho dt \right) E \left(V + \pi V_{\Pi} \Pi dt +  \gamma V_{\Pi} \Pi dW  + \tfrac{1}{2} \gamma^{2} V_{\Pi \Pi} \Pi^2 dt \right) .\] Expanding this bracket, remembering that the expected value of a standard Brownian motion is zero (\(E \left(dW \right) = 0 \)), and dividing through by \(dt\) leaves a second order differential equation in \(\Pi\) \[\tfrac{1}{2} \gamma^2 \Pi^2 V_{\Pi \Pi} + \pi \Pi V_{\Pi} - \rho V + \Pi = 0 \tag{11} .\] This is known as a Cauchy-Euler equation and is homogeneous in \(\Pi\), implying \(V_{\Pi} \Pi \) will just give \(V\) multiplied by some constant, and likewise for \(V_{\Pi \Pi} \Pi^2 \). Furthermore, \(\Pi \) is not raised to any power in this equation, so it seems like a good guess for the particular solution is \(V = \phi \Pi\) where \(\phi\) is some constant to be determined. Indeed, this guess will satisfy the equation if \(\phi = \frac{1}{\rho - \pi} \), which means \(V = \frac{\Pi}{\rho - \pi} \). Substituting in the definition of \(\Pi\) in equation (8) and the definition of \(\pi\) \[V = \frac{h X^{\frac{1-\nu}{1 - \nu (a+b)}}}{\rho - \alpha \frac{1 - \nu}{1 - \nu (a+b)} + \frac{\sigma^2}{2} \frac{\nu (1-\nu) (1 - (a+b))}{\left(1 - \nu (a+b) \right)^2}} .\] </p>
+    <p>The value of the firm in this case is defined by the Bellman equation, which separates the firm's profit flows in the interval \(dt\) into the flow the firm receives within the interval and the discounted value of all expected future flows, as in the equation below: </p>
+    <div class="equation">
+    \[V = \Pi dt + e^{-\rho dt} E \left(V + dV \right). \tag{10} \] 
+    </div>
+    <p>Because \(V\) is a function of \(\Pi\) and \(\Pi\) follows a GBM, \(dV\) is another stochastic integral which means applying Ito's lemma again </p>
+       <div class="equation"> 
+    \[dV = V_{\Pi} d \Pi + \tfrac{1}{2} V_{\Pi \Pi} d \Pi^{2} .\] 
+        </div>
+    <p>A Taylor series expansion around zero of \(e^{-\rho dt} \) gives \(1 - \rho dt\) if all powers of \(dt\) greater than one are ignored. The Bellman equation becomes </p>
+    <div class="equation">
+    \[V = \Pi dt + \left(1 - \rho dt \right) E \left(V + \pi V_{\Pi} \Pi dt +  \gamma V_{\Pi} \Pi dW  + \tfrac{1}{2} \gamma^{2} V_{\Pi \Pi} \Pi^2 dt \right) .\] 
+    </div>
+    <p>Expanding this bracket, remembering that the expected value of a standard Brownian motion is zero (\(E \left(dW \right) = 0 \)), and dividing through by \(dt\) leaves a second order differential equation in \(\Pi\) </p>
+    <div class="equation">
+    \[\tfrac{1}{2} \gamma^2 \Pi^2 V_{\Pi \Pi} + \pi \Pi V_{\Pi} - \rho V + \Pi = 0 \tag{11} .\] 
+    </div>
+    <p>This is known as a Cauchy-Euler equation and is homogeneous in \(\Pi\), implying \(V_{\Pi} \Pi \) will just give \(V\) multiplied by some constant, and likewise for \(V_{\Pi \Pi} \Pi^2 \). Furthermore, \(\Pi \) is not raised to any power in this equation, so it seems like a good guess for the particular solution is \(V = \phi \Pi\) where \(\phi\) is some constant to be determined. Indeed, this guess will satisfy the equation if \(\phi = \frac{1}{\rho - \pi} \), which means \(V = \frac{\Pi}{\rho - \pi} \). Substituting in the definition of \(\Pi\) in equation (8) and the definition of \(\pi\) </p>
+    <div class="equation"> 
+    \[V = \frac{h X^{\frac{1-\nu}{1 - \nu (a+b)}}}{\rho - \alpha \frac{1 - \nu}{1 - \nu (a+b)} + \frac{\sigma^2}{2} \frac{\nu (1-\nu) (1 - (a+b))}{\left(1 - \nu (a+b) \right)^2}} . \tag{12} \] 
+    </div>
     <p>This expression is similar to the one found in the page examining the value of the firm in perfect competition. Increases in the discount rate will decrease the value of the firm and increases in the drift of the GBM \(X\) will increase the value, which makes sense because the value of the firm should be higher when demand for the output good it produces grows faster over time. The effect of the GBM volatility parameter on the value of the firm depends on the returns to scale of the production function. Under CRS, \(\sigma\) has no effect on the value of the firm. With DRS, the value of the firm will fall as the volatility of its profit flow increases. Finally, IRS makes the value of the firm positively correlated with increases in demand volatility. These results are essentially a consequence of Jensen's inequality, concave functions have higher values at a given point compared to a mixture of two equidistant points to the left and right of the initial point. The opposite is true for convex functions.</p>
     </div>
 

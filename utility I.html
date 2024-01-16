@@ -49,9 +49,20 @@
     <h4>Assumptions</h4>    
 </div>  
     <div class="eco-text">
-    <p>A consumer has the following utility function for the two goods \(x\) and \(y\) \[U = \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1}{\rho}}  \tag{1}\] and faces the linear budget constraint \[M = p_x X + p_y Y  \tag{2} \] where \(M\) is income, \(p_x > 0\) is the price of good \(X\) and \(p_y > 0\) is the price of good \(Y\). Both prices, the consumer's income, and the parameters \(a > 0\) and \(b > 0\) are constants by assumption.</p>
+        <p>A consumer has the following utility function for the two goods \(x\) and \(y\) </p>
+        <div class="equation">
+    \[U = \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1}{\rho}}  \tag{1}\] 
+        </div>
+        <p>and faces the linear budget constraint</p>
+        <div class="equation">
+        \[M = p_x X + p_y Y  \tag{2} \] 
+        </div>
+    <p>where \(M\) is income, \(p_x > 0\) is the price of good \(X\) and \(p_y > 0\) is the price of good \(Y\). Both prices, the consumer's income, and the parameters \(a > 0\) and \(b > 0\) are constants by assumption.</p>
     <p>The parameters \(a\) and \(b\) say something about the `importance' of the two goods for the consumer's utility. Higher \(a\) will increase the utility gained from good \(X\) and likewise for \(b\) and good \(Y\). If \(b = 1-a\), the consumer attaches a weight reflecting the importance of the two goods in their utility. Unlike the standard Cobb-Douglas case, the consumer can derive positive utility even when consumption of one of the goods is zero. As will be shown below, \(\rho\) will control the elasticity of substitution, the change in the input ratio given a change in the marginal rate of substitution.</p>
-    <p>The consumer's problem is to maximise the utility function in (1) subject to the budget constraint in (2). This will allow us to derive an expression for the indirect utility function, \(U(p_x, p_y, M) \). If instead we framed the problem as one of cost minimisation, the lowest possible expenditure for a given utility \(U_0\), we would instead derive the expenditure function, \(E(p_x, p_y, U_0)\). However, the expenditure function can easily be found from the indirect utility function in this case, so we will focus on maximising utility subject to the budget constraint. The Lagrangian equation for this problem is \[\ell = \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1}{\rho}} + \lambda \left( M - p_x X - p_y Y \right)  \tag{3} \]</p>
+        <p>The consumer's problem is to maximise the utility function in (1) subject to the budget constraint in (2). This will allow us to derive an expression for the indirect utility function, \(U(p_x, p_y, M) \). If instead we framed the problem as one of cost minimisation, the lowest possible expenditure for a given utility \(U_0\), we would instead derive the expenditure function, \(E(p_x, p_y, U_0)\). However, the expenditure function can easily be found from the indirect utility function in this case, so we will focus on maximising utility subject to the budget constraint. The Lagrangian equation for this problem is </p>
+        <div class="equation">
+    \[\ell = \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1}{\rho}} + \lambda \left( M - p_x X - p_y Y \right)  \tag{3} \]
+        </div>
     </div>  
 
 
@@ -59,10 +70,55 @@
     <h4>Solution</h4>    
 </div> 
     <div class="eco-text">
-        <p>Applying the chain rule to the first term in equation (3), first order conditions for optimisation are \[\frac{\partial \ell}{\partial X} = a X^{\rho - 1} \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1 - \rho }{\rho}} - \lambda p_x = 0  \tag{4} \] \[\frac{\partial \ell}{\partial Y} = b Y^{\rho - 1} \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1 - \rho }{\rho}} - \lambda p_y = 0  \tag{5} \] \[ \frac{\partial \ell}{\partial \lambda} = M - p_x X - p_y Y = 0  \tag{6}. \] Dividing (4) by (6) gives the familiar result that the marginal rate of substitution must be equal to the slope of the budget constraint in order to maximise utility \[\frac{a}{b} \left( \frac{X}{Y} \right)^{\rho -1} = \frac{p_x}{p_y}. \tag{7} \] Note that the exponent is written in the form \( \tfrac{1}{1-\rho} \), which will make the expressions we derive easier to interpret. An expression for \(X\) can easily be derived from this equation, \(X = \left( \frac{a}{b} \frac{p_y}{p_x} \right)^{\frac{1}{1-\rho}} Y \) which can be plugged into (6) to give \[p_x \left[ \left( \frac{a}{b} \frac{p_y}{p_x} \right)^{\frac{1}{1-\rho}} Y \right]  + p_y Y = M  \] \[ p_y \left[ \left( \frac{a}{b} \left( \frac{p_y}{p_x} \right)^{\rho} \right)^{\frac{1}{1-\rho}} Y \right]  + p_y Y = M  \] \[p_y Y \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}   \right] = M \] \[Y^* (p_x, p_y, M) = \frac{M}{p_y} \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \tag{8}\]</p>
-        <p>We can apply exactly the same steps to find the optimal level of \(X\) \[X^* (p_x, p_y, M) = \frac{M}{p_x} \left[ \frac{\left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \tag{9}. \] These expressions are the Marshallian demand functions for goods \(X\) and \(Y\). We could also write them in the form \[Y^* = \frac{M}{p_y} \left(\frac{1}{b p_x^{\rho}} \right)^{\frac{1}{\rho -1}} \left[ \left(\frac{1}{b p_x^{\rho}} \right)^{\frac{1}{\rho -1}} + \left(\frac{1}{a p_y^{\rho}} \right)^{\frac{1}{\rho -1}}   \right]^{-1}  \] \[ = \frac{M}{p_y} \left(\frac{1}{b p_x^{\rho}} \right)^{\frac{1}{\rho -1}}  \left[ \frac{ \left(a p_y^{\rho}  \right)^{\frac{1}{\rho-1 }} \left(b p_x^{\rho}  \right)^{\frac{1}{\rho-1 }} }{\left(a p_y^{\rho}  \right)^{\frac{1}{\rho-1 }} + \left(b p_x^{\rho}  \right)^{\frac{1}{\rho-1 }}} \right] \] \[= M \left[ \frac{\left( a p_y \right)^{\frac{1}{\rho-1}}}{\left( b p_x^{\rho} \right)^{\frac{1}{\rho-1}} + \left( a p_y^{\rho} \right)^{\frac{1}{\rho-1}}}, \right] \] however, the form in which they appear in (8) and (9) is easier to work with in the following steps.  For example, applying the quotient rule reveals that \[\frac{\partial Y^*}{\partial p_y} = - \frac{M \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}{\left(p_y\right)^2} \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \frac{1}{1-\rho} \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{ \left( \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right)^2} \right] \tag{10} \] which is definitely negative as long as \(\rho \lt 1\).</p>
-        <p>To find the indirect utility function, substitute (8) and (9) back into the utility function \[ U = \left(a \left( \frac{M}{p_x} \left[ \frac{\left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \right)^{\rho} + b \left( \frac{M}{p_y} \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \right)^{\rho} \right)^{\frac{1}{\rho}}. \] Multiplying and dividing the first term by \( p_y \) and the second term by \(p_x\) allows us to factor out a common term \(M / p_x p_y \) and simply the resulting expression to derive \[ U(p_x, p_y, M) = \frac{M}{p_x p_y} \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{1 - \rho}{\rho}} = M \left[ \left( b p_y^{\rho} \right)^{\frac{1}{\rho-1}} +   \left( a p_x^{\rho} \right)^{\frac{1}{\rho-1}} \right]^{\frac{1 - \rho}{\rho}}.  \tag{11}\]   As mentioned earlier, it is now easy to derive the expenditure function \[ M(p_x, p_y, U) = U p_x p_y \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{\rho-1}{\rho}} = U  \left[ \left( b p_y^{\rho} \right)^{\frac{1}{\rho-1}} +   \left( a p_x^{\rho} \right)^{\frac{1}{\rho-1}} \right]^{\frac{\rho-1}{\rho}} . \tag{12}\]</p>
-        <p>Once we have the expenditure function, we can also find the Hicksian demand function (denoted by an \(h\) subscript) for the two goods by applying Shephard's lemma. To find the Hicksian demand for good \(Y\), this just involves taking the derivative of (12) with respect to \(p_y\) \[\frac{\partial M(p_x, p_y, U)}{\partial p_y} =  - U p_x \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{-\frac{1}{\rho}} + U p_x \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{\rho-1}{\rho}}  \] \[ \frac{\partial M(p_x, p_y, U)}{\partial p_y} = U \left( \frac{\left( b p_x\right)^{\frac{1}{1-\rho}}}{\left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{1}{\rho}}} \right) =  Y_h (p_x, p_y, U) \tag{13}. \] You can also use Roy's identity to show the equivalence between the Marshallian demand for \(Y\) in equation (8) and \(- \frac{\partial U(p_x, p_y, M)}{\partial p_y} / \frac{\partial U(p_x, p_y, M) }{\partial M} \).</p>
+        <p>Applying the chain rule to the first term in equation (3), first order conditions for optimisation are </p>
+            <div class="equation">
+        \[\frac{\partial \ell}{\partial X} = a X^{\rho - 1} \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1 - \rho }{\rho}} - \lambda p_x = 0  \tag{4} \]
+        \[\frac{\partial \ell}{\partial Y} = b Y^{\rho - 1} \left(a X^{\rho} + b Y^{\rho}  \right)^{\frac{1 - \rho }{\rho}} - \lambda p_y = 0  \tag{5} \]
+        \[ \frac{\partial \ell}{\partial \lambda} = M - p_x X - p_y Y = 0  \tag{6}. \] 
+        </div>
+        <p>Dividing (4) by (6) gives the familiar result that the marginal rate of substitution must be equal to the slope of the budget constraint in order to maximise utility </p>
+        <div class="equation">
+        \[\frac{a}{b} \left( \frac{X}{Y} \right)^{\rho -1} = \frac{p_x}{p_y}. \tag{7} \] 
+        </div>
+        <p>Note that the exponent is written in the form \( \tfrac{1}{1-\rho} \), which will make the expressions we derive easier to interpret. An expression for \(X\) can easily be derived from this equation, \(X = \left( \frac{a}{b} \frac{p_y}{p_x} \right)^{\frac{1}{1-\rho}} Y \) which can be plugged into (6) to give </p>
+        <div class="equation">
+        \[p_x \left[ \left( \frac{a}{b} \frac{p_y}{p_x} \right)^{\frac{1}{1-\rho}} Y \right]  + p_y Y = M  \] \[ p_y \left[ \left( \frac{a}{b} \left( \frac{p_y}{p_x} \right)^{\rho} \right)^{\frac{1}{1-\rho}} Y \right]  + p_y Y = M  \] 
+        \[p_y Y \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}   \right] = M \] 
+        \[Y^* (p_x, p_y, M) = \frac{M}{p_y} \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \tag{8}\]
+        </div>
+        <p>We can apply exactly the same steps to find the optimal level of \(X\) </p>
+            <div class="equation">
+        \[X^* (p_x, p_y, M) = \frac{M}{p_x} \left[ \frac{\left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \tag{9}. \] 
+        </div>
+        <p>These expressions are the Marshallian demand functions for goods \(X\) and \(Y\). We could also write them in the form </p>
+            <div class="equation">
+        \[Y^* = \frac{M}{p_y} \left(\frac{1}{b p_x^{\rho}} \right)^{\frac{1}{\rho -1}} \left[ \left(\frac{1}{b p_x^{\rho}} \right)^{\frac{1}{\rho -1}} + \left(\frac{1}{a p_y^{\rho}} \right)^{\frac{1}{\rho -1}}   \right]^{-1}  \]
+        \[ = \frac{M}{p_y} \left(\frac{1}{b p_x^{\rho}} \right)^{\frac{1}{\rho -1}}  \left[ \frac{ \left(a p_y^{\rho}  \right)^{\frac{1}{\rho-1 }} \left(b p_x^{\rho}  \right)^{\frac{1}{\rho-1 }} }{\left(a p_y^{\rho}  \right)^{\frac{1}{\rho-1 }} + \left(b p_x^{\rho}  \right)^{\frac{1}{\rho-1 }}} \right] \] 
+        \[= M \left[ \frac{\left( a p_y \right)^{\frac{1}{\rho-1}}}{\left( b p_x^{\rho} \right)^{\frac{1}{\rho-1}} + \left( a p_y^{\rho} \right)^{\frac{1}{\rho-1}}}, \right] \] 
+          </div>
+        <p>however, the form in which they appear in (8) and (9) is easier to work with in the following steps.  For example, applying the quotient rule reveals that </p>
+            <div class="equation">
+        \[\frac{\partial Y^*}{\partial p_y} = - \frac{M \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}{\left(p_y\right)^2} \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \frac{1}{1-\rho} \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{ \left( \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right)^2} \right] \tag{10} \] 
+        </div>
+        <p>which is definitely negative as long as \(\rho \lt 1\).</p>
+        <p>To find the indirect utility function, substitute (8) and (9) back into the utility function </p>
+        <div class="equation">
+        \[ U = \left(a \left( \frac{M}{p_x} \left[ \frac{\left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \right)^{\rho} + b \left( \frac{M}{p_y} \left[ \frac{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}}}{\left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} + \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}}} \right] \right)^{\rho} \right)^{\frac{1}{\rho}}. \] 
+        </div>
+        <p>Multiplying and dividing the first term by \( p_y \) and the second term by \(p_x\) allows us to factor out a common term \(M / p_x p_y \) and simply the resulting expression to derive </p>
+            <div class="equation">
+        \[ U(p_x, p_y, M) = \frac{M}{p_x p_y} \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{1 - \rho}{\rho}} = M \left[ \left( b p_y^{\rho} \right)^{\frac{1}{\rho-1}} +   \left( a p_x^{\rho} \right)^{\frac{1}{\rho-1}} \right]^{\frac{1 - \rho}{\rho}}.  \tag{11}\]   
+        </div>
+        <p>As mentioned earlier, it is now easy to derive the expenditure function </p>
+           <div class="equation"> 
+        \[ M(p_x, p_y, U) = U p_x p_y \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{\rho-1}{\rho}} = U  \left[ \left( b p_y^{\rho} \right)^{\frac{1}{\rho-1}} +   \left( a p_x^{\rho} \right)^{\frac{1}{\rho-1}} \right]^{\frac{\rho-1}{\rho}} . \tag{12}\]
+         </div>
+        <p>Once we have the expenditure function, we can also find the Hicksian demand function (denoted by an \(h\) subscript) for the two goods by applying Shephard's lemma. To find the Hicksian demand for good \(Y\), this just involves taking the derivative of (12) with respect to \(p_y\) </p>
+        <div class="equation">
+        \[\frac{\partial M(p_x, p_y, U)}{\partial p_y} =  - U p_x \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{-\frac{1}{\rho}} + U p_x \left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{\rho-1}{\rho}}  \] 
+        \[ \frac{\partial M(p_x, p_y, U)}{\partial p_y} = U \left( \frac{\left( b p_x\right)^{\frac{1}{1-\rho}}}{\left[ \left( b p_x^{\rho} \right)^{\frac{1}{1-\rho}} +   \left( a p_y^{\rho} \right)^{\frac{1}{1-\rho}} \right]^{\frac{1}{\rho}}} \right) =  Y_h (p_x, p_y, U) \tag{13}. \] 
+        </div>  
+        <p>You can also use Roy's identity to show the equivalence between the Marshallian demand for \(Y\) in equation (8) and \(- \frac{\partial U(p_x, p_y, M)}{\partial p_y} / \frac{\partial U(p_x, p_y, M) }{\partial M} \).</p>
     </div>
     
     
@@ -70,7 +126,14 @@
     <h4>Properties</h4>    
 </div>  
     <div class="eco-text">
-    <p>Formally, the elasticity of substitution is the percentage change in the ratio of inputs divided by the percentage change in the MRS \[ \sigma = \frac{\Delta (Y / X)}{(Y/X)} \bigg/ \frac{\Delta MRS}{MRS} \tag{14}  \] We saw in (7) that \[MRS = \frac{a}{b} \left( \frac{X}{Y} \right)^{\rho - 1}  \] which implies \[ \frac{Y}{X} = \left( \frac{b}{a} MRS \right)^{\frac{1}{1-\rho}}. \tag{15} \] This gives a relationship between the ratio of goods and the MRS. Taking the natrual log of both sides an differentiating with respect to \( Y/X \) \[ \ln \left( \frac{Y}{X} \right) = \frac{1}{1 - \rho} \left[ \ln \left( \frac{b}{a} \right) + \ln \left( MRS \right) \right] \] \[ \frac{1}{(Y/X)} = \frac{1}{1 - \rho} \frac{d MRS / d (Y/X) }{MRS} \] \[\frac{d \left( Y/X \right)}{(Y/X)} \bigg/ \frac{d \left( MRS \right) }{MRS} = \frac{1}{1 - \rho} \tag{16}. \]</p>
+    <p>Formally, the elasticity of substitution is the percentage change in the ratio of inputs divided by the percentage change in the MRS </p>
+        <div class="equation">
+    \[ \sigma = \frac{\Delta (Y / X)}{(Y/X)} \bigg/ \frac{\Delta MRS}{MRS} \tag{14}  \] We saw in (7) that \[MRS = \frac{a}{b} \left( \frac{X}{Y} \right)^{\rho - 1}  \] which implies \[ \frac{Y}{X} = \left( \frac{b}{a} MRS \right)^{\frac{1}{1-\rho}}. \tag{15} \] 
+        </div>
+    <p>This gives a relationship between the ratio of goods and the MRS. Taking the natrual log of both sides an differentiating with respect to \( Y/X \)</p>
+    <div class="equation">
+    \[ \ln \left( \frac{Y}{X} \right) = \frac{1}{1 - \rho} \left[ \ln \left( \frac{b}{a} \right) + \ln \left( MRS \right) \right] \] \[ \frac{1}{(Y/X)} = \frac{1}{1 - \rho} \frac{d MRS / d (Y/X) }{MRS} \] \[\frac{d \left( Y/X \right)}{(Y/X)} \bigg/ \frac{d \left( MRS \right) }{MRS} = \frac{1}{1 - \rho} \tag{16}. \]
+        </div>
     <p>The CES utility function is flexible because other common utility functions are really just special cases of the general CES function for given values of \(\rho\). It is easy to see that \(\rho = 1\) produces a linear utility function. When \(\rho \rightarrow 0\), equation (15) shows that \(MRS \rightarrow \frac{a}{b} \frac{Y}{X}  \), which is just the Cobb-Douglas case. Finally, as \(\rho \rightarrow -\infty\), \(MRS \rightarrow (Y /X)^{\infty} \), which is the Leontief case of perfect complements.</p>
     </div>  
     

@@ -53,7 +53,14 @@
     <h4>Portfolio Returns and Volatility</h4>    
 </div>  
     <div class="eco-text">
-    <p>We will consider investment in an equally weighted portfolio of the SPDR S&P 500 Trust ETF, the Vanguard Total Bond Market Index ETF, and the SPDR Gold Trust. The representative portfolio thus comprises of ETFs representing movements in stock, bond, and commodity markets. The Python code below installs the relevant packages for this page, downloads the data, and calculates its expected return and volatility. Let \(\mathbf{R}\) be a \(T \times N\) matrix of log returns where \(T\) is the number of time periods and \(N\) is the number of assets. Also, let \(\mathbf{v}\) be a \(T \times 1\) vector with all elements equal to \(1 / T\), and let \(\mathbf{w}\) be a \(N \times 1\) matrix of portfolio weights, so in the equally-weighted case all elements are just \(1/N\). Finally, let \(\bf{X^{\prime}}\) indicate the transpose of a matrix or vector. Given these definitions, the expected return on the portfolio is \[ \mu_p = \bf{v^{\prime} R w} \tag{1}\] and the variance is \[ \sigma_p^2 = \bf{w^{\prime}} \left[ \mathit{\frac{1}{T}} \bf{R^{\prime} R}  -  \bf{R^{\prime} v v^{\prime} R}  \right] w.   \tag{2} \]</p>
+    <p>We will consider investment in an equally weighted portfolio of the SPDR S&P 500 Trust ETF, the Vanguard Total Bond Market Index ETF, and the SPDR Gold Trust. The representative portfolio thus comprises of ETFs representing movements in stock, bond, and commodity markets. The Python code below installs the relevant packages for this page, downloads the data, and calculates its expected return and volatility. Let \(\mathbf{R}\) be a \(T \times N\) matrix of log returns where \(T\) is the number of time periods and \(N\) is the number of assets. Also, let \(\mathbf{v}\) be a \(T \times 1\) vector with all elements equal to \(1 / T\), and let \(\mathbf{w}\) be a \(N \times 1\) matrix of portfolio weights, so in the equally-weighted case all elements are just \(1/N\). Finally, let \(\bf{X^{\prime}}\) indicate the transpose of a matrix or vector. Given these definitions, the expected return on the portfolio is </p>
+        <div class="equation">
+    \[ \mu_p = \bf{v^{\prime} R w} \tag{1}\] 
+        </div>
+        <p>and the variance is </p>
+        <div class="equation">
+    \[ \sigma_p^2 = \bf{w^{\prime}} \left[ \mathit{\frac{1}{T}} \bf{R^{\prime} R}  -  \bf{R^{\prime} v v^{\prime} R}  \right] w.   \tag{2} \]
+        </div>
     </div>
     <div class="code-box">
     <pre>
@@ -96,7 +103,15 @@ std = np.sqrt(variance)
     <h4>Monet Carlo Simulation</h4>    
 </div> 
     <div class="eco-text">
-        <p>Now assume that returns follow a normal distribution so that \(\forall \bf{r_i} \in R\) \[\mathbf{r_i} \sim \mathcal{N} \left(\mu_i, \sigma^2_i  \right) \tag{3} \] where \(\mathbf{r_i}\) is a \(T \times 1\) column of the matrix \(\mathbf{R}\) representing the returns of asset \(i\) in the portfolio over the sample period. This means that we can write an expression for daily returns of asset \(i\) as the sum of its expect value and its volatility multiplied by a draw from the standard normal distribution \(z_t\) \[ r_{it} = \mu_i + \sigma_i z_t. \tag{4} \] We can use this information to perform Monte Carlo simulations of portfolio returns and examine how leverage can affect the returns and volatility of the investment. Note that there are two assumptions built into this methodology which are unrealistic. The first is that past returns can be used to determine information about future returns and the second is that returns follow a normal distribution. In reality, what happened to an asset in the past is not a good reflection of what returns will happen in the future, and returns exhibit higher kurtosis than is displayed by the normal distribution (which is equal to 3). </p>
+        <p>Now assume that returns follow a normal distribution so that \(\forall \bf{r_i} \in R\) </p>
+            <div class="equation">
+        \[\mathbf{r_i} \sim \mathcal{N} \left(\mu_i, \sigma^2_i  \right) \tag{3} \] 
+        </div>
+        <p>where \(\mathbf{r_i}\) is a \(T \times 1\) column of the matrix \(\mathbf{R}\) representing the returns of asset \(i\) in the portfolio over the sample period. This means that we can write an expression for daily returns of asset \(i\) as the sum of its expect value and its volatility multiplied by a draw from the standard normal distribution \(z_t\) </p>
+            <div class="equation">
+        \[ r_{it} = \mu_i + \sigma_i z_t. \tag{4} \]
+        </div>
+        <p>We can use this information to perform Monte Carlo simulations of portfolio returns and examine how leverage can affect the returns and volatility of the investment. Note that there are two assumptions built into this methodology which are unrealistic. The first is that past returns can be used to determine information about future returns and the second is that returns follow a normal distribution. In reality, what happened to an asset in the past is not a good reflection of what returns will happen in the future, and returns exhibit higher kurtosis than is displayed by the normal distribution (which is equal to 3). </p>
         <p>Let's assume that the investor puts $100,000 of their own capital and $100,000 of borrowed capital into the portfolio, so that the initial portfolio value is $200,000. Leverage in this case is given by the ratio of total assets to the value of their debt, so the initial leverage is \($200,000 / $100,000 = 2\). Note that this is equivalent to the ratio of debt plus equity to equity (again, equity is the value of the investor's own capital in the portfolio). The debt must be repaid with an interest rate of 5% per year, so after a year the investor must pay back $105,000. This repayment is assumed to occur in daily increments. The portfolio will be held for one year, or 252 trading days, which means the daily repayment in debt is \(0.05/252 = 0.02%\). The Python code below performs 1000 Monte Carlo simulations to generate series for the return on the portfolio and the return on equity (ROE) over the holding period. It also calculates the evolution of the portfolio value, the value of the investor's equity, and the evolution of the leverage ratio over the holding period.</p>
     </div>
    <div class="code-box">
