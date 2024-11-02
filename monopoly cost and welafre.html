@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Online Eco Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    
+<body>   
+  <section class="sub-header">
+    <nav>
+    <a href="index.html"><img src="images/mylogo.png"</a>  
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu(); return false;"></i>
+     <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="macroeconomics.html">Macroeconomics</a></li>
+        <li><a href="microeconomics.html">Microeconomics</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="math.html">Math and Stats</a></li>
+     </ul>
+    </div>  
+        <i class="fa fa-bars" onclick="showMenu()"></i> 
+    </nav>
+  </section>
+    
+      
+      
+<!-------Content------->
+      
+      
+<section class="content">
+    
+<div class="section-head">    
+    <h4>Introduction</h4>    
+</div>
+  <div class="eco-text">
+    <p>This page examines how the cost function affects consumer surplus, producer surplus, and profits in perfectly competitive and monopoly markets. We will use three types of total cost function; linear, quadratic and cubic, which are all obtainable from equation (1) given appropriate restrictions on the parameter values, where \(Q\) is the quantity produced in the market</p>
+      <div class="equation">
+      \[C(Q) = c_0 + c_1 Q + c_2 Q^2 + c_3 Q^3. \tag{1} \]
+      </div>
+    <p>A profit maximizing producer will set prices such that marginal revenue is equal to marginal cost. If marginal revenue is higher than marginal cost, then the producer could make additional profits by producing the next unit of the output good. Alternatively, if marginal revenue is lower than marginal cost, producing the next unit of the output good will mean incurring a loss. In perfect competition, the abundance of firms, lack of barriers to entry, and lack of product differentiation means that firms cannot influence the prevailing market price. Furthermore, price will be bid down to marginal cost because any attempt to raise prices and increase profits will just result in fully-informed and rational consumers shopping at another firm. Each firm thus treats price as an exogenous variable in perfect competition and the marginal revenue it earns on each unit of the good sold is equal to this exogenous market-determined price, which we will also assume is static over time. Note that we will be focusing on market equilibrium rather than individual firms. Hence, assume each of the \(N\) firms use the same cost function to produce an output \(q_j\), so \(Q = \sum_{j=1}^N q_j = q_j N\). Furthermore, suppose each firm faces a fixed cost of \(c_0 / N\) so that the total fixed cost in the industry is \(c_0\).</p>
+    <p>Things are different for monopolies. Here, the lack of competition means the firm has control over the market price based on its output choice. This page will consider a linearly decreasing demand curve, which means the quantity demanded for the good will fall as price (\(P\)) increases. Therefore, each additional unit the firm produces will sell at a lower price than the previous unit</p>
+     <div class="equation">
+     \[P(Q) = \delta_0 - \delta_1 Q . \tag{2}\] 
+    </div>       
+    <p>In other words, the monopolist faces a downward sloping marginal revenue curve. Although optimal output is still determined by the point where marginal revenue is equal to marginal cost, the fact that the demand curve lies above the marginal revenue curve means the price the monopolist charges will be a markup over marginal cost. The result is that monopolies will charge a higher equilibrium price and produce a lower equilibrium output compared to perfect competition.</p>
+    <p>The higher price and lower output created by the monopoly is a market inefficiency which we can quantify using the concept of deadweight loss (DWL). This is the difference in total welfare between the perfectly competitive and monopolist market, where welfare is measured by consumer and producer surplus. Consumer surplus is the area between the demand curve and the equilibrium price up to the equilibrium quantity demanded, which we can express mathematically as the integral</p>
+    <div class="equation">
+     \[CS = \int_0^{Q^*} \left( D(Q) - P^* \right) dQ . \tag{3}\] 
+    </div>
+    <p>Intuitively, it is the difference between what consumers are willing to pay for the good and what they actually pay on the market. Producer surplus is the area between the marginal cost curve and the equilibrium price up to the equilibrium quantity demanded, or</p>
+    <div class="equation">
+     \[PS = \int_0^{Q^*} \left( P^* - MC(Q) \right) dQ . \tag{5}\] 
+    </div>
+    <p>As we shall see, producer surplus is equal to profits plus fixed costs. Fixed costs are included in producer surplus because they do not change in the short run and therefore do not affect the decision to produce the marginal unit. Intuitively, fixed costs should be treated as a sunk cost in the short run because they have already been paid and cannot be recovered. This is also why, in the short run, firms should only shut down (which means to temporarily suspend production in the short run) when average revenue falls below average variable costs. However, in the long run, a firm should shut down (which means to suspend production indefinitely in the long run) if average revenue is lower than average total costs because all costs should be considered in the long run.</p>
+    <p>The sum of consumer and producer surplus gives total welfare in the market. Let \(\Omega_{pc}\) be total welfare in perfect competition and let \(\Omega_m\) be total welfare in a monopoly. The the total DWL to society is just</p>
+      <div class="equation">
+         \[ DWL = \Omega_{pc} - \Omega_m. \tag{5} \]
+      </div>
+    <p>We will begin by studying a special case of a quadratic cost function to show the steps involved in deriving the equilibrium expressions. After that, we will use Python's SciPy package to solve the model for other cost functions and examine the changes in equilibrium graphically. The Python code is given below and all the examples used in this page can be replicated just by changing the \(c_i\) parameters near the top of the code box.</p>
+    <div class="code-box">
+    <pre>
+      <code>
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import sympy as sp
+
+# Parameters
+d_0 = 30
+d_1 = 10
+
+c_0 = 5 # If c_0 < 0 then the fixed cost is negative
+c_1 = 5 # If c_1 < 0 then the first few units have negative marginal cost
+c_2 = -3 # If c_2 << 0 then the first few units can have a negative marginal cost
+c_3 = 5
+
+# Functions
+q, p = sp.symbols('q p')
+
+
+def total_cost(q):
+    return c_0 + c_1*q + c_2*(q**2) + c_3*(q**3)
+
+
+def marginal_cost(q):
+    return c_1 + 2*c_2*q + 3*c_3*(q**2)
+
+
+def average_cost(q):
+    return (c_0/q) + c_1 + c_2*q + c_3*(q**2)
+
+
+def demand(q):
+    return d_0 - (d_1*q)
+
+
+def marginal_revenue(q):
+    return d_0 - 2*d_1*q
+
+
+# Simultaneous Equations
+MC_eq = sp.Eq(marginal_cost(q) - p, 0)
+demand_eq = sp.Eq(demand(q) - p, 0)
+MR_eq = sp.Eq(marginal_revenue(q) - p, 0)
+
+sim_pc = sp.solve((MC_eq, demand_eq), (q, p))
+sim_m = sp.solve((MC_eq, MR_eq), (q, p))
+
+
+if c_3 == 0:
+    p_pc = float(sim_pc[p])
+    q_pc = float(sim_pc[q])
+    p_m = float(d_0 - d_1*sim_m[q])
+    q_m = float(sim_m[q])
+elif c_3 != 0:
+    q_pc = float(sim_pc[0][0])
+    p_pc = float(sim_pc[0][1])
+    q_m = float(sim_m[0][0])
+    p_m = float(d_0 - d_1*sim_m[0][0])
+
+ac_m = average_cost(q_m)
+
+# Welfare
+def profit(x, y):
+    return x*y - total_cost(x)
+
+
+pi_pc = profit(q_pc, p_pc)
+pi_m = profit(q_m, p_m)
+ps_pc = pi_pc + c_0
+ps_m = pi_m + c_0
+
+
+def consumer_surplus(x, y):
+    return d_0*x - (0.5*d_1*x**2) - y*x
+
+
+cs_pc = consumer_surplus(q_pc, p_pc)
+cs_m = consumer_surplus(q_m, p_m)
+omega_pc = cs_pc+ps_pc
+omega_m = cs_m + ps_m
+DWL = omega_pc - omega_m
+
+
+# Table
+data = {
+    'Variable': ['Price', 'Quantity', 'Profit', 'Producer Surplus', 'Consumer Surplus', 'Welfare', 'DWL'],
+    'Perfect Competition': [p_pc, q_pc, pi_pc, ps_pc, cs_pc, omega_pc, np.nan],
+    'Monopoly': [p_m, q_m, pi_m, ps_m, cs_m, omega_m, DWL]
+}
+df = pd.DataFrame(data)
+print(df)
+
+
+# Graph
+Q_space = np.linspace(0.01, 2*q_pc, 1000)
+
+MC = np.array([marginal_cost(q) for q in Q_space])
+AC = np.array([average_cost(q) for q in Q_space])
+D = np.array([demand(q) for q in Q_space])
+MR = np.array([marginal_revenue(q) for q in Q_space])
+
+equilibrium_q = [q_pc, q_m, q_m]
+equilibrium_p = [p_pc, p_m, ac_m]
+
+plt.figure()
+plt.plot(Q_space, MC,  color='red', label='MC')
+plt.plot(Q_space, D, color='blue', label='D')
+plt.plot(Q_space, AC, color='black', label='AC')
+plt.plot(Q_space, MR, color='gold', label='MR')
+for eq, ep in zip(equilibrium_q, equilibrium_p):
+    plt.scatter(eq, ep, color='red', zorder=5)
+    plt.plot([0, eq], [ep, ep], color='gray', linestyle='--', linewidth=0.5)
+    plt.plot([eq, eq], [0, ep], color='gray', linestyle='--', linewidth=0.5)
+plt.plot([], [], color='blue', linewidth=6, alpha=0.4, label='CS')
+plt.plot([], [], color='red', linewidth=6, alpha=0.4, label='PS')
+plt.plot([], [], color='yellow', linewidth=6, alpha=0.4, label='DWL')
+plt.legend(loc='upper right')
+plt.xlabel('Quantity')
+plt.ylabel('Price')
+plt.ylim(0, 2*p_m)
+plt.xlim(0, 2*q_pc)
+plt.fill_between(Q_space, p_m, D, where=(D > p_m), color='blue', alpha=0.4)
+plt.fill_between(Q_space, p_m, MC, where=((MC < p_m) & (Q_space < q_m)), color='red', alpha=0.4)
+plt.fill_between(Q_space, D, MC, where=((Q_space > q_m) & (Q_space < q_pc)), color='yellow', alpha=0.4)
+plt.show()
+      </code>
+    </pre>
+    </div>
+  </div>   
+      
+ 
+<div class="section-head">    
+    <h4>Specific Quadratic Cost Function</h4>    
+</div>  
+<div class="eco-text">
+    <p>Let \(c_1 = c_3 = 0\) so that the cost function in equation (1) reduces to</p>
+    <div class="equation">
+    \[C(Q) = c_0 + c_2 Q^2 \tag{6} \]
+    </div>
+    <p>and let the demand function take the same form it has in equation (2). If the total cost function is quadratic, marginal cost will be linear, which implies each successive unit of output costs a constant (\(c_2\)) more to make than the last. This will occur if production of the good exhibits decreasing returns to scale (DRS), so producing each marginal unit of output requires more inputs than the previous unit. For concreteness, suppose labour is the only factor of production and the wage rate is $1. Then if \(Q(L) = \sqrt{L}\) and fixed costs are zero, producing 1 unit of output requires 1 unit of labour for a total cost of $1. However, producing 2 units of output requires 4 units of labour at a total cost of $4, and producing 3 units of output requires 9 units of labour at a total cost of $9. Clearly, total costs are increasing at an increasing rate because of the DRS exhibited by the production function. If a firm produces with both labour and capital, DRS might occur because the technology the firm uses in production is new and only the first worker is familiar with how it works. All subsequent workers are less competent and require training to use the technology effectively. Linear marginal costs could also occur if workers have to be paid more to produce each additional unit. For example, if the wage paid to labour is \(w(L) = L\) and \(Q(L) = L\), then total costs will again be a quadratic function of output, because \(w(L) L = L^2 = Q^2\).</p>
+        
+        
+    <p>In perfect competition, marginal revenue, average revenue, and price all coincide, so finding the equilibrium price and quantity just involves setting marginal cost equal to the demand curve and solving for \(Q\), then plugging this expression back into (2) to find \(P\). I will denote all equilibrium values with the subscript \(pc\) to indicate they are the results for a perfectly competitive market.</p>
+    <div class="equation">
+    \[\delta_0 - \delta_1 Q = 2 c_2 Q  \]
+    \[ Q_{pc}^* = \frac{\delta_0}{2 c_2 + \delta _1} \tag{7} \]
+    \[ P_{pc}^* = \frac{2 c_2 \delta_0}{2 c_2 + \delta_1} \tag{8} .\]
+    </div> 
+    <p>Profit is then given by</p>
+    <div class="equation">
+    \[\Pi_{pc}^* = P^* Q^* - C(Q^*) \]
+    \[ = \frac{2 c_2 \delta_0^2}{\left( 2 c_2 + \delta_1 \right)^2} - c_0 - \frac{ c_2 \delta_0^2}{\left( 2 c_2 + \delta_1 \right)^2} \]
+    \[ = \frac{c_2 \delta_0^2}{\left( 2 c_2 + \delta_1 \right)^2} - c_0 \tag{9} .\]
+    </div>
+    <p>Using the formulas in equations (3) and (4), we can find consumer and producer surplus</p>
+    <div class="equation">
+    \[ CS_{pc} = \int_0^{Q^*} \left( \delta_0 - \delta_1 Q - \frac{2 c_2 \delta_0}{2 c_2 + \delta_1} \right) dQ \] 
+    \[CS_{pc} = \frac{1}{2} \frac{\delta_0^2 \delta_1}{\left( 2 c_2 + \delta_1 \right)^2 } \tag{10} \]
+    \[PS_{pc} = \int_0^{Q^*} \left( \frac{2 c_2 \delta_0}{2 c_2 + \delta_1} - 2 c_2 Q \right) dQ \]
+    \[PS_{pc} =  \frac{\delta_0^2 c_2}{\left( 2 c_2 + \delta_1 \right)^2 } \tag{11} \]
+    </div>
+    <p>Finally, welfare is the sum of consumer and producer surplus</p>
+    <div class="equation">
+    \[\Omega_{pc} = \frac{\delta_0^2 \left(\frac{1}{2} \delta_1 + c_2\right)}{\left( 2 c_2 + \delta_1 \right)^2} \tag{12} .\]
+    </div> 
+    <p>Finding the equilibrium values in the monopolist case involves similar steps, with the key difference being that marginal cost is set equal to marginal revenue to find the optimal level of output. The equilibrium price is still found by substituting \(Q^*_m\) back into the demand curve</p>
+    <div class="equation">
+    \[\delta_0 - 2 \delta_1 Q = 2 c_2 Q \]
+    \[Q^*_m = \frac{1}{2} \frac{\delta_0}{c_2 + \delta_1} \tag{13} \]
+    \[P_m^* = \frac{1}{2} \frac{\delta_0 \left(2 c_2 + \delta_1 \right)}{c_2 + \delta_1} \tag{14}  \]
+    </div>
+    <p>Once these are know, the steps used to find profit, consumer and producer surplus, and total welfare are exactly the same</p>
+    \[\Pi_m^* = \frac{1}{4} \frac{\delta_0^2 \left(c_2 + \delta_1 \right)}{\left( c_2 + \delta_1 \right)^2 } - c_0  \tag{15} \]
+    \[CS_m = \frac{1}{8} \frac{\delta_0^2 d_1 }{\left( c_2 + \delta_1 \right)^2 }  \tag{16} \]
+    \[PS_m = \frac{1}{4} \frac{\delta_0^2 \left(c_2 + \delta_1 \right)}{\left( c_2 + \delta_1 \right)^2} \tag{17}  \]
+    \[\Omega_m = \frac{1}{8} \frac{\delta_0^2 \left(2 c_2 + 3 \delta_1 \right)}{ \left(c_2 + \delta_1 \right)^2} \tag{18}. \]
+    <p>The diagram below shows the equilibrium quantity-price combination in the perfectly competitive and monopolist case where \(c_0 = 5\), \(c_2 = 5\), \(\delta_0 = 30\), and \(\delta_1 = 10\). The consumer surplus is highlighted in blue, the producer surplus is in red, and the DWL is in yellow. Undergraduate courses will often show students how to calculate welfare geometrically using the formulas for the areas of triangles and squares, and the logic for this can clearly be seen in the diagram. Profit is given by the area formed by the gap between the demand function and average cost multiplied by the distance from the origin to the equilibrium output. Notice that firms in perfect competition are able to make positive profit in this example, specifically, the total industry profit is $6.25. This is a consequence of the linear marginal cost function, which lies below the equilibrium price ($15) until the equilibrium output (1.5 units), meaning a profit is made on each unit sold up to this point. Convex total cost functions and decreasing returns to scale production functions are two ways to allow for positive profits in perfect competition.</p>
+    <p>The monopolist restricts output to 1 unit which results in a higher price of $20. This gives a profit of $10 and a total producer surplus of $15. Notice that consumer surplus has fallen by $6.25 and producer surplus has increased by $3.75 compared to perfect competition. This implies to monopolist has transferred $3.75 dollars of consumer surplus into producer surplus and $2.50 has been lost, as reflected in the DWL.</p>
+        <div class="equation">
+\begin{array}{c c c}
+\hline
+Variable & Perfect \hspace{1mm} Competition & Monopoly \\
+\hline
+Price & 15.00 & 20.00 \\
+Quantity & 1.50 & 1.00 \\
+Profit & 6.25 & 10.00 \\
+Producer Surplus & 11.25 & 15.00 \\
+Consumer Surplus & 11.25 & 5.00 \\
+Welfare & 22.50 & 20.00 \\
+DWL & - & 2.50 \\
+\hline
+\end{array}
+    </div>
+</div>
+    <div>
+        <img src="images/welfare_specific_quadratic.png" style="display: block; width: 75%; margin-left: auto; margin-right: auto;">
+    </div>
+      
+      
+
+<div class="section-head">    
+    <h4>Linear Cost Function</h4>    
+</div>  
+    <div class="eco-text">
+    <p>A linear cost function means that marginal costs are constant. In this case, returns to scale are constant, so each additional unit of output requires the same amount of labour to produce as the last unit. In this case, a new worker with the same tools is just as productive as the one who came before. Linear cost functions without fixed costs produce the frequently referenced result that firms in perfectly competitive markets make zero profits. To demonstrate, let \(c_0 = c_2 = c_3 = 0\) and let \(c_1 = 5 \). Note first that marginal costs and average costs coincide. Furthermore, in the absence of fixed costs, producer surplus is equivalent to profit. Because marginal costs are now lower for all output levels above 0.5 units, both consumers and producers are better off in this regime compared to the quadratic cost function above, regardless of whether the market is a monopoly or competitive.</p>
+    <p>The monopolist in this case restricts the quantity supplied from 2.5 to 1.25 units and is therefore able to raise the equilibrium price by $12.50 to $17.50. In doing so, it transfers $7.81 of consumer surplus into producer surplus and the remaining $7.81 decrease in consumer surplus is lost to society in the form of deadweight loss.</p>
+    <div class="equation">
+\begin{array}{c c c}
+\hline
+Variable & Perfect \hspace{1mm} Competition & Monopoly \\
+\hline
+Price & 5.00 & 17.50 \\
+Quantity & 2.50 & 1.25 \\
+Profit & 0.00 & 15.62 \\
+Producer Surplus & 0.00 & 15.62 \\
+Consumer Surplus & 31.25 & 7.81 \\
+Welfare & 31.25 & 23.44 \\
+DWL & - & 7.81 \\
+\hline
+\end{array}
+    </div>
+    </div>
+    <div>
+        <img src="images/welfare_linear.png" style="display: block; width: 75%; margin-left: auto; margin-right: auto;">
+    </div>
+
+<div class="section-head">    
+    <h4>Quadratic Cost Function</h4>    
+</div> 
+    <div class="eco-text">
+    <p>We can see a more general case of the first quadratic cost function examined by setting \(c_1 = 5\) and maintaining \(c_3 = 0\). Compared to the specific case above, marginal costs are now higher at any level of output. As expected, this results in higher equilibrium prices and lower equilibrium output. Both consumers and producers lose out as a result of this. Consumer surplus falls by $4.34 as a result of the monopoly, with $2.61 of this being transfered to producer surplus and $1.74 being lost as part of the DWL.</p>
+        <div class="equation">
+\begin{array}{c c c}
+\hline
+Variable & Perfect \hspace{1mm} Competition & Monopoly \\
+\hline
+Price & 17.50 & 21.67 \\
+Quantity & 1.25 & 0.83 \\
+Profit & 2.81 & 5.42 \\
+Producer Surplus & 7.81 & 10.42 \\
+Consumer Surplus & 7.81 & 3.47 \\
+Welfare & 15.62 & 13.89 \\
+DWL & - & 1.74 \\
+\hline
+\end{array}
+       </div>
+    </div>
+        <img src="images/welfare_quadratic.png" style="display: block; width: 75%; margin-left: auto; margin-right: auto;">
+    </div>
+    
+
+<div class="section-head">    
+    <h4>Cubic Cost Function</h4>    
+</div> 
+    <div class="eco-text">
+        <p>This is the case which most students will be familiar with from textbooks which present the graphs without also covering the mathematics. A cubic total cost means marginal cost will be a quadratic function of output, so the first few marginal units the firm produces will incur a lower cost than the preceding unit. This captures the idea that the firm may benefit from economies of scale early on in the production process as it learns to be more efficient. For example, workers may be able to specialise on different parts of the production process. Eventually, however, diseconomies of scale take over as coordination becomes more difficult at larger scales, requiring more time and resources to be spent on organisation. In our example, let \(c_0 = c_1 = c_3 = 5\), and let \(c_2 = -3\). Because squaring a number less than one will result in a smaller number, the term including \(c_2\) (which is the slope of the linear part of the marginal cost function) dominates for output levels close to zero and marginal cost will be decreasing. However, for larger values of \(Q\) the quadratic term including \(c_3\) will dominate and marginal cost will be increasing.</p>
+        <p>The monopolist restricts output to 0.91 units in this case, a 0.25 unit decrease compared to the perfectly competitive market. This results in a $2.59 increase in the price, a transfer of $1.47 of consumer surplus into producer surplus, and a DWL to society of $1.21.</p>
+        <div class="equation">
+\begin{array}{c c c}
+\hline
+Variable & Perfect \hspace{1mm} Competition & Monopoly \\
+\hline
+Price & 18.35 & 20.94 \\
+Quantity & 1.16 & 0.91 \\
+Profit & 6.72 & 8.19 \\
+Producer Surplus & 11.72 & 13.19 \\
+Consumer Surplus & 6.78 & 4.10 \\
+Welfare & 18.50 & 17.29 \\
+DWL & - & 1.21 \\
+\hline
+\end{array}
+       </div>
+    </div>
+    </div>
+        <img src="images/welfare_cubic.png" style="display: block; width: 75%; margin-left: auto; margin-right: auto;">
+    </div>
+
+
+    
+    
+</section>
+      
+<!---------Footer-------------->
+<section class="footer">
+<p>J.O.C Economics: &copy; Joshua Clark 2024</p>
+</section>
+      
+
+      
+<!---------Javascript for Toggle Menu--------->  
+<script>
+ var navLinks = document.getElementById("navLinks"); 
+    
+ function showMenu(){
+     navLinks.style.right = "0";
+ }
+    
+   function hideMenu(){
+     navLinks.style.right = "-200px";
+ }
+</script>    
+      
+</body>
+</html>
